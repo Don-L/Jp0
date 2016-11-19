@@ -1,0 +1,6 @@
+.Jp0 {
+  width: 45vw;
+  height: calc(800 * 45vw / 480);
+  margin: 0 auto;
+  background-color: #D3B17D;
+}
