@@ -4,9 +4,10 @@ const Image = React.createClass({
 
   render: function () {
 
+    console.log(this.props.word);
     return (
       <div>
-        <p>IMAGE</p>
+        <img className='image' src={this.props.imgsrc} />
       </div>
     );
 

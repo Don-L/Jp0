@@ -1,21 +1,25 @@
 const React = require('react');
 const Hints = require('./Hints.jsx');
-const Phonemes = require('./Phonemes.jsx');
-const Kana = require('./Kana.jsx');
-const Image = require('./Image.jsx');
-const Controller = require('./Controller.jsx');
+// const Phonemes = require('./Phonemes.jsx');
+// const Kana = require('./Kana.jsx');
+// const Image = require('./Image.jsx');
+// const Controller = require('./Controller.jsx');
+
+const Words = require('../res/words.js');
+
+
 
 const Jp0 = React.createClass({
 
+
   render: function () {
+
+    // return <p>hello</p>;
 
     return (
       <div className='Jp0'>
-        <Hints word={this.state.word}/>
-        <Phonemes word={this.state.word}/>
-        <Kana word={this.state.word}/>
-        <Image word={this.state.word}/>
-        <Controller />
+        <Hints hiragana={this.state.words[this.state.currentIndex]['hiragana']} revealed={this.state.revealed}/>
+
       </div>
     );
 
@@ -24,9 +28,21 @@ const Jp0 = React.createClass({
 
   getInitialState: function () {
     return {
-      word: 'test'
+      words: [{
+        'name': 'init',
+        'hiragana': ['I', 'N', 'I', 'T'],
+        'kana': 'KANA',
+        'imgsrc': 'res/Nightingale.JPG'
+      }],
+      currentIndex: 0,
+      revealed: []
     };
   },
+
+
+  componentDidMount: function () {
+    this.setState({words: Words});
+  }
 
 
 

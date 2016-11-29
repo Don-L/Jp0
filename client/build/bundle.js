@@ -19756,10 +19756,12 @@
 	
 	var React = __webpack_require__(1);
 	var Hints = __webpack_require__(160);
-	var Phonemes = __webpack_require__(161);
-	var Kana = __webpack_require__(162);
-	var Image = __webpack_require__(163);
-	var Controller = __webpack_require__(164);
+	// const Phonemes = require('./Phonemes.jsx');
+	// const Kana = require('./Kana.jsx');
+	// const Image = require('./Image.jsx');
+	// const Controller = require('./Controller.jsx');
+	
+	var Words = __webpack_require__(162);
 	
 	var Jp0 = React.createClass({
 	  displayName: 'Jp0',
@@ -19767,21 +19769,30 @@
 	
 	  render: function render() {
 	
+	    // return <p>hello</p>;
+	
 	    return React.createElement(
 	      'div',
 	      { className: 'Jp0' },
-	      React.createElement(Hints, { word: this.state.word }),
-	      React.createElement(Phonemes, { word: this.state.word }),
-	      React.createElement(Kana, { word: this.state.word }),
-	      React.createElement(Image, { word: this.state.word }),
-	      React.createElement(Controller, null)
+	      React.createElement(Hints, { hiragana: this.state.words[this.state.currentIndex]['hiragana'], revealed: this.state.revealed })
 	    );
 	  },
 	
 	  getInitialState: function getInitialState() {
 	    return {
-	      word: 'test'
+	      words: [{
+	        'name': 'init',
+	        'hiragana': ['I', 'N', 'I', 'T'],
+	        'kana': 'KANA',
+	        'imgsrc': 'res/Nightingale.JPG'
+	      }],
+	      currentIndex: 0,
+	      revealed: []
 	    };
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    this.setState({ words: Words });
 	  }
 	
 	});
@@ -19795,6 +19806,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
+	var Syllab = __webpack_require__(161);
 	
 	var Hints = React.createClass({
 	  displayName: 'Hints',
@@ -19802,14 +19814,17 @@
 	
 	  render: function render() {
 	
+	    var hiragana = this.props.hiragana;
+	    var nodes = [];
+	
+	    for (var i = 0; i < hiragana.length; i++) {
+	      nodes.push(React.createElement(Syllab, { key: i, syllab: hiragana[i] }));
+	    };
+	
 	    return React.createElement(
 	      'div',
 	      null,
-	      React.createElement(
-	        'p',
-	        null,
-	        'This is a hint!'
-	      )
+	      nodes
 	    );
 	  }
 	
@@ -19825,113 +19840,39 @@
 	
 	var React = __webpack_require__(1);
 	
-	var Phonemes = React.createClass({
-	  displayName: 'Phonemes',
+	var Syllab = React.createClass({
+	  displayName: 'Syllab',
 	
 	
 	  render: function render() {
 	
 	    return React.createElement(
 	      'div',
-	      null,
+	      { className: 'syllab' },
 	      React.createElement(
 	        'p',
-	        null,
-	        'This is the phonemes!'
+	        { className: 'syllab' },
+	        this.props.syllab
 	      )
 	    );
 	  }
 	
 	});
 	
-	module.exports = Phonemes;
+	module.exports = Syllab;
 
 /***/ },
 /* 162 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
 	'use strict';
 	
-	var React = __webpack_require__(1);
-	
-	var Kana = React.createClass({
-	  displayName: 'Kana',
-	
-	
-	  render: function render() {
-	
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'p',
-	        null,
-	        'KANA'
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Kana;
-
-/***/ },
-/* 163 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var Image = React.createClass({
-	  displayName: 'Image',
-	
-	
-	  render: function render() {
-	
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'p',
-	        null,
-	        'IMAGE'
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Image;
-
-/***/ },
-/* 164 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var Controller = React.createClass({
-	  displayName: 'Controller',
-	
-	
-	  render: function render() {
-	
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'p',
-	        null,
-	        'This is the controller!'
-	      )
-	    );
-	  }
-	
-	});
-	
-	module.exports = Controller;
+	module.exports = [{
+	  'name': 'test',
+	  'hiragana': ['T', 'E', 'S', 'T', '\u3042'],
+	  'kana': 'KANA',
+	  'imgsrc': 'res/Nightingale.JPG'
+	}];
 
 /***/ }
 /******/ ]);
