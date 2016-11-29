@@ -24,7 +24,7 @@ module.exports = {
     'transliteration': 'i'
   },
 
-  '\3045': {
+  '\u3045': {
     'name': 'hiragana letter small u',
     'char': 'ぅ',
     'transliteration': 'u'
@@ -49,13 +49,13 @@ module.exports = {
   '\u3049': {
     'name': 'hiragana letter small o',
     'transliteration': 'o'
-  }
+  },
 
   '\u304A': {
     'name': 'hiragana letter o',
     'transliteration': 'o',
     'sound': 'res/snd/304A.ogg'
-  }
+  },
 
   '\u304B': {
     'name': 'hiragana letter ka',

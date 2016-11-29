@@ -1,41 +1,13 @@
 .Jp0 {
-  width: 45vw;
-  height: calc(800 * 45vw / 480);
+  width: 600px;
+  height: 800px;
   margin: 0 auto;
   background-color: #D3B17D;
-}
-
-.phonemes {
-  margin: 0 auto;
-}
-
-div.char {
-  display: inline-block;
-  border: solid 3px #645530;
-  width: 50px;
-  height: 50px;
-  margin: 2px;
-}
-
-p.char {
-  margin-top: 25%;
   text-align: center;
 }
 
-div.syllab {
-  display: inline-block;
-  border: solid 3px transparent;
-  width: 50px;
-  height: 50px;
-  margin: 2px;
-}
 
-p.syllab {
-  margin-top: 25%;
-  text-align: center;
-}
-
-.image {
-  max-width: 50%;
-  margin: auto;
+img.ImageDisplay {
+  max-width: 300px;
+  max-height: 300px;
 }
