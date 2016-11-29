@@ -19801,13 +19801,15 @@
 	    return React.createElement(
 	      'div',
 	      { className: 'Jp0' },
-	      React.createElement(HintDisplay, { hintsList: hints }),
+	      React.createElement(HintDisplay, { hintsList: hints, revealed: this.state.revealed }),
 	      React.createElement(HiraganaDisplay, { hiraganaChars: this.state.words[this.state.currentIndex]['hiragana'] }),
 	      React.createElement(KanjiDisplay, { kanjiChars: this.state.words[this.state.currentIndex]['kanji'] }),
 	      React.createElement(ImageDisplay, { imgsrc: this.state.words[this.state.currentIndex]['imgsrc'],
 	        name: this.state.words[this.state.currentIndex]['name'],
-	        romaji: this.state.words[this.state.currentIndex]['romaji'] }),
-	      React.createElement(MagicButton, { buttonMessage: this.state.buttonMessage })
+	        romaji: this.state.words[this.state.currentIndex]['romaji'],
+	        revealed: this.state.revealed.length,
+	        hintsNo: this.state.hintsNo }),
+	      React.createElement(MagicButton, { buttonMessage: this.state.buttonMessage, magicButtonClicked: this.magicButtonClicked })
 	    );
 	  },
 	
@@ -19825,13 +19827,62 @@
 	        'N': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init' }
 	      }, _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init' }), _defineProperty(_hiragana, 'T', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init' }), _hiragana),
 	      currentIndex: 0,
-	      buttonMessage: 'Reveal Next'
+	      buttonMessage: 'Hint',
+	      hintsNo: 4,
+	      revealed: []
 	    };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
+	
+	    var hintsNo = Words[0]['hiragana'].length;
+	
 	    this.setState({ words: Words,
-	      hiragana: Hiragana });
+	      hiragana: Hiragana,
+	      currentIndex: 0,
+	      revealed: [],
+	      hintsNo: hintsNo });
+	  },
+	
+	  magicButtonClicked: function magicButtonClicked() {
+	
+	    var hintsNo = this.state.hintsNo;
+	    var revealed = this.state.revealed;
+	
+	    if (hintsNo === revealed.length) {
+	      this.getNextWord();
+	    } else if (revealed.length === 0) {
+	      var sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][0]]['sound']);
+	      sound.play();
+	      this.setState({ revealed: [0] });
+	    } else if (revealed.length === hintsNo - 1) {
+	      var _sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
+	      _sound.play();
+	      var lastRevealed = revealed[revealed.length - 1];
+	      var newRevealed = lastRevealed + 1;
+	      revealed.push(newRevealed);
+	      this.setState({ revealed: revealed,
+	        buttonMessage: 'Next Word' });
+	    } else {
+	      var _lastRevealed = revealed[revealed.length - 1];
+	      var _newRevealed = _lastRevealed + 1;
+	      revealed.push(_newRevealed);
+	      var _sound2 = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
+	      _sound2.play();
+	      this.setState({ revealed: revealed });
+	    }
+	  },
+	
+	  getNextWord: function getNextWord() {
+	
+	    var hintsNo = Words[1]['hiragana'].length;
+	
+	    this.setState({ words: Words,
+	      hiragana: Hiragana,
+	      currentIndex: 1,
+	      revealed: [],
+	      hintsNo: hintsNo,
+	      buttonMessage: 'Hint' });
 	  }
 	
 	});
@@ -19845,13 +19896,13 @@
 	'use strict';
 	
 	module.exports = [{
-	  'name': 'dragon',
+	  'name': 'DRAGON',
 	  'hiragana': ['\u308A', '\u3085', '\u3046'],
 	  'kanji': '竜',
 	  'romaji': 'ryū',
 	  'imgsrc': 'res/img/dragon.jpg'
 	}, {
-	  'name': 'wolf',
+	  'name': 'WOLF',
 	  'hiragana': ['\u304A', '\u304A', '\u304B', '\u307F'],
 	  'kanji': '狼',
 	  'romaji': 'ōkami',
@@ -20387,6 +20438,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
+	var Hint = __webpack_require__(168);
 	
 	var HintDisplay = React.createClass({
 	  displayName: 'HintDisplay',
@@ -20394,14 +20446,19 @@
 	
 	  render: function render() {
 	
+	    var revealed = this.props.revealed;
+	    var hintsList = this.props.hintsList;
+	
+	    var nodes = [];
+	
+	    for (var i = 0; i < hintsList.length; i++) {
+	      nodes.push(React.createElement(Hint, { hint: hintsList[i], revealed: revealed, hintIndex: i }));
+	    }
+	
 	    return React.createElement(
 	      'div',
 	      { className: 'HintDisplay' },
-	      React.createElement(
-	        'p',
-	        { className: 'HintDisplay' },
-	        this.props.hintsList
-	      )
+	      nodes
 	    );
 	  }
 	
@@ -20423,21 +20480,27 @@
 	
 	  render: function render() {
 	
-	    return React.createElement(
-	      'div',
-	      { className: 'ImageDisplay' },
-	      React.createElement('img', { className: 'ImageDisplay', src: this.props.imgsrc }),
-	      React.createElement(
-	        'p',
-	        { className: 'name' },
-	        this.props.name
-	      ),
-	      React.createElement(
-	        'p',
-	        { className: 'romaji' },
-	        this.props.romaji
-	      )
-	    );
+	    if (this.props.revealed === this.props.hintsNo) {
+	      return React.createElement(
+	        'div',
+	        { className: 'ImageDisplay' },
+	        React.createElement('img', { className: 'ImageDisplay', src: this.props.imgsrc }),
+	        React.createElement(
+	          'p',
+	          { className: 'name' },
+	          this.props.name
+	        ),
+	        React.createElement(
+	          'p',
+	          { className: 'romaji' },
+	          '(',
+	          this.props.romaji,
+	          ')'
+	        )
+	      );
+	    } else {
+	      return React.createElement('div', { className: 'ImageDisplay' });
+	    }
 	  }
 	
 	});
@@ -20460,7 +20523,7 @@
 	
 	    return React.createElement(
 	      'button',
-	      { className: 'MagicButton' },
+	      { className: 'MagicButton', onClick: this.props.magicButtonClicked },
 	      this.props.buttonMessage
 	    );
 	  }
@@ -20468,6 +20531,50 @@
 	});
 	
 	module.exports = MagicButton;
+
+/***/ },
+/* 168 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var Hint = React.createClass({
+	  displayName: 'Hint',
+	
+	
+	  render: function render() {
+	
+	    var revealed = this.props.revealed;
+	    var hintIndex = this.props.hintIndex;
+	
+	    if (revealed.indexOf(hintIndex) > -1) {
+	      return React.createElement(
+	        'div',
+	        { className: 'Hint' },
+	        React.createElement(
+	          'p',
+	          { className: 'revealed-hint' },
+	          this.props.hint
+	        )
+	      );
+	    } else {
+	      return React.createElement(
+	        'div',
+	        { className: 'Hint' },
+	        React.createElement(
+	          'p',
+	          { className: 'hidden-hint' },
+	          ' *??* '
+	        )
+	      );
+	    }
+	  }
+	
+	});
+	
+	module.exports = Hint;
 
 /***/ }
 /******/ ]);

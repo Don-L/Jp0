@@ -6,8 +6,17 @@
   text-align: center;
 }
 
+div.ImageDisplay {
+  width: 550px;
+  height: 400px;
+  margin: 0 auto;
+}
 
 img.ImageDisplay {
   max-width: 300px;
   max-height: 300px;
+}
+
+div.Hint {
+  display: inline-block;
 }

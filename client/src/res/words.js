@@ -1,7 +1,7 @@
 module.exports = [
 
   {
-    'name': 'dragon',
+    'name': 'DRAGON',
     'hiragana': ['\u308A','\u3085','\u3046'],
     'kanji': '竜',
     'romaji': 'ryū',
@@ -9,7 +9,7 @@ module.exports = [
   },
 
   {
-    'name': 'wolf',
+    'name': 'WOLF',
     'hiragana': ['\u304A','\u304A','\u304B','\u307F'],
     'kanji': '狼',
     'romaji': 'ōkami',
