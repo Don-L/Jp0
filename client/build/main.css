@@ -1,22 +1,229 @@
+/*@import url(http://fonts.googleapis.com/earlyaccess/notosansthaana.css);
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskannada.css);*/
+@import url(http://fonts.googleapis.com/earlyaccess/notosansgurmukhiui.css);
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+body {
+  /*background-color: #e6c9b0;*/
+  /*background-color: #373737;*/
+}
+
 .Jp0 {
   width: 600px;
   height: 800px;
   margin: 0 auto;
-  background-color: #D3B17D;
+  background-color: #086972;
   text-align: center;
+  /*padding-top: 23px;*/
+  border: solid 5px #014147;
+  border-radius: 5px;
+}
+
+.top {
+  background-color: #e6b3b0;
+  border-radius: 5px;
 }
 
 div.ImageDisplay {
   width: 550px;
   height: 400px;
   margin: 0 auto;
+  /*border: solid 2px black;*/
+  padding-top: 10px;
+  margin-bottom: 20px;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 img.ImageDisplay {
   max-width: 300px;
-  max-height: 300px;
+  height: 350px;
+  border: ridge 3px #e34138;
+  border-radius: 5px;
 }
 
-div.Hint {
+.ImageDisplay p {
+  color: #014147;
   display: inline-block;
+  text-align: center;
+  width: 50%;
+  font-size: 36px;
+  margin: 10px 0 10px 0;
+}
+
+.ImageText {
+  width: 100%;
+  vertical-align: baseline;
+  height: 40px;
+}
+
+.HintDisplay {
+  height: 90px;
+}
+
+.Hint {
+  /*width: 60px;
+  height: 60px;*/
+
+  display: inline-block;
+  /*margin: 5px;*/
+
+  font-size: 24px;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.Hidden-Hint {
+  display: inline-block;
+  margin: 16px 5px 0 5px;
+  width: 56px;
+  height: 46px;
+  padding-top: 10px;
+  border: 2px solid #e34138;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #086972;
+}
+
+.Hidden-Hint:hover {
+  background-color: #ff938e;
+}
+
+.Revealed-Hint {
+  display: inline-block;
+  margin: 15px 5px 0 5px;
+  width: 48px;
+  height: 38px;
+  padding-top: 7px;
+  padding-bottom: 3px;
+  border: 6px solid #e34138;
+  border-radius: 50%;
+  /*margin-top: 11px;*/
+  color: white;
+  background-color: #e34138;
+}
+
+.HiraganaDisplay {
+  color: #71ca7c;
+  /*border: 2px solid black;*/
+  margin: 0 auto;
+  border-radius: 5px;
+  margin-top: 20px;
+  margin-bottom: 0;
+  vertical-align: text-top;
+  font-family: 'Noto Sans Gurmukhi UI', sans-serif;
+  background-color: #014147;
+}
+
+.hrg1 {
+  width: 70px;
+}
+
+.hrg2 {
+  width: 140px;
+}
+
+.hrg3 {
+  width: 210px;
+}
+
+.hrg4 {
+  width: 280px;
+}
+
+.hrg5 {
+  width: 350px;
+}
+
+.hrg6 {
+  width: 420px;
+}
+
+.hrg7 {
+  width: 490px;
+}
+
+.hrg8 {
+  width: 560px;
+}
+
+.HirChar {
+  display: inline-block;
+  margin: 7px;
+  font-size: 48px;
+  width: 56px;
+  height: 60px;
+  margin-bottom: 14px;
+}
+
+.Char {
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.Char:hover {
+  background-color: #23818a;
+  border-radius: 5px;
+  color: #88b28e;
+}
+
+p.Kanji {
+  color: #ffc38e;
+  font-size: 56px;
+  margin: 10px 0 5px 0;
+  font-family: 'Noto Sans Gurmukhi UI', sans-serif;
+}
+
+.MagicButton {
+  color: #753700;
+  display: inline-block;
+  width: calc(50% - 1px);
+  /*width: 50%;*/
+  font-size: 24px;
+  font-family: 'Source Sans Pro', sans-serif;
+  border: solid 3px #014147;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+  height: 42px;
+}
+
+.MagicButton:hover {
+  background-color: #71ca7c;
+}
+
+.next-hint {
+
+  background-color: #2bb03c;
+}
+
+.reveal-all {
+  background-color: #09911a;
+}
+
+.next-word {
+  background-color: #e38838;
+}
+
+.exit {
+  background-color: #bb5e0c;
+}
+
+.exit:hover, .next-word:hover {
+  background-color: #e6c9b0;
+}
+
+.big {
+  height: 84px;
+}
+
+
+
+
+
+.example-appear {
+  opacity: 0.01;
+}
+
+.example-appear.example-appear-active {
+  opacity: 1;
+  transition: opacity .5s ease-in;
 }

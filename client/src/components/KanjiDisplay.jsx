@@ -7,7 +7,7 @@ const KanjiDisplay = React.createClass({
 
     return (
       <div className='Kanji'>
-        <h1 className='Kanji'>{this.props.kanjiChars}</h1>
+        <p className='Kanji'>{this.props.kanjiChars}</p>
       </div>
     );
 

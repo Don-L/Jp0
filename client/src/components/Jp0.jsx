@@ -5,7 +5,7 @@ const KanjiDisplay = require('./KanjiDisplay.jsx');
 const HiraganaDisplay = require('./HiraganaDisplay.jsx');
 const HintDisplay = require('./HintDisplay.jsx');
 const ImageDisplay = require('./ImageDisplay.jsx');
-const MagicButton = require('./MagicButton.jsx');
+const Controller = require('./Controller.jsx');
 
 
 
@@ -23,15 +23,24 @@ const Jp0 = React.createClass({
 
     return (
       <div className='Jp0'>
-        <HintDisplay hintsList={hints} revealed={this.state.revealed}/>
-        <HiraganaDisplay hiraganaChars={this.state.words[this.state.currentIndex]['hiragana']} />
+        <div className='top'>
+          <ImageDisplay imgsrc={this.state.words[this.state.currentIndex]['imgsrc']}
+                        name={this.state.words[this.state.currentIndex]['name']}
+                        romaji={this.state.words[this.state.currentIndex]['romaji']}
+                        revealed={this.state.revealed.length}
+                        hintsNo={this.state.hintsNo} />
+          <HintDisplay hintClicked={this.revealHint} hintsList={hints} revealed={this.state.revealed}/>
+        </div>
+        <HiraganaDisplay hirChars={this.state.words[this.state.currentIndex]['hiragana']} />
         <KanjiDisplay kanjiChars={this.state.words[this.state.currentIndex]['kanji']} />
-        <ImageDisplay imgsrc={this.state.words[this.state.currentIndex]['imgsrc']}
-                      name={this.state.words[this.state.currentIndex]['name']}
-                      romaji={this.state.words[this.state.currentIndex]['romaji']}
-                      revealed={this.state.revealed.length}
-                      hintsNo={this.state.hintsNo} />
-        <MagicButton buttonMessage={this.state.buttonMessage} magicButtonClicked={this.magicButtonClicked}/>
+        <Controller
+          buttonMessage={this.state.buttonMessage}
+          nextWordButtonClicked={this.getNextWord}
+          nextHintButtonClicked={this.nextHintButtonClicked}
+          revealButtonClicked={this.revealAll}
+          hintsNo={this.state.hintsNo}
+          revealed={this.state.revealed}/>
+
       </div>
     );
 
@@ -51,7 +60,7 @@ const Jp0 = React.createClass({
                  'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init'},
                  'T':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init'},},
       currentIndex: 0,
-      buttonMessage: 'Hint',
+      buttonMessage: 'HINT',
       hintsNo: 4,
       revealed: []
     };
@@ -70,46 +79,103 @@ const Jp0 = React.createClass({
   },
 
 
-  magicButtonClicked: function () {
+  // nextHintButtonClicked: function () {
+  //   console.log('click!!');
+  //
+  //   let firstHidden = this.findFirstHidden();
+  //
+  //   let hintsNo = this.state.hintsNo;
+  //   let revealed = this.state.revealed;
+  //
+  //   if (hintsNo === revealed.length) {
+  //     this.getNextWord();
+  //   } else if (revealed.length === 0) {
+  //     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][0]]['sound']);
+  //     // sound.play();
+  //     this.setState({revealed: [0]});
+  //   } else if (revealed.length === hintsNo - 1) {
+  //     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
+  //     // sound.play();
+  //     let lastRevealed = revealed[revealed.length - 1];
+  //     let newRevealed = lastRevealed + 1;
+  //     revealed.push(newRevealed);
+  //     this.setState({revealed: revealed,
+  //                    buttonMessage: 'NEXT WORD'});
+  //   } else {
+  //     let lastRevealed = revealed[revealed.length - 1];
+  //     let newRevealed = lastRevealed + 1;
+  //     revealed.push(newRevealed);
+  //     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
+  //     // sound.play();
+  //     this.setState({revealed: revealed});
+  //   }
+  // },
 
+
+  nextHintButtonClicked: function () {
+    let firstHidden = this.findFirstHidden();
     let hintsNo = this.state.hintsNo;
     let revealed = this.state.revealed;
 
-    if (hintsNo === revealed.length) {
+    if (firstHidden === -1) {
       this.getNextWord();
-    } else if (revealed.length === 0) {
-      let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][0]]['sound']);
-      sound.play();
-      this.setState({revealed: [0]});
-    } else if (revealed.length === hintsNo - 1) {
-      let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
-      sound.play();
-      let lastRevealed = revealed[revealed.length - 1];
-      let newRevealed = lastRevealed + 1;
-      revealed.push(newRevealed);
-      this.setState({revealed: revealed,
-                     buttonMessage: 'Next Word'});
     } else {
-      let lastRevealed = revealed[revealed.length - 1];
-      let newRevealed = lastRevealed + 1;
-      revealed.push(newRevealed);
-      let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
-      sound.play();
-      this.setState({revealed: revealed});
+      let newRevealed = this.state.revealed;
+      newRevealed.push(firstHidden);
+      newRevealed = newRevealed.sort(function(a, b){return a-b});
+      this.setState({revealed: newRevealed});
     }
   },
 
 
-  getNextWord: function() {
+  findFirstHidden: function () {
+    let revealed = this.state.revealed;
+    let hintsNo = this.state.hintsNo;
+    if (hintsNo === revealed.length) {
+      return -1;
+    } else if (revealed.indexOf(0) === -1) {
+      return 0;
+    } else {
+      for (let i = 0; i < revealed.length - 2; i++) {
+        if (revealed[i + 1] - revealed[i] >= 2) {
+          return i + 1;
+        }
+      }
+    }
+  },
 
-    let hintsNo = Words[1]['hiragana'].length;
+
+  getNextWord: function () {
+
+    let newCurrent = this.state.currentIndex + 1;
+    let hintsNo = Words[newCurrent]['hiragana'].length;
 
     this.setState({words: Words,
                    hiragana: Hiragana,
-                   currentIndex: 1,
+                   currentIndex: newCurrent,
                    revealed: [],
                    hintsNo: hintsNo,
-                   buttonMessage: 'Hint'});
+                   buttonMessage: 'HINT'});
+  },
+
+
+  revealAll: function () {
+    let rev = [];
+    for (var i = 0; i < this.state.words[this.state.currentIndex]['hiragana'].length; i++) {
+      rev.push(i);
+    }
+    this.setState(
+      {revealed: rev}
+    )
+  },
+
+
+  revealHint: function (index) {
+    let revealed = this.state.revealed;
+    revealed.push(index);
+    this.setState(
+      {revealed: revealed}
+    );
   }
 
 

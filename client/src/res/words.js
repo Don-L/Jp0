@@ -1,5 +1,5 @@
 module.exports = [
-
+//hiragana max 8 characters
   {
     'name': 'DRAGON',
     'hiragana': ['\u308A','\u3085','\u3046'],
