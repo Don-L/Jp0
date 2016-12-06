@@ -1,4 +1,5 @@
 const React = require('react');
+const HirTable = require('./HirTable.jsx');
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 const ImageDisplay = React.createClass({
@@ -28,6 +29,7 @@ const ImageDisplay = React.createClass({
     } else {
       return (
         <div className='ImageDisplay'>
+          <HirTable />
         </div>
       );
     }

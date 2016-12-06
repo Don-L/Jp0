@@ -62,7 +62,8 @@ const Jp0 = React.createClass({
       currentIndex: 0,
       buttonMessage: 'HINT',
       hintsNo: 4,
-      revealed: []
+      revealed: [],
+      showTable: false
     };
   },
 
@@ -136,9 +137,9 @@ const Jp0 = React.createClass({
     } else if (revealed.indexOf(0) === -1) {
       return 0;
     } else {
-      for (let i = 0; i < revealed.length - 2; i++) {
-        if (revealed[i + 1] - revealed[i] >= 2) {
-          return i + 1;
+      for (let i=0; i<revealed.length; i++) {
+        if (revealed[i + 1] - revealed[i] >= 2 || revealed.indexOf(i + 1) === -1) {
+          return(i + 1);
         }
       }
     }

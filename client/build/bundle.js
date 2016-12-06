@@ -19839,7 +19839,8 @@
 	      currentIndex: 0,
 	      buttonMessage: 'HINT',
 	      hintsNo: 4,
-	      revealed: []
+	      revealed: [],
+	      showTable: false
 	    };
 	  },
 	
@@ -19912,8 +19913,8 @@
 	    } else if (revealed.indexOf(0) === -1) {
 	      return 0;
 	    } else {
-	      for (var i = 0; i < revealed.length - 2; i++) {
-	        if (revealed[i + 1] - revealed[i] >= 2) {
+	      for (var i = 0; i < revealed.length; i++) {
+	        if (revealed[i + 1] - revealed[i] >= 2 || revealed.indexOf(i + 1) === -1) {
 	          return i + 1;
 	        }
 	      }
@@ -21426,6 +21427,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
+	var HirTable = __webpack_require__(175);
 	var ReactCSSTransitionGroup = __webpack_require__(167);
 	
 	var ImageDisplay = React.createClass({
@@ -21464,7 +21466,11 @@
 	        )
 	      );
 	    } else {
-	      return React.createElement('div', { className: 'ImageDisplay' });
+	      return React.createElement(
+	        'div',
+	        { className: 'ImageDisplay' },
+	        React.createElement(HirTable, null)
+	      );
 	    }
 	  }
 	
@@ -21473,7 +21479,459 @@
 	module.exports = ImageDisplay;
 
 /***/ },
-/* 175 */,
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	var React = __webpack_require__(1);
+	
+	var HirTable = React.createClass({
+	  displayName: "HirTable",
+	
+	
+	  render: function render() {
+	
+	    return React.createElement(
+	      "table",
+	      null,
+	      React.createElement(
+	        "tbody",
+	        null,
+	        React.createElement(
+	          "tr",
+	          null,
+	          React.createElement("th", null),
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "a"
+	            )
+	          ),
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "i"
+	            )
+	          ),
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "u"
+	            )
+	          ),
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "e"
+	            )
+	          ),
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "o"
+	            )
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement("th", null),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3042"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3044"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3046"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3048"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u304A"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "k"
+	            )
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u304B"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u304D"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u304F"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3051"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3053"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "s"
+	            )
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3055"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3057"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3059"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u305B"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u305D"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "t"
+	            )
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u305F"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3061"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3064"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3066"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3068"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "n"
+	            )
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u306A"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u306B"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u306C"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u306D"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u306E"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "h"
+	            )
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u306F"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3072"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3075"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3078"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u307B"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "m"
+	            )
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u307E"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u307F"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3080"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3081"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3082"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "y"
+	            )
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3084"
+	          ),
+	          React.createElement("td", null),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3086"
+	          ),
+	          React.createElement("td", null),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3088"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "r"
+	            )
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3089"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u308A"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u308B"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u308C"
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u308D"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement(
+	            "th",
+	            null,
+	            React.createElement(
+	              "i",
+	              null,
+	              "w"
+	            )
+	          ),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u308F"
+	          ),
+	          React.createElement("td", null),
+	          React.createElement("td", null),
+	          React.createElement("td", null),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3092"
+	          )
+	        ),
+	        React.createElement(
+	          "tr",
+	          { align: "center" },
+	          React.createElement("th", null),
+	          React.createElement("td", { className: "blank-cell" }),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3093 ",
+	            React.createElement(
+	              "strong",
+	              null,
+	              "(n)"
+	            )
+	          ),
+	          React.createElement("td", { className: "blank-cell" }),
+	          React.createElement(
+	            "td",
+	            null,
+	            "\u3063"
+	          ),
+	          React.createElement("td", { className: "blank-cell" })
+	        )
+	      )
+	    );
+	  }
+	
+	});
+	
+	module.exports = HirTable;
+
+/***/ },
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
