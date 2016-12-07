@@ -24,15 +24,24 @@ const Jp0 = React.createClass({
     return (
       <div className='Jp0'>
         <div className='top'>
-          <ImageDisplay imgsrc={this.state.words[this.state.currentIndex]['imgsrc']}
-                        name={this.state.words[this.state.currentIndex]['name']}
-                        romaji={this.state.words[this.state.currentIndex]['romaji']}
-                        revealed={this.state.revealed.length}
-                        hintsNo={this.state.hintsNo} />
-          <HintDisplay hintClicked={this.revealHint} hintsList={hints} revealed={this.state.revealed}/>
+          <ImageDisplay
+            imgsrc={this.state.words[this.state.currentIndex]['imgsrc']}
+            name={this.state.words[this.state.currentIndex]['name']}
+            romaji={this.state.words[this.state.currentIndex]['romaji']}
+            revealed={this.state.revealed.length}
+            hintsNo={this.state.hintsNo}
+            tableDisplayed={this.state.tableDisplayed}
+            tableSelected={this.state.tableSelected}/>
+          <HintDisplay
+            hintClicked={this.revealHint}
+            hintsList={hints}
+            revealed={this.state.revealed}/>
         </div>
-        <HiraganaDisplay hirChars={this.state.words[this.state.currentIndex]['hiragana']} />
-        <KanjiDisplay kanjiChars={this.state.words[this.state.currentIndex]['kanji']} />
+        <HiraganaDisplay
+          hirChars={this.state.words[this.state.currentIndex]['hiragana']} showTableWithSelected={this.showTableWithSelected} />
+        <KanjiDisplay
+          kanjiChars={this.state.words[this.state.currentIndex]['kanji']}
+          showTableWithAllSelected={this.showTableWithAllSelected} />
         <Controller
           buttonMessage={this.state.buttonMessage}
           nextWordButtonClicked={this.getNextWord}
@@ -63,7 +72,8 @@ const Jp0 = React.createClass({
       buttonMessage: 'HINT',
       hintsNo: 4,
       revealed: [],
-      showTable: false
+      tableDisplayed: false,
+      tableSelected: []
     };
   },
 
@@ -78,39 +88,6 @@ const Jp0 = React.createClass({
                    revealed: [],
                    hintsNo: hintsNo});
   },
-
-
-  // nextHintButtonClicked: function () {
-  //   console.log('click!!');
-  //
-  //   let firstHidden = this.findFirstHidden();
-  //
-  //   let hintsNo = this.state.hintsNo;
-  //   let revealed = this.state.revealed;
-  //
-  //   if (hintsNo === revealed.length) {
-  //     this.getNextWord();
-  //   } else if (revealed.length === 0) {
-  //     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][0]]['sound']);
-  //     // sound.play();
-  //     this.setState({revealed: [0]});
-  //   } else if (revealed.length === hintsNo - 1) {
-  //     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
-  //     // sound.play();
-  //     let lastRevealed = revealed[revealed.length - 1];
-  //     let newRevealed = lastRevealed + 1;
-  //     revealed.push(newRevealed);
-  //     this.setState({revealed: revealed,
-  //                    buttonMessage: 'NEXT WORD'});
-  //   } else {
-  //     let lastRevealed = revealed[revealed.length - 1];
-  //     let newRevealed = lastRevealed + 1;
-  //     revealed.push(newRevealed);
-  //     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
-  //     // sound.play();
-  //     this.setState({revealed: revealed});
-  //   }
-  // },
 
 
   nextHintButtonClicked: function () {
@@ -156,7 +133,9 @@ const Jp0 = React.createClass({
                    currentIndex: newCurrent,
                    revealed: [],
                    hintsNo: hintsNo,
-                   buttonMessage: 'HINT'});
+                   buttonMessage: 'HINT',
+                   tableDisplayed: false,
+                   tableSelected: []});
   },
 
 
@@ -166,7 +145,8 @@ const Jp0 = React.createClass({
       rev.push(i);
     }
     this.setState(
-      {revealed: rev}
+      {revealed: rev,
+       tableDisplayed: false}
     )
   },
 
@@ -174,10 +154,46 @@ const Jp0 = React.createClass({
   revealHint: function (index) {
     let revealed = this.state.revealed;
     revealed.push(index);
+    if (revealed.length === this.state.hintsNo) {
+      this.setState(
+        {revealed: revealed,
+         tableDisplayed: false}
+      );
+    } else {
+      this.setState(
+        {revealed: revealed}
+      );
+    }
+  },
+
+
+  showTableWithSelected: function (char, all) {
+    let tableSelected = [];
+    if (all) {
+      tableSelected = this.state.tableSelected;
+    }
+    if (this.state.hiragana[char].parent) {
+      let ch = this.state.hiragana[char].parent;
+      tableSelected.push(ch);
+      tableSelected.push('yōon')
+    } else {
+      tableSelected.push(char);
+    }
     this.setState(
-      {revealed: revealed}
+      {tableDisplayed: true,
+       tableSelected: tableSelected}
     );
+  },
+
+
+  showTableWithAllSelected: function () {
+    let hirChars=this.state.words[this.state.currentIndex]['hiragana'];
+    for (let hira of hirChars) {
+      this.showTableWithSelected(hira, 'all');
+    }
   }
+
+
 
 
 
@@ -194,3 +210,35 @@ const Jp0 = React.createClass({
 });
 
 module.exports = Jp0;
+
+// nextHintButtonClicked: function () {
+//   console.log('click!!');
+//
+//   let firstHidden = this.findFirstHidden();
+//
+//   let hintsNo = this.state.hintsNo;
+//   let revealed = this.state.revealed;
+//
+//   if (hintsNo === revealed.length) {
+//     this.getNextWord();
+//   } else if (revealed.length === 0) {
+//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][0]]['sound']);
+//     // sound.play();
+//     this.setState({revealed: [0]});
+//   } else if (revealed.length === hintsNo - 1) {
+//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
+//     // sound.play();
+//     let lastRevealed = revealed[revealed.length - 1];
+//     let newRevealed = lastRevealed + 1;
+//     revealed.push(newRevealed);
+//     this.setState({revealed: revealed,
+//                    buttonMessage: 'NEXT WORD'});
+//   } else {
+//     let lastRevealed = revealed[revealed.length - 1];
+//     let newRevealed = lastRevealed + 1;
+//     revealed.push(newRevealed);
+//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
+//     // sound.play();
+//     this.setState({revealed: revealed});
+//   }
+// },

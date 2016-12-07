@@ -19804,15 +19804,24 @@
 	      React.createElement(
 	        'div',
 	        { className: 'top' },
-	        React.createElement(ImageDisplay, { imgsrc: this.state.words[this.state.currentIndex]['imgsrc'],
+	        React.createElement(ImageDisplay, {
+	          imgsrc: this.state.words[this.state.currentIndex]['imgsrc'],
 	          name: this.state.words[this.state.currentIndex]['name'],
 	          romaji: this.state.words[this.state.currentIndex]['romaji'],
 	          revealed: this.state.revealed.length,
-	          hintsNo: this.state.hintsNo }),
-	        React.createElement(HintDisplay, { hintClicked: this.revealHint, hintsList: hints, revealed: this.state.revealed })
+	          hintsNo: this.state.hintsNo,
+	          tableDisplayed: this.state.tableDisplayed,
+	          tableSelected: this.state.tableSelected }),
+	        React.createElement(HintDisplay, {
+	          hintClicked: this.revealHint,
+	          hintsList: hints,
+	          revealed: this.state.revealed })
 	      ),
-	      React.createElement(HiraganaDisplay, { hirChars: this.state.words[this.state.currentIndex]['hiragana'] }),
-	      React.createElement(KanjiDisplay, { kanjiChars: this.state.words[this.state.currentIndex]['kanji'] }),
+	      React.createElement(HiraganaDisplay, {
+	        hirChars: this.state.words[this.state.currentIndex]['hiragana'], showTableWithSelected: this.showTableWithSelected }),
+	      React.createElement(KanjiDisplay, {
+	        kanjiChars: this.state.words[this.state.currentIndex]['kanji'],
+	        showTableWithAllSelected: this.showTableWithAllSelected }),
 	      React.createElement(Controller, {
 	        buttonMessage: this.state.buttonMessage,
 	        nextWordButtonClicked: this.getNextWord,
@@ -19840,7 +19849,8 @@
 	      buttonMessage: 'HINT',
 	      hintsNo: 4,
 	      revealed: [],
-	      showTable: false
+	      tableDisplayed: false,
+	      tableSelected: []
 	    };
 	  },
 	
@@ -19854,39 +19864,6 @@
 	      revealed: [],
 	      hintsNo: hintsNo });
 	  },
-	
-	  // nextHintButtonClicked: function () {
-	  //   console.log('click!!');
-	  //
-	  //   let firstHidden = this.findFirstHidden();
-	  //
-	  //   let hintsNo = this.state.hintsNo;
-	  //   let revealed = this.state.revealed;
-	  //
-	  //   if (hintsNo === revealed.length) {
-	  //     this.getNextWord();
-	  //   } else if (revealed.length === 0) {
-	  //     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][0]]['sound']);
-	  //     // sound.play();
-	  //     this.setState({revealed: [0]});
-	  //   } else if (revealed.length === hintsNo - 1) {
-	  //     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
-	  //     // sound.play();
-	  //     let lastRevealed = revealed[revealed.length - 1];
-	  //     let newRevealed = lastRevealed + 1;
-	  //     revealed.push(newRevealed);
-	  //     this.setState({revealed: revealed,
-	  //                    buttonMessage: 'NEXT WORD'});
-	  //   } else {
-	  //     let lastRevealed = revealed[revealed.length - 1];
-	  //     let newRevealed = lastRevealed + 1;
-	  //     revealed.push(newRevealed);
-	  //     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
-	  //     // sound.play();
-	  //     this.setState({revealed: revealed});
-	  //   }
-	  // },
-	
 	
 	  nextHintButtonClicked: function nextHintButtonClicked() {
 	    var firstHidden = this.findFirstHidden();
@@ -19931,7 +19908,9 @@
 	      currentIndex: newCurrent,
 	      revealed: [],
 	      hintsNo: hintsNo,
-	      buttonMessage: 'HINT' });
+	      buttonMessage: 'HINT',
+	      tableDisplayed: false,
+	      tableSelected: [] });
 	  },
 	
 	  revealAll: function revealAll() {
@@ -19939,18 +19918,100 @@
 	    for (var i = 0; i < this.state.words[this.state.currentIndex]['hiragana'].length; i++) {
 	      rev.push(i);
 	    }
-	    this.setState({ revealed: rev });
+	    this.setState({ revealed: rev,
+	      tableDisplayed: false });
 	  },
 	
 	  revealHint: function revealHint(index) {
 	    var revealed = this.state.revealed;
 	    revealed.push(index);
-	    this.setState({ revealed: revealed });
+	    if (revealed.length === this.state.hintsNo) {
+	      this.setState({ revealed: revealed,
+	        tableDisplayed: false });
+	    } else {
+	      this.setState({ revealed: revealed });
+	    }
+	  },
+	
+	  showTableWithSelected: function showTableWithSelected(char, all) {
+	    var tableSelected = [];
+	    if (all) {
+	      tableSelected = this.state.tableSelected;
+	    }
+	    if (this.state.hiragana[char].parent) {
+	      var ch = this.state.hiragana[char].parent;
+	      tableSelected.push(ch);
+	      tableSelected.push('yōon');
+	    } else {
+	      tableSelected.push(char);
+	    }
+	    this.setState({ tableDisplayed: true,
+	      tableSelected: tableSelected });
+	  },
+	
+	  showTableWithAllSelected: function showTableWithAllSelected() {
+	    var hirChars = this.state.words[this.state.currentIndex]['hiragana'];
+	    var _iteratorNormalCompletion2 = true;
+	    var _didIteratorError2 = false;
+	    var _iteratorError2 = undefined;
+	
+	    try {
+	      for (var _iterator2 = hirChars[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	        var hira = _step2.value;
+	
+	        this.showTableWithSelected(hira, 'all');
+	      }
+	    } catch (err) {
+	      _didIteratorError2 = true;
+	      _iteratorError2 = err;
+	    } finally {
+	      try {
+	        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	          _iterator2.return();
+	        }
+	      } finally {
+	        if (_didIteratorError2) {
+	          throw _iteratorError2;
+	        }
+	      }
+	    }
 	  }
 	
 	});
 	
 	module.exports = Jp0;
+	
+	// nextHintButtonClicked: function () {
+	//   console.log('click!!');
+	//
+	//   let firstHidden = this.findFirstHidden();
+	//
+	//   let hintsNo = this.state.hintsNo;
+	//   let revealed = this.state.revealed;
+	//
+	//   if (hintsNo === revealed.length) {
+	//     this.getNextWord();
+	//   } else if (revealed.length === 0) {
+	//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][0]]['sound']);
+	//     // sound.play();
+	//     this.setState({revealed: [0]});
+	//   } else if (revealed.length === hintsNo - 1) {
+	//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
+	//     // sound.play();
+	//     let lastRevealed = revealed[revealed.length - 1];
+	//     let newRevealed = lastRevealed + 1;
+	//     revealed.push(newRevealed);
+	//     this.setState({revealed: revealed,
+	//                    buttonMessage: 'NEXT WORD'});
+	//   } else {
+	//     let lastRevealed = revealed[revealed.length - 1];
+	//     let newRevealed = lastRevealed + 1;
+	//     revealed.push(newRevealed);
+	//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
+	//     // sound.play();
+	//     this.setState({revealed: revealed});
+	//   }
+	// },
 
 /***/ },
 /* 160 */
@@ -19980,12 +20041,15 @@
 
 	'use strict';
 	
+	//small versions of characters must appear immediately before their normal sized versions in the array
+	
 	module.exports = {
 	
 	  '\u3041': {
 	    'name': 'hiragana letter small a',
 	    'char': 'ぁ',
-	    'transliteration': 'a'
+	    'transliteration': 'a',
+	    'parent': '\u3042'
 	  },
 	
 	  '\u3042': {
@@ -19997,7 +20061,8 @@
 	  '\u3043': {
 	    'name': 'hiragana letter small i',
 	    'char': 'ぃ',
-	    'transliteration': 'i'
+	    'transliteration': 'i',
+	    'parent': '\u3044'
 	  },
 	
 	  '\u3044': {
@@ -20009,7 +20074,8 @@
 	  '\u3045': {
 	    'name': 'hiragana letter small u',
 	    'char': 'ぅ',
-	    'transliteration': 'u'
+	    'transliteration': 'u',
+	    'parent': '\u3046'
 	  },
 	
 	  '\u3046': {
@@ -20020,7 +20086,8 @@
 	
 	  '\u3047': {
 	    'name': 'hiragana letter small e',
-	    'transliteration': 'e'
+	    'transliteration': 'e',
+	    'parent': '\u3048'
 	  },
 	
 	  '\u3048': {
@@ -20030,7 +20097,8 @@
 	
 	  '\u3049': {
 	    'name': 'hiragana letter small o',
-	    'transliteration': 'o'
+	    'transliteration': 'o',
+	    'parent': '\u304A'
 	  },
 	
 	  '\u304A': {
@@ -20165,7 +20233,8 @@
 	  //need this? - denotes glottal stop
 	  '\u3063': {
 	    'name': 'hiragana letter small tu',
-	    'transliteration': 'tu'
+	    'transliteration': 'tu',
+	    'parent': '\u3064'
 	  },
 	
 	  //tu or tsu?
@@ -20348,7 +20417,8 @@
 	  '\u3083': {
 	    'name': 'hiragana letter small ya',
 	    'char': 'ゃ',
-	    'transliteration': 'ya'
+	    'transliteration': 'ya',
+	    'parent': '\u3084'
 	  },
 	
 	  '\u3084': {
@@ -20361,7 +20431,8 @@
 	  '\u3085': {
 	    'name': 'hiragana letter small yu',
 	    'char': 'ゅ',
-	    'transliteration': 'yu'
+	    'transliteration': 'yu',
+	    'parent': '\u3086'
 	  },
 	
 	  '\u3086': {
@@ -20374,7 +20445,8 @@
 	  '\u3087': {
 	    'name': 'hiragana letter small yo',
 	    'char': 'ょ',
-	    'transliteration': 'yo'
+	    'transliteration': 'yo',
+	    'parent': '\u3088'
 	  },
 	
 	  '\u3088': {
@@ -20456,10 +20528,14 @@
 	      { className: 'Kanji' },
 	      React.createElement(
 	        'p',
-	        { className: 'Kanji' },
+	        { className: 'Kanji', onClick: this.showTableWithAllSelected },
 	        this.props.kanjiChars
 	      )
 	    );
+	  },
+	
+	  showTableWithAllSelected: function showTableWithAllSelected() {
+	    this.props.showTableWithAllSelected();
 	  }
 	
 	});
@@ -20484,7 +20560,7 @@
 	    var nodes = [];
 	
 	    for (var i = 0; i < this.props.hirChars.length; i++) {
-	      nodes.push(React.createElement(HirChar, { key: i, char: this.props.hirChars[i] }));
+	      nodes.push(React.createElement(HirChar, { key: i, showTableWithSelected: this.props.showTableWithSelected, char: this.props.hirChars[i] }));
 	    };
 	
 	    var clss = 'HiraganaDisplay' + ' hrg' + this.props.hirChars.length;
@@ -20516,13 +20592,17 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'HirChar' },
+	      { className: 'HirChar', onClick: this.showTableWithSelected },
 	      React.createElement(
 	        'p',
 	        { className: 'Char' },
 	        this.props.char
 	      )
 	    );
+	  },
+	
+	  showTableWithSelected: function showTableWithSelected() {
+	    this.props.showTableWithSelected(this.props.char);
 	  }
 	
 	});
@@ -21436,7 +21516,13 @@
 	
 	  render: function render() {
 	
-	    if (this.props.revealed === this.props.hintsNo) {
+	    if (this.props.tableDisplayed === true) {
+	      return React.createElement(
+	        'div',
+	        { className: 'ImageDisplay' },
+	        React.createElement(HirTable, { tableSelected: this.props.tableSelected })
+	      );
+	    } else if (this.props.revealed === this.props.hintsNo) {
 	      return React.createElement(
 	        'div',
 	        { className: 'ImageDisplay' },
@@ -21466,12 +21552,20 @@
 	        )
 	      );
 	    } else {
-	      return React.createElement(
-	        'div',
-	        { className: 'ImageDisplay' },
-	        React.createElement(HirTable, null)
-	      );
+	      return React.createElement('div', { className: 'ImageDisplay' });
 	    }
+	
+	    //  else {
+	    //   if (this.props.tableDisplayed === false) {
+	    //
+	    //   } else {
+	    //     return (
+	    //       <div className='ImageDisplay'>
+	    //         <HirTable tableSelected={this.props.tableSelected}/>
+	    //       </div>
+	    //     );
+	    //   }
+	    // }
 	  }
 	
 	});
@@ -21482,446 +21576,264 @@
 /* 175 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	var React = __webpack_require__(1);
+	var TableCell = __webpack_require__(177);
 	
 	var HirTable = React.createClass({
-	  displayName: "HirTable",
+	  displayName: 'HirTable',
 	
 	
 	  render: function render() {
 	
 	    return React.createElement(
-	      "table",
+	      'table',
 	      null,
 	      React.createElement(
-	        "tbody",
+	        'tbody',
 	        null,
 	        React.createElement(
-	          "tr",
+	          'tr',
 	          null,
-	          React.createElement("th", null),
+	          React.createElement('th', null),
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "a"
+	              'a'
 	            )
 	          ),
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "i"
+	              'i'
 	            )
 	          ),
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "u"
+	              'u'
 	            )
 	          ),
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "e"
+	              'e'
 	            )
 	          ),
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "o"
+	              'o'
 	            )
 	          )
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
-	          React.createElement("th", null),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3042"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3044"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3046"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3048"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u304A"
-	          )
+	          'tr',
+	          { align: 'center' },
+	          React.createElement('th', null),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3042' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3044' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3046' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3048' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u304A' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
+	          'tr',
+	          { align: 'center' },
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "k"
+	              'k'
 	            )
 	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u304B"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u304D"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u304F"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3051"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3053"
-	          )
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u304B' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u304D' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u304F' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3051' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3053' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
+	          'tr',
+	          { align: 'center' },
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "s"
+	              's'
 	            )
 	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3055"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3057"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3059"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u305B"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u305D"
-	          )
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3055' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3057' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3059' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u305B' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u305D' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
+	          'tr',
+	          { align: 'center' },
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "t"
+	              't'
 	            )
 	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u305F"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3061"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3064"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3066"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3068"
-	          )
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u305F' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3061' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3063' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3066' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3068' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
+	          'tr',
+	          { align: 'center' },
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "n"
+	              'n'
 	            )
 	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u306A"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u306B"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u306C"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u306D"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u306E"
-	          )
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306A' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306B' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306C' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306D' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306E' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
+	          'tr',
+	          { align: 'center' },
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "h"
+	              'h'
 	            )
 	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u306F"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3072"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3075"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3078"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u307B"
-	          )
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306F' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3072' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3075' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3078' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u307B' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
+	          'tr',
+	          { align: 'center' },
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "m"
+	              'm'
 	            )
 	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u307E"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u307F"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3080"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3081"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3082"
-	          )
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u307E' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u307F' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3080' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3081' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3082' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
+	          'tr',
+	          { align: 'center' },
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "y"
+	              'y'
 	            )
 	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3084"
-	          ),
-	          React.createElement("td", null),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3086"
-	          ),
-	          React.createElement("td", null),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3088"
-	          )
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3084' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3086' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3088' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
+	          'tr',
+	          { align: 'center' },
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "r"
+	              'r'
 	            )
 	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3089"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u308A"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u308B"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u308C"
-	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u308D"
-	          )
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3089' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308A' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308B' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308C' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308D' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
+	          'tr',
+	          { align: 'center' },
 	          React.createElement(
-	            "th",
+	            'th',
 	            null,
 	            React.createElement(
-	              "i",
+	              'i',
 	              null,
-	              "w"
+	              'w'
 	            )
 	          ),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u308F"
-	          ),
-	          React.createElement("td", null),
-	          React.createElement("td", null),
-	          React.createElement("td", null),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3092"
-	          )
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308F' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3092' })
 	        ),
 	        React.createElement(
-	          "tr",
-	          { align: "center" },
-	          React.createElement("th", null),
-	          React.createElement("td", { className: "blank-cell" }),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3093 ",
-	            React.createElement(
-	              "strong",
-	              null,
-	              "(n)"
-	            )
-	          ),
-	          React.createElement("td", { className: "blank-cell" }),
-	          React.createElement(
-	            "td",
-	            null,
-	            "\u3063"
-	          ),
-	          React.createElement("td", { className: "blank-cell" })
+	          'tr',
+	          { align: 'center' },
+	          React.createElement('th', null),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3093' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '' })
+	        ),
+	        React.createElement(
+	          'tr',
+	          { align: 'center' },
+	          React.createElement('th', null),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: 'y\u014Don' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3063' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u309B' }),
+	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u309C' })
 	        )
 	      )
 	    );
@@ -21991,6 +21903,71 @@
 	});
 	
 	module.exports = Controller;
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var TableCell = React.createClass({
+	  displayName: 'TableCell',
+	
+	
+	  render: function render() {
+	
+	    if (this.props.tableChar === 'ん') {
+	      if (this.props.tableSelected.indexOf(this.props.tableChar) > -1) {
+	        return React.createElement(
+	          'td',
+	          { className: 'selected-cell' },
+	          this.props.tableChar,
+	          ' (',
+	          React.createElement(
+	            'strong',
+	            null,
+	            'n'
+	          ),
+	          ')'
+	        );
+	      } else {
+	        return React.createElement(
+	          'td',
+	          null,
+	          this.props.tableChar,
+	          ' (',
+	          React.createElement(
+	            'strong',
+	            null,
+	            'n'
+	          ),
+	          ')'
+	        );
+	      }
+	    } else if (this.props.tableChar === '') {
+	      return React.createElement('td', { className: 'blank-cell' });
+	    } else {
+	      if (this.props.tableSelected.indexOf(this.props.tableChar) > -1) {
+	        return React.createElement(
+	          'td',
+	          { className: 'selected-cell' },
+	          this.props.tableChar
+	        );
+	      } else {
+	        return React.createElement(
+	          'td',
+	          null,
+	          this.props.tableChar
+	        );
+	      }
+	    }
+	  }
+	
+	});
+	
+	module.exports = TableCell;
 
 /***/ }
 /******/ ]);

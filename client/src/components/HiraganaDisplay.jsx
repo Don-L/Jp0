@@ -9,7 +9,7 @@ const HiraganaDisplay = React.createClass({
     let nodes = [];
 
     for (let i = 0; i < this.props.hirChars.length; i++) {
-      nodes.push(<HirChar key={i} char={this.props.hirChars[i]} />);
+      nodes.push(<HirChar key={i} showTableWithSelected={this.props.showTableWithSelected} char={this.props.hirChars[i]} />);
     };
 
     let clss = 'HiraganaDisplay' + ' hrg' + this.props.hirChars.length;

@@ -7,10 +7,15 @@ const KanjiDisplay = React.createClass({
 
     return (
       <div className='Kanji'>
-        <p className='Kanji'>{this.props.kanjiChars}</p>
+        <p className='Kanji' onClick={this.showTableWithAllSelected}>{this.props.kanjiChars}</p>
       </div>
     );
 
+  },
+
+
+  showTableWithAllSelected: function () {
+    this.props.showTableWithAllSelected();
   }
 
 

@@ -6,9 +6,14 @@ const ImageDisplay = React.createClass({
 
   render: function () {
 
-    if (this.props.revealed === this.props.hintsNo) {
+    if (this.props.tableDisplayed === true) {
       return (
-
+        <div className='ImageDisplay'>
+          <HirTable tableSelected={this.props.tableSelected}/>
+        </div>
+      );
+    } else if (this.props.revealed === this.props.hintsNo) {
+      return (
         <div className='ImageDisplay'>
           <ReactCSSTransitionGroup
             transitionName="example"
@@ -23,16 +28,25 @@ const ImageDisplay = React.createClass({
               </div>
           </ReactCSSTransitionGroup>
         </div>
-
-
       );
     } else {
       return (
         <div className='ImageDisplay'>
-          <HirTable />
         </div>
       );
     }
+
+    //  else {
+    //   if (this.props.tableDisplayed === false) {
+    //
+    //   } else {
+    //     return (
+    //       <div className='ImageDisplay'>
+    //         <HirTable tableSelected={this.props.tableSelected}/>
+    //       </div>
+    //     );
+    //   }
+    // }
   }
 
 

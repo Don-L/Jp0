@@ -71,20 +71,29 @@ img.ImageDisplay {
   /*background-color: white;*/
   background-color: #e6c9b0;
   width: 60px;
-  height: 28px;
+  height: 26px;
   font-family: 'Noto Sans Gurmukhi UI', sans-serif;
 }
 
 .ImageDisplay th {
   font-family: 'Source Sans Pro', sans-serif;
   font-weight: bold;
-  padding: 5px;
+  padding: 0 5px 0 5px;
   color: #014147;
+}
+
+strong {
+  color: #014147;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 td.blank-cell {
   border: none;
   background-color: #ffc38e;
+}
+
+td.selected-cell {
+  background-color: #88b28e;
 }
 
 .HintDisplay {
@@ -191,9 +200,9 @@ td.blank-cell {
 }
 
 .Char:hover {
-  background-color: #23818a;
-  border-radius: 5px;
-  color: #88b28e;
+  /*background-color: #23818a;
+  border-radius: 5px;*/
+  color: #09911a;
 }
 
 /*.Char:hover {
@@ -203,10 +212,15 @@ td.blank-cell {
 }*/
 
 p.Kanji {
-  color: #ffc38e;
+  color: #e38838;
   font-size: 56px;
   margin: 10px 0 5px 0;
   font-family: 'Noto Sans Gurmukhi UI', sans-serif;
+  cursor: pointer;
+}
+
+p.Kanji:hover {
+  color: #e6c9b0;
 }
 
 .MagicButton {

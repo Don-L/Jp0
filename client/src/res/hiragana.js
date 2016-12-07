@@ -1,9 +1,12 @@
+//small versions of characters must appear immediately before their normal sized versions in the array
+
 module.exports = {
 
   '\u3041': {
     'name': 'hiragana letter small a',
     'char': 'ぁ',
-    'transliteration': 'a'
+    'transliteration': 'a',
+    'parent': '\u3042'
   },
 
   '\u3042': {
@@ -15,7 +18,8 @@ module.exports = {
   '\u3043': {
     'name': 'hiragana letter small i',
     'char': 'ぃ',
-    'transliteration': 'i'
+    'transliteration': 'i',
+    'parent': '\u3044'
   },
 
   '\u3044': {
@@ -27,7 +31,8 @@ module.exports = {
   '\u3045': {
     'name': 'hiragana letter small u',
     'char': 'ぅ',
-    'transliteration': 'u'
+    'transliteration': 'u',
+    'parent': '\u3046'
   },
 
   '\u3046': {
@@ -38,7 +43,8 @@ module.exports = {
 
   '\u3047': {
     'name': 'hiragana letter small e',
-    'transliteration': 'e'
+    'transliteration': 'e',
+    'parent': '\u3048'
   },
 
   '\u3048': {
@@ -48,7 +54,8 @@ module.exports = {
 
   '\u3049': {
     'name': 'hiragana letter small o',
-    'transliteration': 'o'
+    'transliteration': 'o',
+    'parent': '\u304A'
   },
 
   '\u304A': {
@@ -183,7 +190,8 @@ module.exports = {
 //need this? - denotes glottal stop
   '\u3063': {
     'name': 'hiragana letter small tu',
-    'transliteration': 'tu'
+    'transliteration': 'tu',
+    'parent': '\u3064'
   },
 
 //tu or tsu?
@@ -366,7 +374,8 @@ module.exports = {
   '\u3083': {
     'name': 'hiragana letter small ya',
     'char': 'ゃ',
-    'transliteration': 'ya'
+    'transliteration': 'ya',
+    'parent': '\u3084'
   },
 
   '\u3084': {
@@ -379,7 +388,8 @@ module.exports = {
   '\u3085': {
     'name': 'hiragana letter small yu',
     'char': 'ゅ',
-    'transliteration': 'yu'
+    'transliteration': 'yu',
+    'parent': '\u3086'
   },
 
   '\u3086': {
@@ -392,7 +402,8 @@ module.exports = {
   '\u3087': {
     'name': 'hiragana letter small yo',
     'char': 'ょ',
-    'transliteration': 'yo'
+    'transliteration': 'yo',
+    'parent': '\u3088'
   },
 
   '\u3088': {
