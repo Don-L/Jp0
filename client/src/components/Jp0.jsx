@@ -31,7 +31,9 @@ const Jp0 = React.createClass({
             revealed={this.state.revealed.length}
             hintsNo={this.state.hintsNo}
             tableDisplayed={this.state.tableDisplayed}
-            tableSelected={this.state.tableSelected}/>
+            tableSelected={this.state.tableSelected}
+            tableClicked={this.hideTable}
+            hiragana={this.state.hiragana}/>
           <HintDisplay
             hintClicked={this.revealHint}
             hintsList={hints}
@@ -61,7 +63,7 @@ const Jp0 = React.createClass({
       words: [{
         'name': 'init',
         'hiragana': ['I', 'N', 'I', 'T'],
-        'kana': 'KANA',
+        'kanji': 'KANJI',
         'imgsrc': 'res/Nightingale.JPG'
       }],
       hiragana: {'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init'},
@@ -94,7 +96,6 @@ const Jp0 = React.createClass({
     let firstHidden = this.findFirstHidden();
     let hintsNo = this.state.hintsNo;
     let revealed = this.state.revealed;
-
     if (firstHidden === -1) {
       this.getNextWord();
     } else {
@@ -102,6 +103,9 @@ const Jp0 = React.createClass({
       newRevealed.push(firstHidden);
       newRevealed = newRevealed.sort(function(a, b){return a-b});
       this.setState({revealed: newRevealed});
+      if (newRevealed.length === hintsNo) {
+        this.setState({tableDisplayed: false});
+      }
     }
   },
 
@@ -172,8 +176,8 @@ const Jp0 = React.createClass({
     if (all) {
       tableSelected = this.state.tableSelected;
     }
-    if (this.state.hiragana[char].parent) {
-      let ch = this.state.hiragana[char].parent;
+    if (this.state.hiragana[char].yoon_parent) {
+      let ch = this.state.hiragana[char].yoon_parent;
       tableSelected.push(ch);
       tableSelected.push('yōon')
     } else {
@@ -191,6 +195,11 @@ const Jp0 = React.createClass({
     for (let hira of hirChars) {
       this.showTableWithSelected(hira, 'all');
     }
+  },
+
+
+  hideTable: function () {
+    this.setState({tableDisplayed: false});
   }
 
 

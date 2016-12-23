@@ -5,19 +5,19 @@ const TableCell = React.createClass({
 
   render: function () {
 
-    if (this.props.tableChar === 'ん') {
-      if (this.props.tableSelected.indexOf(this.props.tableChar) > -1) {
-        return <td className='selected-cell'>{this.props.tableChar} (<strong>n</strong>)</td>
+    if (this.props.tableChar.char === 'ん') {
+      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
+        return <td className='selected-cell'>{this.props.tableChar.char} (<strong>n</strong>)</td>
       } else {
-        return <td>{this.props.tableChar} (<strong>n</strong>)</td>
+        return <td>{this.props.tableChar.char} (<strong>n</strong>)</td>
       }
-    } else if (this.props.tableChar === '') {
+    } else if (this.props.tableChar.char === '') {
       return <td className='blank-cell'></td>
     } else {
-      if (this.props.tableSelected.indexOf(this.props.tableChar) > -1) {
-        return <td className='selected-cell'>{this.props.tableChar}</td>
+      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
+        return <td className='selected-cell'>{this.props.tableChar.char}</td>
       } else {
-        return <td>{this.props.tableChar}</td>
+        return <td>{this.props.tableChar.char}</td>
       }
     }
   }

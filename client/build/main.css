@@ -3,15 +3,27 @@
 @import url(http://fonts.googleapis.com/earlyaccess/notosansgurmukhiui.css);
 @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
 
+
+/*----------------------*/
+/*  TOP LEVEL ELEMENTS  */
+/*----------------------*/
+
+#app {
+  width: 100%;
+}
+
 body {
   /*background-color: #e6c9b0;*/
   /*background-color: #373737;*/
+  background-color: #6c898c;
+  margin: 0 auto;
 }
 
 .Jp0 {
   width: 600px;
   height: 800px;
   margin: 0 auto;
+  margin-top: calc((100vh - 800px) / 2);
   background-color: #086972;
   text-align: center;
   /*padding-top: 23px;*/
@@ -24,6 +36,30 @@ body {
   border-radius: 5px;
 }
 
+@media screen and (max-width: 414px) {
+  #app {
+    width: 100%;
+  }
+  .Jp0 {
+    width: 300px;
+    height: 548px;
+    margin-top: calc((100vh - 548px) / 2);
+  }
+  body {
+    margin: 5px 0 5px 0;
+    background-color: #6c898c;
+  }
+  .top {
+    border-radius: 5px 5px 0 0;
+  }
+}
+
+
+
+/*------------------------------*/
+/*         IMAGE DISPLAY        */
+/*------------------------------*/
+
 div.ImageDisplay {
   width: 550px;
   height: 400px;
@@ -35,8 +71,8 @@ div.ImageDisplay {
 }
 
 img.ImageDisplay {
-  max-width: 300px;
-  height: 350px;
+  max-width: 530px;
+  max-height: 350px;
   border: ridge 3px #e34138;
   border-radius: 5px;
 }
@@ -50,11 +86,38 @@ img.ImageDisplay {
   margin: 10px 0 10px 0;
 }
 
+@media screen and (max-width: 414px) {
+  div.ImageDisplay {
+    width: 250px;
+    height: 245px;
+    margin-bottom: 10px;
+    padding-top: 5px;
+  }
+  img.ImageDisplay {
+    max-width: 230px;
+    max-height: 200px;
+    border: solid 2px #e34138;
+  }
+  .ImageDisplay p {
+    margin: 5px 0 10px 0;
+  }
+}
+
 .ImageText {
   width: 100%;
   vertical-align: baseline;
   height: 40px;
 }
+
+@media screen and (max-width: 414px) {
+  .ImageDisplay p {
+    font-size: 20px;
+  }
+}
+
+/*------------------------------*/
+/*            TABLE             */
+/*------------------------------*/
 
 .ImageDisplay table {
   border: solid 2px #ff938e;
@@ -82,6 +145,19 @@ img.ImageDisplay {
   color: #014147;
 }
 
+@media screen and (max-width: 414px) {
+  .ImageDisplay table {
+    font-size: 12px;
+  }
+  .ImageDisplay td {
+    width: 40px;
+    height: 10px;
+    padding: 0;
+    border-style: none;
+    box-shadow: inset 0 0 1px #014147;
+  }
+}
+
 strong {
   color: #014147;
   font-family: 'Source Sans Pro', sans-serif;
@@ -95,6 +171,11 @@ td.blank-cell {
 td.selected-cell {
   background-color: #88b28e;
 }
+
+
+/*------------------------------*/
+/*            HINT              */
+/*------------------------------*/
 
 .HintDisplay {
   height: 90px;
@@ -121,6 +202,23 @@ td.selected-cell {
   border-radius: 50%;
   cursor: pointer;
   color: #086972;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+@media screen and (max-width: 414px) {
+  .HintDisplay {
+    height: 47px;
+  }
+  .Hint {
+    font-size: 18px;
+  }
+  .Hidden-Hint {
+    width: 38px;
+    height: 28px;
+    margin: 0 4px 0 4px;
+    padding-top: 8px;
+    padding-bottom: 3px;
+  }
 }
 
 .Hidden-Hint:hover {
@@ -141,6 +239,20 @@ td.selected-cell {
   background-color: #e34138;
 }
 
+@media screen and (max-width: 414px) {
+  .Revealed-Hint {
+    width: 30px;
+    height: 20px;
+    margin: 0 4px 0 4px;
+    padding-top: 3px;
+    padding-bottom: 7px;
+  }
+}
+
+/*------------------------------*/
+/*          HIRAGANA            */
+/*------------------------------*/
+
 .HiraganaDisplay {
   color: #71ca7c;
   /*border: 2px solid black;*/
@@ -153,6 +265,7 @@ td.selected-cell {
   background-color: #014147;
 }
 
+/*.hrg classes are used for kanji display as well as hiragana. max 6 hiragana characters*/
 .hrg1 {
   width: 70px;
 }
@@ -177,13 +290,13 @@ td.selected-cell {
   width: 420px;
 }
 
-.hrg7 {
+/*.hrg7 {
   width: 490px;
 }
 
 .hrg8 {
   width: 560px;
-}
+}*/
 
 .HirChar {
   display: inline-block;
@@ -205,23 +318,69 @@ td.selected-cell {
   color: #09911a;
 }
 
+@media screen and (max-width: 414px) {
+  .HiraganaDisplay {
+    margin-top: 0;
+    border-radius: 0;
+    height: 60px;
+  }
+  .HirChar {
+    width: 36px;
+    font-size: 36px;
+  }
+  .hrg1 {
+    width: 300px;
+  }
+  .hrg2 {
+    width: 300px;
+  }
+  .hrg3 {
+    width: 300px;
+  }
+  .hrg4 {
+    width: 300px;
+  }
+  .hrg5 {
+    width: 300px;
+  }
+  .hrg6 {
+    width: 300px;
+  }
+}
+
 /*.Char:hover {
   background-color: #23818a;
   border-radius: 5px;
   color: #88b28e;
 }*/
 
+
+/*------------------------------*/
+/*            KANJI             */
+/*------------------------------*/
+
 p.Kanji {
   color: #e38838;
-  font-size: 56px;
+  font-size: 68px;
   margin: 10px 0 5px 0;
   font-family: 'Noto Sans Gurmukhi UI', sans-serif;
   cursor: pointer;
+  margin: 0 auto;
 }
 
 p.Kanji:hover {
   color: #e6c9b0;
 }
+
+@media screen and (max-width: 414px) {
+  p.Kanji {
+    font-size: 48px;
+  }
+}
+
+/*------------------------------*/
+/*          CONTROLS            */
+/*------------------------------*/
 
 .MagicButton {
   color: #753700;
@@ -242,7 +401,6 @@ p.Kanji:hover {
 }
 
 .next-hint {
-
   background-color: #2bb03c;
 }
 
@@ -265,6 +423,47 @@ p.Kanji:hover {
 .big {
   height: 84px;
 }
+
+@media screen and (max-width: 414px) {
+  .MagicButton {
+    height: 58px;
+    width: 50%;
+  }
+  .next-hint {
+    background-color: #2bb03c;
+    border-left-width: 0;
+    border-right-width: 3px;
+    border-bottom-width: 0;
+    border-radius: 0;
+  }
+  .reveal-all {
+    background-color: #09911a;
+    border-left-width: 0;
+    border-right-width: 3px;
+    border-radius: 0 0 0 5px;
+  }
+  .next-word {
+    background-color: #e38838;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-bottom-width: 0;
+    border-radius: 0;
+  }
+  .exit {
+    border-left-width: 0;
+    border-right-width: 0;
+    border-radius: 0 0 5px 0;
+    background-color: #bb5e0c;
+  }
+  .big {
+    height: 116px;
+  }
+  .MagicButton.next-hint.big {
+    border-bottom-width: 3px;
+  }
+}
+
+
 
 
 

@@ -9,7 +9,10 @@ const ImageDisplay = React.createClass({
     if (this.props.tableDisplayed === true) {
       return (
         <div className='ImageDisplay'>
-          <HirTable tableSelected={this.props.tableSelected}/>
+          <HirTable
+            tableSelected={this.props.tableSelected}
+            tableClicked={this.props.tableClicked}
+            hiragana={this.props.hiragana}/>
         </div>
       );
     } else if (this.props.revealed === this.props.hintsNo) {

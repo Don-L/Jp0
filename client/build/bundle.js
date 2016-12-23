@@ -19758,7 +19758,7 @@
 	
 	var React = __webpack_require__(1);
 	var Words = __webpack_require__(160);
-	var Hiragana = __webpack_require__(161);
+	var Hiragana = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../res/hiragana.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	var KanjiDisplay = __webpack_require__(162);
 	var HiraganaDisplay = __webpack_require__(163);
 	var HintDisplay = __webpack_require__(165);
@@ -19811,7 +19811,9 @@
 	          revealed: this.state.revealed.length,
 	          hintsNo: this.state.hintsNo,
 	          tableDisplayed: this.state.tableDisplayed,
-	          tableSelected: this.state.tableSelected }),
+	          tableSelected: this.state.tableSelected,
+	          tableClicked: this.hideTable,
+	          hiragana: this.state.hiragana }),
 	        React.createElement(HintDisplay, {
 	          hintClicked: this.revealHint,
 	          hintsList: hints,
@@ -19839,7 +19841,7 @@
 	      words: [{
 	        'name': 'init',
 	        'hiragana': ['I', 'N', 'I', 'T'],
-	        'kana': 'KANA',
+	        'kanji': 'KANJI',
 	        'imgsrc': 'res/Nightingale.JPG'
 	      }],
 	      hiragana: (_hiragana = { 'I': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init' },
@@ -19869,7 +19871,6 @@
 	    var firstHidden = this.findFirstHidden();
 	    var hintsNo = this.state.hintsNo;
 	    var revealed = this.state.revealed;
-	
 	    if (firstHidden === -1) {
 	      this.getNextWord();
 	    } else {
@@ -19879,6 +19880,9 @@
 	        return a - b;
 	      });
 	      this.setState({ revealed: newRevealed });
+	      if (newRevealed.length === hintsNo) {
+	        this.setState({ tableDisplayed: false });
+	      }
 	    }
 	  },
 	
@@ -19938,8 +19942,8 @@
 	    if (all) {
 	      tableSelected = this.state.tableSelected;
 	    }
-	    if (this.state.hiragana[char].parent) {
-	      var ch = this.state.hiragana[char].parent;
+	    if (this.state.hiragana[char].yoon_parent) {
+	      var ch = this.state.hiragana[char].yoon_parent;
 	      tableSelected.push(ch);
 	      tableSelected.push('yōon');
 	    } else {
@@ -19975,6 +19979,10 @@
 	        }
 	      }
 	    }
+	  },
+	
+	  hideTable: function hideTable() {
+	    this.setState({ tableDisplayed: false });
 	  }
 	
 	});
@@ -20020,10 +20028,10 @@
 	'use strict';
 	
 	module.exports = [
-	//hiragana max 8 characters
+	//hiragana max 6 characters
 	{
 	  'name': 'DRAGON',
-	  'hiragana': ['\u308A', '\u3085', '\u3046'],
+	  'hiragana': ['\u308A', '\u3085', '\u3046', '\u3046', '\u3046', '\u3046'],
 	  'kanji': '竜',
 	  'romaji': 'ryū',
 	  'imgsrc': 'res/img/dragon.jpg'
@@ -20036,480 +20044,7 @@
 	}];
 
 /***/ },
-/* 161 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	//small versions of characters must appear immediately before their normal sized versions in the array
-	
-	module.exports = {
-	
-	  '\u3041': {
-	    'name': 'hiragana letter small a',
-	    'char': 'ぁ',
-	    'transliteration': 'a',
-	    'parent': '\u3042'
-	  },
-	
-	  '\u3042': {
-	    'name': 'hiragana letter a',
-	    'char': 'あ',
-	    'transliteration': 'a'
-	  },
-	
-	  '\u3043': {
-	    'name': 'hiragana letter small i',
-	    'char': 'ぃ',
-	    'transliteration': 'i',
-	    'parent': '\u3044'
-	  },
-	
-	  '\u3044': {
-	    'name': 'hiragana letter i',
-	    'char': 'い',
-	    'transliteration': 'i'
-	  },
-	
-	  '\u3045': {
-	    'name': 'hiragana letter small u',
-	    'char': 'ぅ',
-	    'transliteration': 'u',
-	    'parent': '\u3046'
-	  },
-	
-	  '\u3046': {
-	    'name': 'hiragana letter u',
-	    'transliteration': 'u',
-	    'sound': 'res/snd/3046.ogg'
-	  },
-	
-	  '\u3047': {
-	    'name': 'hiragana letter small e',
-	    'transliteration': 'e',
-	    'parent': '\u3048'
-	  },
-	
-	  '\u3048': {
-	    'name': 'hiragana letter e',
-	    'transliteration': 'e'
-	  },
-	
-	  '\u3049': {
-	    'name': 'hiragana letter small o',
-	    'transliteration': 'o',
-	    'parent': '\u304A'
-	  },
-	
-	  '\u304A': {
-	    'name': 'hiragana letter o',
-	    'transliteration': 'o',
-	    'sound': 'res/snd/304A.ogg'
-	  },
-	
-	  '\u304B': {
-	    'name': 'hiragana letter ka',
-	    'transliteration': 'ka',
-	    'sound': 'res/snd/304B.ogg'
-	  },
-	
-	  '\u304C': {
-	    'name': 'hiragana letter ga',
-	    'transliteration': 'ga'
-	  },
-	
-	  '\u304D': {
-	    'name': 'hiragana letter ki',
-	    'transliteration': 'ki'
-	  },
-	
-	  '\u304E': {
-	    'name': 'hiragana letter gi',
-	    'transliteration': 'gi'
-	  },
-	
-	  '\u304F': {
-	    'name': 'hiragana letter ku',
-	    'transliteration': 'ku'
-	  },
-	
-	  '\u3050': {
-	    'name': 'hiragana letter gu',
-	    'transliteration': 'gu'
-	  },
-	
-	  '\u3051': {
-	    'name': 'hiragana letter ke',
-	    'transliteration': 'ke'
-	  },
-	
-	  '\u3052': {
-	    'name': 'hiragana letter ge',
-	    'transliteration': 'ge'
-	  },
-	
-	  '\u3053': {
-	    'name': 'hiragana letter ko',
-	    'transliteration': 'ko'
-	  },
-	
-	  '\u3054': {
-	    'name': 'hiragana letter go',
-	    'transliteration': 'go'
-	  },
-	
-	  '\u3055': {
-	    'name': 'hiragana letter sa',
-	    'transliteration': 'sa'
-	  },
-	
-	  '\u3056': {
-	    'name': 'hiragana letter za',
-	    'transliteration': 'za'
-	  },
-	
-	  '\u3057': {
-	    'name': 'hiragana letter si',
-	    'transliteration': 'si'
-	  },
-	
-	  '\u3058': {
-	    'name': 'hiragana letter zi',
-	    'transliteration': 'zi'
-	  },
-	
-	  '\u3059': {
-	    'name': 'hiragana letter su',
-	    'transliteration': 'su'
-	  },
-	
-	  '\u305A': {
-	    'name': 'hiragana letter zu',
-	    'transliteration': 'zu'
-	  },
-	
-	  '\u305B': {
-	    'name': 'hiragana letter se',
-	    'transliteration': 'se'
-	  },
-	
-	  '\u305C': {
-	    'name': 'hiragana letter ze',
-	    'transliteration': 'ze'
-	  },
-	
-	  '\u305D': {
-	    'name': 'hiragana letter so',
-	    'transliteration': 'so'
-	  },
-	
-	  '\u305E': {
-	    'name': 'hiragana letter zo',
-	    'transliteration': 'zo'
-	  },
-	
-	  '\u305F': {
-	    'name': 'hiragana letter ta',
-	    'transliteration': 'ta'
-	  },
-	
-	  '\u3060': {
-	    'name': 'hiragana letter da',
-	    'transliteration': 'da'
-	  },
-	
-	  // or chi? - check transliteration
-	  '\u3061': {
-	    'name': 'hiragana letter ti',
-	    'transliteration': 'ti',
-	    'sound': 'res/snd/3061.ogg'
-	  },
-	
-	  '\u3062': {
-	    'name': 'hiragana letter di',
-	    'transliteration': 'di'
-	  },
-	  //only started paying attention to wiki info here
-	  //need this? - denotes glottal stop
-	  '\u3063': {
-	    'name': 'hiragana letter small tu',
-	    'transliteration': 'tu',
-	    'parent': '\u3064'
-	  },
-	
-	  //tu or tsu?
-	  '\u3064': {
-	    'name': 'hiragana letter tu',
-	    'transliteration': 'tsu'
-	  },
-	
-	  //need this? - uncommon
-	  '\u3065': {
-	    'name': 'hiragana letter du',
-	    'transliteration': 'du'
-	  },
-	
-	  '\u3066': {
-	    'name': 'hiragana letter te',
-	    'char': 'て',
-	    'transliteration': 'te'
-	  },
-	
-	  '\u3067': {
-	    'name': 'hiragana letter de',
-	    'char': 'で',
-	    'transliteration': 'de'
-	  },
-	
-	  '\u3068': {
-	    'name': 'hiragana letter to',
-	    'char': 'と',
-	    'transliteration': 'to'
-	  },
-	
-	  '\u3069': {
-	    'name': 'hiragana letter do',
-	    'char': 'ど',
-	    'transliteration': 'do'
-	  },
-	
-	  '\u306A': {
-	    'name': 'hiragana letter na',
-	    'char': 'な',
-	    'transliteration': 'na'
-	  },
-	
-	  '\u306B': {
-	    'name': 'hiragana letter ni',
-	    'char': 'に',
-	    'transliteration': 'ni'
-	  },
-	
-	  '\u306C': {
-	    'name': 'hiragana letter nu',
-	    'char': 'ぬ',
-	    'transliteration': 'nu'
-	  },
-	
-	  '\u306D': {
-	    'name': 'hiragana letter ne',
-	    'char': 'ね',
-	    'transliteration': 'ne'
-	  },
-	
-	  '\u306E': {
-	    'name': 'hiragana letter no',
-	    'char': 'の',
-	    'transliteration': 'no'
-	  },
-	
-	  '\u306F': {
-	    'name': 'hiragana letter ha',
-	    'char': 'は',
-	    'transliteration': 'ha'
-	  },
-	
-	  //lots of additional forms for hi
-	  '\u3072': {
-	    'name': 'hiragana letter hi',
-	    'char': 'ひ',
-	    'transliteration': 'hyi'
-	  },
-	
-	  //check transliteration - bi or byi best? this is another form of 'hi'
-	  '\u3073': {
-	    'name': 'hiragana letter bi',
-	    'char': 'び',
-	    'transliteration': 'byi'
-	  },
-	  //another form of 'hi' - again, check transliteration
-	  '\u3074': {
-	    'name': 'hiragana letter pi',
-	    'char': 'ぴ',
-	    'transliteration': 'pyi'
-	  },
-	
-	  '\u3075': {
-	    'name': 'hiragana letter fu',
-	    'char': 'ふ',
-	    'transliteration': 'fu'
-	  },
-	
-	  '\u3076': {
-	    'name': 'hiragana letter bu',
-	    'char': 'ぶ',
-	    'transliteration': 'bu'
-	  },
-	
-	  '\u3077': {
-	    'name': 'hiragana letter pu',
-	    'char': 'ぷ',
-	    'transliteration': 'pu'
-	  },
-	
-	  '\u3078': {
-	    'name': 'hiragana letter he',
-	    'char': 'へ',
-	    'transliteration': 'he'
-	  },
-	
-	  '\u3079': {
-	    'name': 'hiragana letter be',
-	    'char': 'べ',
-	    'transliteration': 'be'
-	  },
-	
-	  '\u307A': {
-	    'name': 'hiragana letter pe',
-	    'char': 'ぺ',
-	    'transliteration': 'pe'
-	  },
-	
-	  '\u307B': {
-	    'name': 'hiragana letter ho',
-	    'char': 'ほ',
-	    'transliteration': 'ho'
-	  },
-	
-	  '\u307C': {
-	    'name': 'hiragana letter bo',
-	    'char': 'ぼ',
-	    'transliteration': 'bo'
-	  },
-	
-	  '\u307D': {
-	    'name': 'hiragana letter po',
-	    'char': 'ぽ',
-	    'transliteration': 'po'
-	  },
-	
-	  '\u307E': {
-	    'name': 'hiragana letter ma',
-	    'char': 'ま',
-	    'transliteration': 'ma'
-	  },
-	
-	  '\u307F': {
-	    'name': 'hiragana letter mi',
-	    'char': 'み',
-	    'transliteration': 'mi'
-	  },
-	
-	  '\u3080': {
-	    'name': 'hiragana letter mu',
-	    'char': 'む',
-	    'transliteration': 'mu'
-	  },
-	
-	  '\u3081': {
-	    'name': 'hiragana letter me',
-	    'char': 'め',
-	    'transliteration': 'me'
-	  },
-	
-	  '\u3082': {
-	    'name': 'hiragana letter mo',
-	    'char': 'も',
-	    'transliteration': 'mo'
-	  },
-	
-	  //yoon - check transliteration
-	  '\u3083': {
-	    'name': 'hiragana letter small ya',
-	    'char': 'ゃ',
-	    'transliteration': 'ya',
-	    'parent': '\u3084'
-	  },
-	
-	  '\u3084': {
-	    'name': 'hiragana letter ya',
-	    'char': 'や',
-	    'transliteration': 'ya'
-	  },
-	
-	  //yoon - check transliteration
-	  '\u3085': {
-	    'name': 'hiragana letter small yu',
-	    'char': 'ゅ',
-	    'transliteration': 'yu',
-	    'parent': '\u3086'
-	  },
-	
-	  '\u3086': {
-	    'name': 'hiragana letter yu',
-	    'char': 'ゆ',
-	    'transliteration': 'yu'
-	  },
-	
-	  //yoon - check transliteration
-	  '\u3087': {
-	    'name': 'hiragana letter small yo',
-	    'char': 'ょ',
-	    'transliteration': 'yo',
-	    'parent': '\u3088'
-	  },
-	
-	  '\u3088': {
-	    'name': 'hiragana letter yo',
-	    'char': 'よ',
-	    'transliteration': 'yo'
-	  },
-	
-	  //ra or la?
-	  '\u3089': {
-	    'name': 'hiragana letter ra',
-	    'char': 'ら',
-	    'transliteration': 'ra'
-	  },
-	
-	  '\u308A': {
-	    'name': 'hiragana letter ri',
-	    'char': 'り',
-	    'transliteration': 'ri',
-	    'sound': 'res/snd/308A.ogg'
-	  },
-	
-	  '\u308B': {
-	    'name': 'hiragana letter ru',
-	    'char': 'る',
-	    'transliteration': 'ru'
-	  },
-	
-	  '\u308C': {
-	    'name': 'hiragana letter re',
-	    'char': 'れ',
-	    'transliteration': 're'
-	  },
-	
-	  '\u308D': {
-	    'name': 'hiragana letter ro',
-	    'char': 'ろ',
-	    'transliteration': 'ro'
-	  },
-	
-	  '\u308F': {
-	    'name': 'hiragana letter wa',
-	    'char': 'わ',
-	    'transliteration': 'wa'
-	  },
-	
-	  //check transliteration - o or wo best?
-	  '\u3092': {
-	    'name': 'hiragana letter wo',
-	    'char': 'を',
-	    'transliteration': 'o'
-	  },
-	
-	  //changes sound depending on surrounding mora
-	  '\u3093': {
-	    'name': 'hiragana letter n',
-	    'char': 'ん',
-	    'transliteration': 'n'
-	  }
-	
-	};
-
-/***/ },
+/* 161 */,
 /* 162 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -20523,12 +20058,16 @@
 	
 	  render: function render() {
 	
+	    console.log(this.props.kanjiChars);
+	
+	    var clss = 'Kanji hrg' + this.props.kanjiChars.length;
+	
 	    return React.createElement(
 	      'div',
 	      { className: 'Kanji' },
 	      React.createElement(
 	        'p',
-	        { className: 'Kanji', onClick: this.showTableWithAllSelected },
+	        { className: clss, onClick: this.showTableWithAllSelected },
 	        this.props.kanjiChars
 	      )
 	    );
@@ -21520,7 +21059,10 @@
 	      return React.createElement(
 	        'div',
 	        { className: 'ImageDisplay' },
-	        React.createElement(HirTable, { tableSelected: this.props.tableSelected })
+	        React.createElement(HirTable, {
+	          tableSelected: this.props.tableSelected,
+	          tableClicked: this.props.tableClicked,
+	          hiragana: this.props.hiragana })
 	      );
 	    } else if (this.props.revealed === this.props.hintsNo) {
 	      return React.createElement(
@@ -21589,7 +21131,7 @@
 	
 	    return React.createElement(
 	      'table',
-	      null,
+	      { onClick: this.props.tableClicked },
 	      React.createElement(
 	        'tbody',
 	        null,
@@ -21647,11 +21189,20 @@
 	          'tr',
 	          { align: 'center' },
 	          React.createElement('th', null),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3042' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3044' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3046' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3048' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u304A' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected, tableChar: this.props.hiragana['\u3042'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3044'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3046'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3048'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u304A'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -21665,11 +21216,21 @@
 	              'k'
 	            )
 	          ),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u304B' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u304D' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u304F' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3051' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3053' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u304B'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u304D'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u304F'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3051'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3053'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -21683,11 +21244,21 @@
 	              's'
 	            )
 	          ),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3055' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3057' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3059' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u305B' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u305D' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3055'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3057'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3059'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u305B'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u305D'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -21701,11 +21272,21 @@
 	              't'
 	            )
 	          ),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u305F' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3061' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3063' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3066' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3068' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u305F'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3061'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3064'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3066'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3068'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -21719,11 +21300,21 @@
 	              'n'
 	            )
 	          ),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306A' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306B' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306C' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306D' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306E' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u306A'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u306B'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u306C'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u306D'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u306E'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -21737,11 +21328,21 @@
 	              'h'
 	            )
 	          ),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u306F' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3072' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3075' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3078' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u307B' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u306F'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3072'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3075'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3078'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u307B'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -21755,11 +21356,21 @@
 	              'm'
 	            )
 	          ),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u307E' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u307F' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3080' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3081' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3082' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u307E'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u307F'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3080'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3081'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3082'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -21773,11 +21384,21 @@
 	              'y'
 	            )
 	          ),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3084' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3086' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3088' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3084'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana[' '] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3086'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana[' '] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3088'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -21791,11 +21412,21 @@
 	              'r'
 	            )
 	          ),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3089' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308A' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308B' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308C' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308D' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3089'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u308A'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u308B'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u308C'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u308D'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -21809,31 +21440,61 @@
 	              'w'
 	            )
 	          ),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u308F' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3092' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u308F'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana[' '] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana[' '] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana[' '] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3092'] })
 	        ),
 	        React.createElement(
 	          'tr',
 	          { align: 'center' },
 	          React.createElement('th', null),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3093' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['empty_string'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['empty_string'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3093'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['empty_string'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['empty_string'] })
 	        ),
 	        React.createElement(
 	          'tr',
 	          { align: 'center' },
 	          React.createElement('th', null),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: 'y\u014Don' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: ' ' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u3063' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u309B' }),
-	          React.createElement(TableCell, { tableSelected: this.props.tableSelected, tableChar: '\u309C' })
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['yōon'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana[' '] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3063'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3099'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u309A'] })
 	        )
 	      )
 	    );
@@ -21918,12 +21579,12 @@
 	
 	  render: function render() {
 	
-	    if (this.props.tableChar === 'ん') {
-	      if (this.props.tableSelected.indexOf(this.props.tableChar) > -1) {
+	    if (this.props.tableChar.char === 'ん') {
+	      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
 	        return React.createElement(
 	          'td',
 	          { className: 'selected-cell' },
-	          this.props.tableChar,
+	          this.props.tableChar.char,
 	          ' (',
 	          React.createElement(
 	            'strong',
@@ -21936,7 +21597,7 @@
 	        return React.createElement(
 	          'td',
 	          null,
-	          this.props.tableChar,
+	          this.props.tableChar.char,
 	          ' (',
 	          React.createElement(
 	            'strong',
@@ -21946,20 +21607,20 @@
 	          ')'
 	        );
 	      }
-	    } else if (this.props.tableChar === '') {
+	    } else if (this.props.tableChar.char === '') {
 	      return React.createElement('td', { className: 'blank-cell' });
 	    } else {
-	      if (this.props.tableSelected.indexOf(this.props.tableChar) > -1) {
+	      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
 	        return React.createElement(
 	          'td',
 	          { className: 'selected-cell' },
-	          this.props.tableChar
+	          this.props.tableChar.char
 	        );
 	      } else {
 	        return React.createElement(
 	          'td',
 	          null,
-	          this.props.tableChar
+	          this.props.tableChar.char
 	        );
 	      }
 	    }

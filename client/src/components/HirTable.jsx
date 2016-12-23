@@ -7,7 +7,7 @@ const TableCell = require('./TableCell.jsx');
     render: function () {
 
       return (
-        <table>
+        <table onClick={this.props.tableClicked}>
           <tbody>
             <tr>
               <th></th>
@@ -19,99 +19,218 @@ const TableCell = require('./TableCell.jsx');
             </tr>
             <tr align="center">
               <th></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3042'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3044'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3046'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3048'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u304A'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected} tableChar={this.props.hiragana['\u3042']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3044']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3046']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3048']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u304A']}/>
             </tr>
             <tr align="center">
               <th><i>k</i></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u304B'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u304D'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u304F'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3051'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3053'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u304B']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u304D']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u304F']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3051']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3053']}/>
             </tr>
             <tr align="center">
               <th><i>s</i></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3055'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3057'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3059'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u305B'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u305D'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3055']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3057']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3059']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u305B']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u305D']}/>
             </tr>
             <tr align="center">
               <th><i>t</i></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u305F'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3061'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3063'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3066'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3068'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u305F']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3061']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3064']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3066']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3068']}/>
             </tr>
             <tr align="center">
               <th><i>n</i></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u306A'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u306B'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u306C'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u306D'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u306E'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u306A']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u306B']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u306C']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u306D']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u306E']}/>
             </tr>
             <tr align="center">
               <th><i>h</i></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u306F'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3072'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3075'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3078'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u307B'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u306F']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3072']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3075']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3078']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u307B']}/>
             </tr>
             <tr align="center">
               <th><i>m</i></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u307E'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u307F'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3080'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3081'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3082'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u307E']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u307F']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3080']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3081']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3082']}/>
             </tr>
             <tr align="center">
               <th><i>y</i></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3084'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar=' '/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3086'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={' '}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3088'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3084']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana[' ']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3086']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana[' ']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3088']}/>
             </tr>
             <tr align="center">
               <th><i>r</i></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3089'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u308A'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u308B'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u308C'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u308D'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3089']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u308A']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u308B']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u308C']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u308D']}/>
             </tr>
             <tr align="center">
               <th><i>w</i></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u308F'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar=' '/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar=' '/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar=' '/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3092'}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u308F']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana[' ']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana[' ']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana[' ']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3092']}/>
             </tr>
             <tr align="center">
               <th></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar=''/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar=''/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar={'\u3093'}/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar=''/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar=''/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['empty_string']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['empty_string']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3093']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['empty_string']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['empty_string']}/>
             </tr>
             <tr align="center">
               <th></th>
-              <TableCell tableSelected={this.props.tableSelected} tableChar='yōon'/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar=' '/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar='っ'/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar='゛'/>
-              <TableCell tableSelected={this.props.tableSelected} tableChar='゜'/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['yōon']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana[' ']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3063']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u3099']}/>
+              <TableCell
+                tableSelected={this.props.tableSelected}
+                tableChar={this.props.hiragana['\u309A']}/>
             </tr>
           </tbody>
         </table>
