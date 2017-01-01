@@ -5,8 +5,10 @@ const HirChar = React.createClass({
 
   render: function () {
 
+    let classNo = this.props.char.length;
+
     return (
-      <div className='HirChar' onClick={this.showTableWithSelected}>
+      <div className={'HirChar' + classNo} onClick={this.showTableWithSelected}>
         <p className='Char'>{this.props.char}</p>
       </div>
     );

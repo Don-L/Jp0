@@ -12,7 +12,11 @@ const HiraganaDisplay = React.createClass({
       nodes.push(<HirChar key={i} showTableWithSelected={this.props.showTableWithSelected} char={this.props.hirChars[i]} />);
     };
 
-    let clss = 'HiraganaDisplay' + ' hrg' + this.props.hirChars.length;
+    var flattened = this.props.hirChars.reduce(function(a, b) {
+      return a + b;
+    }, []);
+
+    let clss = 'HiraganaDisplay' + ' hrg' + flattened.length;
 
     return (
       <div className={clss}>

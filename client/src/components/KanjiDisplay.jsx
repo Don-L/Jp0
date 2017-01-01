@@ -6,8 +6,6 @@ const KanjiDisplay = React.createClass({
 
   render: function () {
 
-    console.log(this.props.kanjiChars);
-
     let clss = 'Kanji hrg' + this.props.kanjiChars.length;
 
     return (

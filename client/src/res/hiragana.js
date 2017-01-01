@@ -1,5 +1,3 @@
-//small versions of characters must appear immediately before their normal sized versions in the array
-
 module.exports = {
 
   'empty_string': {
@@ -27,7 +25,7 @@ module.exports = {
     'char': 'ぁ',
     'unicode': '\u3041',
     'transliteration': 'a',
-    'yoon_parent': '\u3042'
+    'yōon_parent': '\u3042'
   },
 
   '\u3042': {
@@ -35,7 +33,7 @@ module.exports = {
     'char': 'あ',
     'unicode': '\u3042',
     'transliteration': 'a',
-    'yoon_child': '\u3041'
+    'yōon_child': '\u3041'
   },
 
   '\u3043': {
@@ -43,7 +41,7 @@ module.exports = {
     'char': 'ぃ',
     'unicode': '\u3043',
     'transliteration': 'i',
-    'yoon_parent': '\u3044'
+    'yōon_parent': '\u3044'
   },
 
   '\u3044': {
@@ -51,7 +49,7 @@ module.exports = {
     'char': 'い',
     'unicode': '\u3044',
     'transliteration': 'i',
-    'yoon_child': '\u3043'
+    'yōon_child': '\u3043'
   },
 
   '\u3045': {
@@ -59,7 +57,7 @@ module.exports = {
     'char': 'ぅ',
     'unicode': '\u3045',
     'transliteration': 'u',
-    'yoon_parent': '\u3046'
+    'yōon_parent': '\u3046'
   },
 
   '\u3046': {
@@ -68,7 +66,7 @@ module.exports = {
     'unicode': '\u3046',
     'transliteration': 'u',
     'sound': 'res/snd/3046.ogg',
-    'yoon_child': '\u3045'
+    'yōon_child': '\u3045'
   },
 
   '\u3047': {
@@ -76,7 +74,7 @@ module.exports = {
     'char': 'ぇ',
     'unicode': '\u3047',
     'transliteration': 'e',
-    'yoon_parent': '\u3048'
+    'yōon_parent': '\u3048'
   },
 
   '\u3048': {
@@ -84,7 +82,7 @@ module.exports = {
     'char': 'え',
     'unicode': '\u3048',
     'transliteration': 'e',
-    'yoon_child': '\u3047'
+    'yōon_child': '\u3047'
   },
 
   '\u3049': {
@@ -92,7 +90,7 @@ module.exports = {
     'char': 'ぉ',
     'unicode': '\u3049',
     'transliteration': 'o',
-    'yoon_parent': '\u304A'
+    'yōon_parent': '\u304A'
   },
 
   '\u304A': {
@@ -101,7 +99,7 @@ module.exports = {
     'unicode': '\u304A',
     'transliteration': 'o',
     'sound': 'res/snd/304A.ogg',
-    'yoon_child': '\u3049'
+    'yōon_child': '\u3049'
   },
 
   '\u304B': {
@@ -305,7 +303,7 @@ module.exports = {
     'char': 'っ',
     'unicode': '\u3063',
     'transliteration': '!',
-    'yoon_parent': '\u3064'
+    'yōon_parent': '\u3064'
   },
 
 //tu or tsu?
@@ -314,7 +312,7 @@ module.exports = {
     'char': 'つ',
     'unicode': '\u3064',
     'transliteration': 'tsu',
-    'yoon_child': '\u3063',
+    'yōon_child': '\u3063',
     'dakuten_child': '\u3065'
   },
 
@@ -398,7 +396,25 @@ module.exports = {
     'name': 'hiragana letter ha',
     'char': 'は',
     'unicode': '\u306F',
-    'transliteration': 'ha'
+    'transliteration': 'ha',
+    'dakuten_child': '\u3070',
+    'handakuten_child': '\u3071'
+  },
+
+  '\u3070': {
+    'name': 'hiragana letter ba',
+    'char': 'ば',
+    'unicode': '\u3070',
+    'transliteration': 'ba',
+    'dakuten_parent': '\u306F'
+  },
+
+  '\u3071': {
+    'name': 'hiragana letter pa',
+    'char': 'ぱ',
+    'unicode': '\u3071',
+    'transliteration': 'pa',
+    'handakuten_parent': '\u306F'
   },
 
 //lots of additional forms for hi
@@ -411,7 +427,7 @@ module.exports = {
     'handakuten_child': '\u3074'
   },
 
-//check transliteration - bi or byi best? this is another form of 'hi'
+//check transliteration - bi or byi best?
   '\u3073': {
     'name': 'hiragana letter bi',
     'char': 'び',
@@ -419,7 +435,7 @@ module.exports = {
     'transliteration': 'byi',
     'dakuten_parent': '\u3072'
   },
-//another form of 'hi' - again, check transliteration
+//check transliteration
   '\u3074': {
     'name': 'hiragana letter pi',
     'char': 'ぴ',
@@ -543,7 +559,7 @@ module.exports = {
     'char': 'ゃ',
     'unicode': '\u3083',
     'transliteration': 'ya',
-    'yoon_parent': '\u3084'
+    'yōon_parent': '\u3084'
   },
 
   '\u3084': {
@@ -551,7 +567,7 @@ module.exports = {
     'char': 'や',
     'unicode': '\u3084',
     'transliteration': 'ya',
-    'yoon_child': '\u3083'
+    'yōon_child': '\u3083'
   },
 
   '\u3085': {
@@ -559,7 +575,7 @@ module.exports = {
     'char': 'ゅ',
     'unicode': '\u3085',
     'transliteration': 'yu',
-    'yoon_parent': '\u3086'
+    'yōon_parent': '\u3086'
   },
 
   '\u3086': {
@@ -567,7 +583,7 @@ module.exports = {
     'char': 'ゆ',
     'unicode': '\u3086',
     'transliteration': 'yu',
-    'yoon_child': '\u3085'
+    'yōon_child': '\u3085'
   },
 
   '\u3087': {
@@ -575,7 +591,7 @@ module.exports = {
     'char': 'ょ',
     'unicode': '\u3087',
     'transliteration': 'yo',
-    'yoon_parent': '\u3088'
+    'yōon_parent': '\u3088'
   },
 
   '\u3088': {
@@ -583,7 +599,7 @@ module.exports = {
     'char': 'よ',
     'unicode': '\u3088',
     'transliteration': 'yo',
-    'yoon_child': '\u3087'
+    'yōon_child': '\u3087'
   },
 
 //ra or la?
@@ -646,262 +662,259 @@ module.exports = {
     'transliteration': 'n'
   },
 
-  //yoon
+  //yōon
 
-  '\u304D\u3041': {
-    'name': 'yoon with hiragana letter ki and hiragana letter small ya',
+  '\u304D\u3083': {
+    'name': 'yōon with hiragana letter ki and hiragana letter small ya',
     'char': 'きゃ',
-    'unicode': '\u304d\u3041',
+    'unicode': '\u304d\u3083',
     'transliteration': 'kya'
   },
 
   '\u304D\u3085': {
-    'name': 'yoon with hiragana letter ki and hiragana letter small yu',
+    'name': 'yōon with hiragana letter ki and hiragana letter small yu',
     'char': 'きゅ',
     'unicode': '\u304D\u3085',
     'transliteration': 'kyu'
   },
 
   '\u304D\u3087': {
-    'name': 'yoon with hiragana letter ki and hiragana letter small yo',
+    'name': 'yōon with hiragana letter ki and hiragana letter small yo',
     'char': 'きょ',
     'unicode': '\u304D\u3087',
     'transliteration': 'kyo'
   },
 
-  '\u3057\u3041': {
-    'name': 'yoon with hiragana letter si and hiragana letter small ya',
+  '\u3057\u3083': {
+    'name': 'yōon with hiragana letter si and hiragana letter small ya',
     'char': 'しゃ',
-    'unicode': '\u3057\u3041',
+    'unicode': '\u3057\u3083',
     'transliteration': 'sha'
   },
 
   '\u3057\u3085': {
-    'name': 'yoon with hiragana letter si and hiragana letter small yu',
+    'name': 'yōon with hiragana letter si and hiragana letter small yu',
     'char': 'しゅ',
     'unicode': '\u3057\u3085',
     'transliteration': 'shu'
   },
 
   '\u3057\u3087': {
-    'name': 'yoon with hiragana letter si and hiragana letter small yo',
+    'name': 'yōon with hiragana letter si and hiragana letter small yo',
     'char': 'しょ',
     'unicode': '\u3057\u3087',
     'transliteration': 'sho'
   },
 
-  '\u3061\u3041': {
-    'name': 'yoon with hiragana letter ti and hiragana letter small ya',
+  '\u3061\u3083': {
+    'name': 'yōon with hiragana letter ti and hiragana letter small ya',
     'char': 'ちゃ',
-    'unicode': '\u3061\u3041',
+    'unicode': '\u3061\u3083',
     'transliteration': 'cha'
   },
 
   '\u3061\u3085': {
-    'name': 'yoon with hiragana letter ti and hiragana letter small yu',
+    'name': 'yōon with hiragana letter ti and hiragana letter small yu',
     'char': 'ちゅ',
     'unicode': '\u3061\u3085',
     'transliteration': 'chu'
   },
 
   '\u3061\u3087': {
-    'name': 'yoon with hiragana letter ti and hiragana letter small yo',
+    'name': 'yōon with hiragana letter ti and hiragana letter small yo',
     'char': 'ちょ',
     'unicode': '\u3061\u3087',
     'transliteration': 'cho'
   },
 
-  '\u306B\u3041': {
-    'name': 'yoon with hiragana letter ni and hiragana letter small ya',
+  '\u306B\u3083': {
+    'name': 'yōon with hiragana letter ni and hiragana letter small ya',
     'char': 'にゃ',
-    'unicode': '\u306B\u3041',
+    'unicode': '\u306B\u3083',
     'transliteration': 'nya'
   },
 
   '\u306B\u3085': {
-    'name': 'yoon with hiragana letter ni and hiragana letter small yu',
+    'name': 'yōon with hiragana letter ni and hiragana letter small yu',
     'char': 'にゅ',
     'unicode': '\u3061\u3085',
     'transliteration': 'nyu'
   },
 
   '\u306B\u3087': {
-    'name': 'yoon with hiragana letter ni and hiragana letter small yo',
+    'name': 'yōon with hiragana letter ni and hiragana letter small yo',
     'char': 'にょ',
     'unicode': '\u306B\u3087',
     'transliteration': 'nyo'
   },
 
-  '\u3072\u3041': {
-    'name': 'yoon with hiragana letter hi and hiragana letter small ya',
+  '\u3072\u3083': {
+    'name': 'yōon with hiragana letter hi and hiragana letter small ya',
     'char': 'ひゃ',
-    'unicode': '\u3072\u3041',
+    'unicode': '\u3072\u3083',
     'transliteration': 'hya'
   },
 
   '\u3072\u3085': {
-    'name': 'yoon with hiragana letter hi and hiragana letter small yu',
+    'name': 'yōon with hiragana letter hi and hiragana letter small yu',
     'char': 'ひゅ',
     'unicode': '\u3072\u3085',
     'transliteration': 'hyu'
   },
 
   '\u3072\u3087': {
-    'name': 'yoon with hiragana letter hi and hiragana letter small yo',
+    'name': 'yōon with hiragana letter hi and hiragana letter small yo',
     'char': 'ひょ',
     'unicode': '\u3072\u3087',
     'transliteration': 'hyo'
   },
 
-  '\u307F\u3041': {
-    'name': 'yoon with hiragana letter mi and hiragana letter small ya',
+  '\u307F\u3083': {
+    'name': 'yōon with hiragana letter mi and hiragana letter small ya',
     'char': 'みゃ',
-    'unicode': '\u307F\u3041',
+    'unicode': '\u307F\u3083',
     'transliteration': 'mya'
-  }
+  },
 
   '\u307F\u3085': {
-    'name': 'yoon with hiragana letter mi and hiragana letter small yu',
+    'name': 'yōon with hiragana letter mi and hiragana letter small yu',
     'char': 'みゅ',
     'unicode': '\u307F\u3085',
     'transliteration': 'myu'
   },
 
   '\u307F\u3087': {
-    'name': 'yoon with hiragana letter mi and hiragana letter small yo',
+    'name': 'yōon with hiragana letter mi and hiragana letter small yo',
     'char': 'みょ',
     'unicode': '\u307F\u3087',
     'transliteration': 'myo'
   },
 
-  '\u308A\u3041': {
-    'name': 'yoon with hiragana letter ri and hiragana letter small ya',
+  '\u308A\u3083': {
+    'name': 'yōon with hiragana letter ri and hiragana letter small ya',
     'char': 'りゃ',
-    'unicode': '\u308A\u3041',
+    'unicode': '\u308A\u3083',
     'transliteration': 'rya'
   },
 
   '\u308A\u3085': {
-    'name': 'yoon with hiragana letter ri and hiragana letter small yu',
+    'name': 'yōon with hiragana letter ri and hiragana letter small yu',
     'char': 'りゅ',
     'unicode': '\u308A\u3085',
     'transliteration': 'ryu'
   },
 
   '\u308A\u3087': {
-    'name': 'yoon with hiragana letter ri and hiragana letter small yo',
+    'name': 'yōon with hiragana letter ri and hiragana letter small yo',
     'char': 'りょ',
     'unicode': '\u308A\u3087',
     'transliteration': 'ryo'
   },
 
-  '\u304E\u3041': {
-    'name': 'yoon with hiragana letter gi and hiragana letter small ya',
+  '\u304E\u3083': {
+    'name': 'yōon with hiragana letter gi and hiragana letter small ya',
     'char': 'ぎゃ',
-    'unicode': '\u304E\u3041',
+    'unicode': '\u304E\u3083',
     'transliteration': 'gya'
   },
 
   '\u304E\u3085': {
-    'name': 'yoon with hiragana letter gi and hiragana letter small yu',
+    'name': 'yōon with hiragana letter gi and hiragana letter small yu',
     'char': 'ぎゅ',
     'unicode': '\u304E\u3085',
     'transliteration': 'gyu'
   },
 
   '\u304E\u3087': {
-    'name': 'yoon with hiragana letter gi and hiragana letter small yo',
+    'name': 'yōon with hiragana letter gi and hiragana letter small yo',
     'char': 'ぎょ',
     'unicode': '\u304E\u3087',
     'transliteration': 'gyo'
-  }
+  },
 
 //check transliterations for next 3
-  '\u3058\u3041': {
-    'name': 'yoon with hiragana letter zi and hiragana letter small ya',
+  '\u3058\u3083': {
+    'name': 'yōon with hiragana letter zi and hiragana letter small ya',
     'char': 'じゃ',
-    'unicode': '\u3058\u3041',
+    'unicode': '\u3058\u3083',
     'transliteration': 'ja'
   },
 
   '\u3058\u3085': {
-    'name' 'yoon with hiragana letter zi and hiragana letter small yu',
+    'name': 'yōon with hiragana letter zi and hiragana letter small yu',
     'char': 'じゅ',
     'unicode': '\u3058\u3085',
     'transliteration': 'ju'
   },
 
   '\u3058\u3087': {
-    'name': 'yoon with hiragana letter zi and hiragana letter small yo',
+    'name': 'yōon with hiragana letter zi and hiragana letter small yo',
     'char': 'じょ',
     'unicode': '\u3058\u3087',
     'transliteration': 'jo'
   },
 
-  '\u3062\u3041': {
-    'name': 'yoon with hiragana letter di and hiragana letter small ya',
+  '\u3062\u3083': {
+    'name': 'yōon with hiragana letter di and hiragana letter small ya',
     'char': 'ぢゃ',
-    'unicode': '\u3062\u3041',
+    'unicode': '\u3062\u3083',
     'transliteration': 'ja'
   },
 
   '\u3062\u3085': {
-    'name': 'yoon with hiragana letter di and hiragana letter small yu',
+    'name': 'yōon with hiragana letter di and hiragana letter small yu',
     'char': 'ぢゅ',
     'unicode': '\u3062\u3085',
     'transliteration': 'ju'
   },
 
   '\u3062\u3087': {
-    'name': 'yoon with hiragana letter di and hiragana letter small yo',
+    'name': 'yōon with hiragana letter di and hiragana letter small yo',
     'char': 'ぢょ',
     'unicode': '\u3062\u3087',
     'transliteration': 'jo'
   },
 
-  '\u3073\u3041': {
-    'name': 'yoon with hiragana letter bi and hiragana letter small ya',
+  '\u3073\u3083': {
+    'name': 'yōon with hiragana letter bi and hiragana letter small ya',
     'char': 'びゃ',
-    'unicode': '\u3073\u3041',
+    'unicode': '\u3073\u3083',
     'transliteration': 'bya'
   },
 
   '\u3073\u3085': {
-    'name': 'yoon with hiragana letter bi and hiragana letter small yu',
+    'name': 'yōon with hiragana letter bi and hiragana letter small yu',
     'char': 'びゅ',
     'unicode': '\u3073\u3085',
     'transliteration': 'byu'
   },
 
   '\u3073\u3087': {
-    'name': 'yoon with hiragana letter bi and hiragana letter small yo',
+    'name': 'yōon with hiragana letter bi and hiragana letter small yo',
     'char': 'びょ',
     'unicode': '\u3073\u3085',
     'transliteration': 'byo'
   },
 
-  '\u3074\u3041': {
-    'name': 'yoon with hiragana letter pi and hiragana letter small ya',
+  '\u3074\u3083': {
+    'name': 'yōon with hiragana letter pi and hiragana letter small ya',
     'char': 'ぴゃ',
-    'unicode': '\u3074\u3041',
+    'unicode': '\u3074\u3083',
     'transliteration': 'pya'
   },
 
   '\u3074\u3085': {
-    'name': 'yoon with hiragana letter pi and hiragana letter small yu',
+    'name': 'yōon with hiragana letter pi and hiragana letter small yu',
     'char': 'ぴゅ',
     'unicode': '\u3074\u3041',
     'transliteration': 'pyu'
   },
 
   '\u3074\u3087': {
-    'name': 'yoon with hiragana letter pi and hiragana letter small yo',
+    'name': 'yōon with hiragana letter pi and hiragana letter small yo',
     'char': 'ぴょ',
     'unicode': '\u3074\u3087',
     'transliteration': 'pyo'
   }
-
-
-
 
 }

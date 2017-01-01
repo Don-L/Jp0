@@ -45,7 +45,6 @@ const Jp0 = React.createClass({
           kanjiChars={this.state.words[this.state.currentIndex]['kanji']}
           showTableWithAllSelected={this.showTableWithAllSelected} />
         <Controller
-          buttonMessage={this.state.buttonMessage}
           nextWordButtonClicked={this.getNextWord}
           nextHintButtonClicked={this.nextHintButtonClicked}
           revealButtonClicked={this.revealAll}
@@ -71,7 +70,6 @@ const Jp0 = React.createClass({
                  'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init'},
                  'T':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init'},},
       currentIndex: 0,
-      buttonMessage: 'HINT',
       hintsNo: 4,
       revealed: [],
       tableDisplayed: false,
@@ -91,7 +89,7 @@ const Jp0 = React.createClass({
                    hintsNo: hintsNo});
   },
 
-
+//moves app to next word if all hints revealed or reveals first hidden hint
   nextHintButtonClicked: function () {
     let firstHidden = this.findFirstHidden();
     let hintsNo = this.state.hintsNo;
@@ -137,7 +135,6 @@ const Jp0 = React.createClass({
                    currentIndex: newCurrent,
                    revealed: [],
                    hintsNo: hintsNo,
-                   buttonMessage: 'HINT',
                    tableDisplayed: false,
                    tableSelected: []});
   },
@@ -240,8 +237,7 @@ module.exports = Jp0;
 //     let lastRevealed = revealed[revealed.length - 1];
 //     let newRevealed = lastRevealed + 1;
 //     revealed.push(newRevealed);
-//     this.setState({revealed: revealed,
-//                    buttonMessage: 'NEXT WORD'});
+//     this.setState({revealed: revealed});
 //   } else {
 //     let lastRevealed = revealed[revealed.length - 1];
 //     let newRevealed = lastRevealed + 1;

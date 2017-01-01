@@ -298,13 +298,24 @@ td.selected-cell {
   width: 560px;
 }*/
 
-.HirChar {
+.HirChar1 {
   display: inline-block;
   margin: 7px;
   font-size: 48px;
   width: 56px;
   height: 60px;
   margin-bottom: 14px;
+}
+
+.HirChar2 {
+  display: inline-block;
+  margin: 0;
+  margin-right: -7px;
+  font-size: 48px;
+  width: 112px;
+  height: 60px;
+  margin-bottom: 14px;
+  letter-spacing: 7px;
 }
 
 .Char {
@@ -324,9 +335,14 @@ td.selected-cell {
     border-radius: 0;
     height: 60px;
   }
-  .HirChar {
+  .HirChar1 {
     width: 36px;
     font-size: 36px;
+  }
+  .HirChar2 {
+    width: 95px;
+    font-size: 36px;
+    letter-spacing: 7px;
   }
   .hrg1 {
     width: 300px;
