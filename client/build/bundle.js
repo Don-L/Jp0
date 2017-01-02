@@ -19815,6 +19815,7 @@
 	          tableClicked: this.hideTable,
 	          hiragana: this.state.hiragana }),
 	        React.createElement(HintDisplay, {
+	          changeHirCharColour: this.changeHirCharColour,
 	          hintClicked: this.revealHint,
 	          hintsList: hints,
 	          revealed: this.state.revealed })
@@ -19827,6 +19828,7 @@
 	      React.createElement(Controller, {
 	        nextWordButtonClicked: this.getNextWord,
 	        nextHintButtonClicked: this.nextHintButtonClicked,
+	        mouseOverHintButton: this.changeHirCharColour,
 	        revealButtonClicked: this.revealAll,
 	        hintsNo: this.state.hintsNo,
 	        revealed: this.state.revealed })
@@ -19865,7 +19867,7 @@
 	      hintsNo: hintsNo });
 	  },
 	
-	  //moves app to next word if all hints revealed or reveals first hidden hint
+	  //moves app to next word if all hints revealed or reveals first hidden hint.
 	  nextHintButtonClicked: function nextHintButtonClicked() {
 	    var firstHidden = this.findFirstHidden();
 	    var hintsNo = this.state.hintsNo;
@@ -19873,6 +19875,7 @@
 	    if (firstHidden === -1) {
 	      this.getNextWord();
 	    } else {
+	      this.changeHirCharColour(firstHidden, 'on');
 	      var newRevealed = this.state.revealed;
 	      newRevealed.push(firstHidden);
 	      newRevealed = newRevealed.sort(function (a, b) {
@@ -19903,6 +19906,10 @@
 	
 	  getNextWord: function getNextWord() {
 	
+	    for (var i = 0; i < this.state.words[this.state.currentIndex].hiragana.length; i++) {
+	      this.changeHirCharColour(i, 'off');
+	    }
+	
 	    var newCurrent = this.state.currentIndex + 1;
 	    var hintsNo = Words[newCurrent]['hiragana'].length;
 	
@@ -19924,9 +19931,25 @@
 	      tableDisplayed: false });
 	  },
 	
+	  changeHirCharColour: function changeHirCharColour(hintIndex, onOrOff) {
+	    // console.log('mousey mouseuy ', hintIndex);
+	    if (hintIndex === 'next') {
+	      hintIndex = this.findFirstHidden();
+	    }
+	    var char = document.getElementById('HirCharId' + hintIndex);
+	    if (onOrOff === 'on') {
+	      if (char.className.indexOf('hint-selected') === -1) {
+	        char.className += ' hint-selected';
+	      }
+	    } else {
+	      char.className = char.className.substr(0, 8);
+	    }
+	  },
+	
 	  revealHint: function revealHint(index) {
 	    var revealed = this.state.revealed;
 	    revealed.push(index);
+	    this.changeHirCharColour(index, 'on');
 	    if (revealed.length === this.state.hintsNo) {
 	      this.setState({ revealed: revealed,
 	        tableDisplayed: false });
@@ -21020,7 +21043,7 @@
 	    var nodes = [];
 	
 	    for (var i = 0; i < this.props.hirChars.length; i++) {
-	      nodes.push(React.createElement(HirChar, { key: i, showTableWithSelected: this.props.showTableWithSelected, char: this.props.hirChars[i] }));
+	      nodes.push(React.createElement(HirChar, { key: i, id: 'HirCharId' + i, showTableWithSelected: this.props.showTableWithSelected, char: this.props.hirChars[i] }));
 	    };
 	
 	    var flattened = this.props.hirChars.reduce(function (a, b) {
@@ -21058,7 +21081,7 @@
 	
 	    return React.createElement(
 	      'div',
-	      { className: 'HirChar' + classNo, onClick: this.showTableWithSelected },
+	      { className: 'HirChar' + classNo, id: this.props.id, onClick: this.showTableWithSelected },
 	      React.createElement(
 	        'p',
 	        { className: 'Char' },
@@ -21096,7 +21119,7 @@
 	    var nodes = [];
 	
 	    for (var i = 0; i < hintsList.length; i++) {
-	      nodes.push(React.createElement(Hint, { key: i, hint: hintsList[i], hintClicked: this.props.hintClicked, revealed: revealed, hintIndex: i }));
+	      nodes.push(React.createElement(Hint, { key: i, hint: hintsList[i], changeHirCharColour: this.props.changeHirCharColour, hintClicked: this.props.hintClicked, revealed: revealed, hintIndex: i }));
 	    }
 	
 	    return React.createElement(
@@ -21157,7 +21180,7 @@
 	        { className: 'Hint' },
 	        React.createElement(
 	          'p',
-	          { onClick: this.hintClicked, className: 'Hidden-Hint' },
+	          { onMouseOver: this.mouseOverHint, onMouseLeave: this.mouseLeaveHint, onClick: this.hintClicked, className: 'Hidden-Hint' },
 	          blanks
 	        )
 	      );
@@ -21166,6 +21189,14 @@
 	
 	  hintClicked: function hintClicked() {
 	    this.props.hintClicked(this.props.hintIndex);
+	  },
+	
+	  mouseOverHint: function mouseOverHint() {
+	    this.props.changeHirCharColour(this.props.hintIndex, 'on');
+	  },
+	
+	  mouseLeaveHint: function mouseLeaveHint() {
+	    this.props.changeHirCharColour(this.props.hintIndex, 'off');
 	  }
 	
 	});
@@ -22466,26 +22497,47 @@
 	        null,
 	        React.createElement(
 	          'button',
-	          { className: 'MagicButton next-hint', onClick: this.props.nextHintButtonClicked },
+	          {
+	            className: 'MagicButton next-hint',
+	            onClick: this.props.nextHintButtonClicked,
+	            onMouseOver: this.mouseOverHintButton,
+	            onMouseLeave: this.mouseLeaveHintButton
+	          },
 	          'HINT'
 	        ),
 	        React.createElement(
 	          'button',
-	          { onClick: this.props.nextWordButtonClicked, className: 'MagicButton next-word' },
+	          {
+	            onClick: this.props.nextWordButtonClicked,
+	            className: 'MagicButton next-word'
+	          },
 	          'NEXT WORD'
 	        ),
 	        React.createElement(
 	          'button',
-	          { onClick: this.props.revealButtonClicked, className: 'MagicButton reveal-all' },
+	          {
+	            onClick: this.props.revealButtonClicked,
+	            className: 'MagicButton reveal-all'
+	          },
 	          'REVEAL ALL'
 	        ),
 	        React.createElement(
 	          'button',
-	          { className: 'MagicButton exit' },
+	          {
+	            className: 'MagicButton exit'
+	          },
 	          'EXIT'
 	        )
 	      );
 	    }
+	  },
+	
+	  mouseOverHintButton: function mouseOverHintButton() {
+	    this.props.mouseOverHintButton('next', 'on');
+	  },
+	
+	  mouseLeaveHintButton: function mouseLeaveHintButton() {
+	    this.props.mouseOverHintButton('next', 'off');
 	  }
 	
 	});

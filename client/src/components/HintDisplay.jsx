@@ -12,7 +12,7 @@ const HintDisplay = React.createClass({
     let nodes = [];
 
     for (var i = 0; i < hintsList.length; i++) {
-      nodes.push(<Hint key={i} hint={hintsList[i]} hintClicked={this.props.hintClicked} revealed={revealed} hintIndex={i}/>)
+      nodes.push(<Hint key={i} hint={hintsList[i]} changeHirCharColour={this.props.changeHirCharColour} hintClicked={this.props.hintClicked} revealed={revealed} hintIndex={i}/>)
     }
 
     return (

@@ -35,6 +35,7 @@ const Jp0 = React.createClass({
             tableClicked={this.hideTable}
             hiragana={this.state.hiragana}/>
           <HintDisplay
+            changeHirCharColour={this.changeHirCharColour}
             hintClicked={this.revealHint}
             hintsList={hints}
             revealed={this.state.revealed}/>
@@ -47,6 +48,7 @@ const Jp0 = React.createClass({
         <Controller
           nextWordButtonClicked={this.getNextWord}
           nextHintButtonClicked={this.nextHintButtonClicked}
+          mouseOverHintButton={this.changeHirCharColour}
           revealButtonClicked={this.revealAll}
           hintsNo={this.state.hintsNo}
           revealed={this.state.revealed}/>
@@ -89,7 +91,7 @@ const Jp0 = React.createClass({
                    hintsNo: hintsNo});
   },
 
-//moves app to next word if all hints revealed or reveals first hidden hint
+//moves app to next word if all hints revealed or reveals first hidden hint.
   nextHintButtonClicked: function () {
     let firstHidden = this.findFirstHidden();
     let hintsNo = this.state.hintsNo;
@@ -97,6 +99,7 @@ const Jp0 = React.createClass({
     if (firstHidden === -1) {
       this.getNextWord();
     } else {
+      this.changeHirCharColour(firstHidden, 'on');
       let newRevealed = this.state.revealed;
       newRevealed.push(firstHidden);
       newRevealed = newRevealed.sort(function(a, b){return a-b});
@@ -127,6 +130,10 @@ const Jp0 = React.createClass({
 
   getNextWord: function () {
 
+    for (let i = 0; i < this.state.words[this.state.currentIndex].hiragana.length; i++) {
+      this.changeHirCharColour(i, 'off');
+    }
+
     let newCurrent = this.state.currentIndex + 1;
     let hintsNo = Words[newCurrent]['hiragana'].length;
 
@@ -152,9 +159,26 @@ const Jp0 = React.createClass({
   },
 
 
+  changeHirCharColour: function (hintIndex, onOrOff) {
+    // console.log('mousey mouseuy ', hintIndex);
+    if (hintIndex === 'next') {
+      hintIndex = this.findFirstHidden();
+    }
+    let char = document.getElementById('HirCharId' + hintIndex);
+    if (onOrOff === 'on'){
+      if (char.className.indexOf('hint-selected') === -1) {
+        char.className += ' hint-selected';
+      }
+    } else {
+      char.className = char.className.substr(0,8);
+    }
+  },
+
+
   revealHint: function (index) {
     let revealed = this.state.revealed;
     revealed.push(index);
+    this.changeHirCharColour(index, 'on');
     if (revealed.length === this.state.hintsNo) {
       this.setState(
         {revealed: revealed,

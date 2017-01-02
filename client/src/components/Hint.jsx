@@ -29,7 +29,7 @@ const Hint = React.createClass({
       }
       return (
         <div className='Hint'>
-          <p onClick={this.hintClicked} className='Hidden-Hint'>{blanks}</p>
+          <p onMouseOver={this.mouseOverHint} onMouseLeave={this.mouseLeaveHint} onClick={this.hintClicked} className='Hidden-Hint'>{blanks}</p>
         </div>
       );
     }
@@ -39,6 +39,16 @@ const Hint = React.createClass({
 
   hintClicked: function () {
     this.props.hintClicked(this.props.hintIndex);
+  },
+
+
+  mouseOverHint: function () {
+    this.props.changeHirCharColour(this.props.hintIndex, 'on');
+  },
+
+
+  mouseLeaveHint: function () {
+    this.props.changeHirCharColour(this.props.hintIndex, 'off');
   }
 
 

@@ -254,7 +254,7 @@ td.selected-cell {
 /*------------------------------*/
 
 .HiraganaDisplay {
-  color: #71ca7c;
+  color: #09911a;
   /*border: 2px solid black;*/
   margin: 0 auto;
   border-radius: 5px;
@@ -326,7 +326,11 @@ td.selected-cell {
 .Char:hover {
   /*background-color: #23818a;
   border-radius: 5px;*/
-  color: #09911a;
+  color: #71ca7c;
+}
+
+.hint-selected {
+  color: #71ca7c;
 }
 
 @media screen and (max-width: 414px) {
