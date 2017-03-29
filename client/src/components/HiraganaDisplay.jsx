@@ -9,7 +9,12 @@ const HiraganaDisplay = React.createClass({
     let nodes = [];
 
     for (let i = 0; i < this.props.hirChars.length; i++) {
-      nodes.push(<HirChar key={i} id={'HirCharId' + i} showTableWithSelected={this.props.showTableWithSelected} char={this.props.hirChars[i]} />);
+      nodes.push(<HirChar key={i}
+                          hirIndex={i}
+                          id={'HirCharId' + i}
+                          nextUp={this.props.nextUp}
+                          highlightingHir={this.props.highlightingHir}
+                          showTableWithSelected={this.props.showTableWithSelected} char={this.props.hirChars[i]} />);
     };
 
     var flattened = this.props.hirChars.reduce(function(a, b) {

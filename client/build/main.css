@@ -428,7 +428,7 @@ p.Kanji:hover {
   background-color: #09911a;
 }
 
-.next-word {
+.next-card {
   background-color: #e38838;
 }
 
@@ -436,7 +436,7 @@ p.Kanji:hover {
   background-color: #bb5e0c;
 }
 
-.exit:hover, .next-word:hover {
+.exit:hover, .next-card:hover {
   background-color: #e6c9b0;
 }
 
@@ -462,7 +462,7 @@ p.Kanji:hover {
     border-right-width: 3px;
     border-radius: 0 0 0 5px;
   }
-  .next-word {
+  .next-card {
     background-color: #e38838;
     border-right-width: 0;
     border-left-width: 0;

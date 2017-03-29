@@ -19757,13 +19757,13 @@
 	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 	
 	var React = __webpack_require__(1);
-	var Words = __webpack_require__(160);
+	var Cards = __webpack_require__(160);
 	var Hiragana = __webpack_require__(161);
 	var KanjiDisplay = __webpack_require__(162);
 	var HiraganaDisplay = __webpack_require__(163);
 	var HintDisplay = __webpack_require__(165);
 	var ImageDisplay = __webpack_require__(174);
-	var Controller = __webpack_require__(176);
+	var Controller = __webpack_require__(177);
 	
 	var Jp0 = React.createClass({
 	  displayName: 'Jp0',
@@ -19771,14 +19771,14 @@
 	
 	  render: function render() {
 	
-	    var currentWord = this.state.words[this.state.currentIndex];
+	    var currentCard = this.state.cards[this.state.currentIndex];
 	    var hints = [];
 	    var _iteratorNormalCompletion = true;
 	    var _didIteratorError = false;
 	    var _iteratorError = undefined;
 	
 	    try {
-	      for (var _iterator = currentWord['hiragana'][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	      for (var _iterator = currentCard['hiragana'][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 	        var hira = _step.value;
 	
 	        hints.push(this.state.hiragana[hira]['transliteration']);
@@ -19805,9 +19805,9 @@
 	        'div',
 	        { className: 'top' },
 	        React.createElement(ImageDisplay, {
-	          imgsrc: this.state.words[this.state.currentIndex]['imgsrc'],
-	          name: this.state.words[this.state.currentIndex]['name'],
-	          romaji: this.state.words[this.state.currentIndex]['romaji'],
+	          imgsrc: this.state.cards[this.state.currentIndex]['imgsrc'],
+	          name: this.state.cards[this.state.currentIndex]['name'],
+	          romaji: this.state.cards[this.state.currentIndex]['romaji'],
 	          revealed: this.state.revealed.length,
 	          hintsNo: this.state.hintsNo,
 	          tableDisplayed: this.state.tableDisplayed,
@@ -19821,14 +19821,16 @@
 	          revealed: this.state.revealed })
 	      ),
 	      React.createElement(HiraganaDisplay, {
-	        hirChars: this.state.words[this.state.currentIndex]['hiragana'], showTableWithSelected: this.showTableWithSelected }),
+	        hirChars: this.state.cards[this.state.currentIndex]['hiragana'], showTableWithSelected: this.showTableWithSelected,
+	        nextUp: this.findFirstHidden(),
+	        highlightingHir: this.state.highlightingHir }),
 	      React.createElement(KanjiDisplay, {
-	        kanjiChars: this.state.words[this.state.currentIndex]['kanji'],
+	        kanjiChars: this.state.cards[this.state.currentIndex]['kanji'],
 	        showTableWithAllSelected: this.showTableWithAllSelected }),
 	      React.createElement(Controller, {
-	        nextWordButtonClicked: this.getNextWord,
+	        nextCardButtonClicked: this.getNextCard,
 	        nextHintButtonClicked: this.nextHintButtonClicked,
-	        mouseOverHintButton: this.changeHirCharColour,
+	        mouseOverHintButton: this.toggleHighlightingHir,
 	        revealButtonClicked: this.revealAll,
 	        hintsNo: this.state.hintsNo,
 	        revealed: this.state.revealed })
@@ -19839,7 +19841,7 @@
 	    var _hiragana;
 	
 	    return {
-	      words: [{
+	      cards: [{
 	        'name': 'init',
 	        'hiragana': ['I', 'N', 'I', 'T'],
 	        'kanji': 'KANJI',
@@ -19851,31 +19853,33 @@
 	      currentIndex: 0,
 	      hintsNo: 4,
 	      revealed: [],
+	      highlightingHir: false,
 	      tableDisplayed: false,
+	      tableType: null,
 	      tableSelected: []
 	    };
 	  },
 	
 	  componentDidMount: function componentDidMount() {
 	
-	    var hintsNo = Words[0]['hiragana'].length;
+	    var hintsNo = Cards[0]['hiragana'].length;
 	
-	    this.setState({ words: Words,
+	    this.setState({ cards: Cards,
 	      hiragana: Hiragana,
 	      currentIndex: 0,
 	      revealed: [],
 	      hintsNo: hintsNo });
 	  },
 	
-	  //moves app to next word if all hints revealed or reveals first hidden hint.
+	  //moves app to next card if all hints revealed or reveals first hidden hint.
 	  nextHintButtonClicked: function nextHintButtonClicked() {
 	    var firstHidden = this.findFirstHidden();
 	    var hintsNo = this.state.hintsNo;
 	    var revealed = this.state.revealed;
 	    if (firstHidden === -1) {
-	      this.getNextWord();
+	      this.getNextCard();
 	    } else {
-	      this.changeHirCharColour(firstHidden, 'on');
+	      // this.changeHirCharColour(firstHidden + 1, 'on');
 	      var newRevealed = this.state.revealed;
 	      newRevealed.push(firstHidden);
 	      newRevealed = newRevealed.sort(function (a, b) {
@@ -19904,16 +19908,16 @@
 	    }
 	  },
 	
-	  getNextWord: function getNextWord() {
+	  getNextCard: function getNextCard() {
 	
-	    for (var i = 0; i < this.state.words[this.state.currentIndex].hiragana.length; i++) {
+	    for (var i = 0; i < this.state.cards[this.state.currentIndex].hiragana.length; i++) {
 	      this.changeHirCharColour(i, 'off');
 	    }
 	
 	    var newCurrent = this.state.currentIndex + 1;
-	    var hintsNo = Words[newCurrent]['hiragana'].length;
+	    var hintsNo = Cards[newCurrent]['hiragana'].length;
 	
-	    this.setState({ words: Words,
+	    this.setState({ cards: Cards,
 	      hiragana: Hiragana,
 	      currentIndex: newCurrent,
 	      revealed: [],
@@ -19924,7 +19928,7 @@
 	
 	  revealAll: function revealAll() {
 	    var rev = [];
-	    for (var i = 0; i < this.state.words[this.state.currentIndex]['hiragana'].length; i++) {
+	    for (var i = 0; i < this.state.cards[this.state.currentIndex]['hiragana'].length; i++) {
 	      rev.push(i);
 	    }
 	    this.setState({ revealed: rev,
@@ -19933,16 +19937,25 @@
 	
 	  changeHirCharColour: function changeHirCharColour(hintIndex, onOrOff) {
 	    // console.log('mousey mouseuy ', hintIndex);
-	    if (hintIndex === 'next') {
-	      hintIndex = this.findFirstHidden();
-	    }
-	    var char = document.getElementById('HirCharId' + hintIndex);
-	    if (onOrOff === 'on') {
-	      if (char.className.indexOf('hint-selected') === -1) {
-	        char.className += ' hint-selected';
-	      }
+	    // if (hintIndex === 'next') {
+	    //   hintIndex = this.findFirstHidden();
+	    // }
+	    // let char = document.getElementById('HirCharId' + hintIndex);
+	    // if (onOrOff === 'on'){
+	    //   if (char.className.indexOf('hint-selected') === -1) {
+	    //     char.className += ' hint-selected';
+	    //   }
+	    // } else {
+	    //   char.className = char.className.substr(0,8);
+	    // }
+	    console.log('hello!');
+	  },
+	
+	  toggleHighlightingHir: function toggleHighlightingHir() {
+	    if (this.state.highlightingHir === false) {
+	      this.setState({ highlightingHir: true });
 	    } else {
-	      char.className = char.className.substr(0, 8);
+	      this.setState({ highlightingHir: false });
 	    }
 	  },
 	
@@ -19975,7 +19988,7 @@
 	  },
 	
 	  showTableWithAllSelected: function showTableWithAllSelected() {
-	    var hirChars = this.state.words[this.state.currentIndex]['hiragana'];
+	    var hirChars = this.state.cards[this.state.currentIndex]['hiragana'];
 	    var _iteratorNormalCompletion2 = true;
 	    var _didIteratorError2 = false;
 	    var _iteratorError2 = undefined;
@@ -20019,13 +20032,13 @@
 	//   let revealed = this.state.revealed;
 	//
 	//   if (hintsNo === revealed.length) {
-	//     this.getNextWord();
+	//     this.getNextCard();
 	//   } else if (revealed.length === 0) {
-	//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][0]]['sound']);
+	//     // let sound = new Audio(this.state.hiragana[this.state.cards[this.state.currentIndex]['hiragana'][0]]['sound']);
 	//     // sound.play();
 	//     this.setState({revealed: [0]});
 	//   } else if (revealed.length === hintsNo - 1) {
-	//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
+	//     // let sound = new Audio(this.state.hiragana[this.state.cards[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
 	//     // sound.play();
 	//     let lastRevealed = revealed[revealed.length - 1];
 	//     let newRevealed = lastRevealed + 1;
@@ -20035,7 +20048,7 @@
 	//     let lastRevealed = revealed[revealed.length - 1];
 	//     let newRevealed = lastRevealed + 1;
 	//     revealed.push(newRevealed);
-	//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
+	//     // let sound = new Audio(this.state.hiragana[this.state.cards[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
 	//     // sound.play();
 	//     this.setState({revealed: revealed});
 	//   }
@@ -20051,7 +20064,7 @@
 	//hiragana max 6 characters
 	{
 	  'name': 'DRAGON',
-	  'hiragana': ['\u3046', '\u308A\u3085', '\u3086', '\u3046', '\u3046'],
+	  'hiragana': ['\u308A\u3085', '\u3046'],
 	  'kanji': '竜',
 	  'romaji': 'ryū',
 	  'imgsrc': 'res/img/dragon.jpg'
@@ -21043,7 +21056,12 @@
 	    var nodes = [];
 	
 	    for (var i = 0; i < this.props.hirChars.length; i++) {
-	      nodes.push(React.createElement(HirChar, { key: i, id: 'HirCharId' + i, showTableWithSelected: this.props.showTableWithSelected, char: this.props.hirChars[i] }));
+	      nodes.push(React.createElement(HirChar, { key: i,
+	        hirIndex: i,
+	        id: 'HirCharId' + i,
+	        nextUp: this.props.nextUp,
+	        highlightingHir: this.props.highlightingHir,
+	        showTableWithSelected: this.props.showTableWithSelected, char: this.props.hirChars[i] }));
 	    };
 	
 	    var flattened = this.props.hirChars.reduce(function (a, b) {
@@ -21079,12 +21097,18 @@
 	
 	    var classNo = this.props.char.length;
 	
+	    var highlightClass = '';
+	
+	    if (this.props.hirIndex === this.props.nextUp && this.props.highlightingHir === true) {
+	      highlightClass = ' hint-selected';
+	    };
+	
 	    return React.createElement(
 	      'div',
 	      { className: 'HirChar' + classNo, id: this.props.id, onClick: this.showTableWithSelected },
 	      React.createElement(
 	        'p',
-	        { className: 'Char' },
+	        { className: 'Char' + highlightClass },
 	        this.props.char
 	      )
 	    );
@@ -22079,7 +22103,7 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var TableCell = __webpack_require__(177);
+	var TableCell = __webpack_require__(176);
 	
 	var HirTable = React.createClass({
 	  displayName: 'HirTable',
@@ -22087,12 +22111,26 @@
 	
 	  render: function render() {
 	
-	    return React.createElement(
+	    var gojuonTable = React.createElement(
 	      'table',
 	      { onClick: this.props.tableClicked },
 	      React.createElement(
 	        'tbody',
 	        null,
+	        React.createElement(
+	          'tr',
+	          { align: 'center' },
+	          React.createElement('th', null),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: { char: 'gojūon' } }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: { char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A' } }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: { char: 'yōon' } })
+	        ),
 	        React.createElement(
 	          'tr',
 	          null,
@@ -22423,16 +22461,196 @@
 	            tableChar: this.props.hiragana['empty_string'] }),
 	          React.createElement(TableCell, {
 	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['empty_string'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
 	            tableChar: this.props.hiragana['\u3093'] }),
 	          React.createElement(TableCell, {
 	            tableSelected: this.props.tableSelected,
 	            tableChar: this.props.hiragana['empty_string'] }),
 	          React.createElement(TableCell, {
 	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3063'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
 	            tableChar: this.props.hiragana['empty_string'] })
+	        )
+	      )
+	    );
+	
+	    var dakuonTable = React.createElement(
+	      'table',
+	      { onClick: this.props.tableClicked },
+	      React.createElement(
+	        'tbody',
+	        null,
+	        React.createElement(
+	          'tr',
+	          { align: 'center' },
+	          React.createElement('th', null),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: { char: 'gojūon' } }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: { char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A' } }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: { char: 'yōon' } })
+	        ),
+	        React.createElement(
+	          'tr',
+	          null,
+	          React.createElement('th', null),
+	          React.createElement(
+	            'th',
+	            null,
+	            React.createElement(
+	              'i',
+	              null,
+	              'a'
+	            )
+	          ),
+	          React.createElement(
+	            'th',
+	            null,
+	            React.createElement(
+	              'i',
+	              null,
+	              'i'
+	            )
+	          ),
+	          React.createElement(
+	            'th',
+	            null,
+	            React.createElement(
+	              'i',
+	              null,
+	              'u'
+	            )
+	          ),
+	          React.createElement(
+	            'th',
+	            null,
+	            React.createElement(
+	              'i',
+	              null,
+	              'e'
+	            )
+	          ),
+	          React.createElement(
+	            'th',
+	            null,
+	            React.createElement(
+	              'i',
+	              null,
+	              'o'
+	            )
+	          )
+	        ),
+	        React.createElement(
+	          'tr',
+	          { align: 'center' },
+	          React.createElement(
+	            'th',
+	            null,
+	            'g'
+	          ),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected, tableChar: this.props.hiragana['\u304C'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u304E'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3050'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3052'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3054'] })
+	        ),
+	        React.createElement(
+	          'tr',
+	          { align: 'center' },
+	          React.createElement(
+	            'th',
+	            null,
+	            React.createElement(
+	              'i',
+	              null,
+	              'z'
+	            )
+	          ),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3056'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3058'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u305A'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u305C'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u305E'] })
+	        ),
+	        React.createElement(
+	          'tr',
+	          { align: 'center' },
+	          React.createElement(
+	            'th',
+	            null,
+	            React.createElement(
+	              'i',
+	              null,
+	              'd'
+	            )
+	          ),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3060'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3062'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3065'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3067'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3069'] })
+	        ),
+	        React.createElement(
+	          'tr',
+	          { align: 'center' },
+	          React.createElement(
+	            'th',
+	            null,
+	            React.createElement(
+	              'i',
+	              null,
+	              'b'
+	            )
+	          ),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3070'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3073'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3076'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3079'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u307C'] })
 	        ),
 	        React.createElement(
 	          'tr',
@@ -22440,22 +22658,52 @@
 	          React.createElement('th', null),
 	          React.createElement(TableCell, {
 	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['yōon'] }),
+	            tableChar: this.props.hiragana[' '] }),
 	          React.createElement(TableCell, {
 	            tableSelected: this.props.tableSelected,
 	            tableChar: this.props.hiragana[' '] }),
 	          React.createElement(TableCell, {
 	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3063'] }),
+	            tableChar: this.props.hiragana[' '] }),
 	          React.createElement(TableCell, {
 	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3099'] }),
+	            tableChar: this.props.hiragana[' '] }),
 	          React.createElement(TableCell, {
 	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u309A'] })
+	            tableChar: this.props.hiragana[' '] })
+	        ),
+	        React.createElement(
+	          'tr',
+	          { align: 'center' },
+	          React.createElement(
+	            'th',
+	            null,
+	            React.createElement(
+	              'i',
+	              null,
+	              'p'
+	            )
+	          ),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3071'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3074'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u3077'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u307A'] }),
+	          React.createElement(TableCell, {
+	            tableSelected: this.props.tableSelected,
+	            tableChar: this.props.hiragana['\u307D'] })
 	        )
 	      )
 	    );
+	
+	    return dakuonTable;
 	  }
 	
 	});
@@ -22464,88 +22712,6 @@
 
 /***/ },
 /* 176 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var Controller = React.createClass({
-	  displayName: 'Controller',
-	
-	
-	  render: function render() {
-	
-	    if (this.props.hintsNo === this.props.revealed.length) {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'button',
-	          { onClick: this.props.nextHintButtonClicked, className: 'MagicButton next-hint big' },
-	          'NEXT'
-	        ),
-	        React.createElement(
-	          'button',
-	          { className: 'MagicButton exit big' },
-	          'EXIT'
-	        )
-	      );
-	    } else {
-	      return React.createElement(
-	        'div',
-	        null,
-	        React.createElement(
-	          'button',
-	          {
-	            className: 'MagicButton next-hint',
-	            onClick: this.props.nextHintButtonClicked,
-	            onMouseOver: this.mouseOverHintButton,
-	            onMouseLeave: this.mouseLeaveHintButton
-	          },
-	          'HINT'
-	        ),
-	        React.createElement(
-	          'button',
-	          {
-	            onClick: this.props.nextWordButtonClicked,
-	            className: 'MagicButton next-word'
-	          },
-	          'NEXT WORD'
-	        ),
-	        React.createElement(
-	          'button',
-	          {
-	            onClick: this.props.revealButtonClicked,
-	            className: 'MagicButton reveal-all'
-	          },
-	          'REVEAL ALL'
-	        ),
-	        React.createElement(
-	          'button',
-	          {
-	            className: 'MagicButton exit'
-	          },
-	          'EXIT'
-	        )
-	      );
-	    }
-	  },
-	
-	  mouseOverHintButton: function mouseOverHintButton() {
-	    this.props.mouseOverHintButton('next', 'on');
-	  },
-	
-	  mouseLeaveHintButton: function mouseLeaveHintButton() {
-	    this.props.mouseOverHintButton('next', 'off');
-	  }
-	
-	});
-	
-	module.exports = Controller;
-
-/***/ },
-/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22608,6 +22774,88 @@
 	});
 	
 	module.exports = TableCell;
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var Controller = React.createClass({
+	  displayName: 'Controller',
+	
+	
+	  render: function render() {
+	
+	    if (this.props.hintsNo === this.props.revealed.length) {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'button',
+	          { onClick: this.props.nextHintButtonClicked, className: 'MagicButton next-hint big' },
+	          'NEXT'
+	        ),
+	        React.createElement(
+	          'button',
+	          { className: 'MagicButton exit big' },
+	          'EXIT'
+	        )
+	      );
+	    } else {
+	      return React.createElement(
+	        'div',
+	        null,
+	        React.createElement(
+	          'button',
+	          {
+	            className: 'MagicButton next-hint',
+	            onClick: this.props.nextHintButtonClicked,
+	            onMouseOver: this.mouseOverHintButton,
+	            onMouseLeave: this.mouseLeaveHintButton
+	          },
+	          'HINT'
+	        ),
+	        React.createElement(
+	          'button',
+	          {
+	            onClick: this.props.nextCardButtonClicked,
+	            className: 'MagicButton next-card'
+	          },
+	          'NEXT CARD'
+	        ),
+	        React.createElement(
+	          'button',
+	          {
+	            onClick: this.props.revealButtonClicked,
+	            className: 'MagicButton reveal-all'
+	          },
+	          'REVEAL ALL'
+	        ),
+	        React.createElement(
+	          'button',
+	          {
+	            className: 'MagicButton exit'
+	          },
+	          'EXIT'
+	        )
+	      );
+	    }
+	  },
+	
+	  mouseOverHintButton: function mouseOverHintButton() {
+	    this.props.mouseOverHintButton('next', 'on');
+	  },
+	
+	  mouseLeaveHintButton: function mouseLeaveHintButton() {
+	    this.props.mouseOverHintButton('next', 'off');
+	  }
+	
+	});
+	
+	module.exports = Controller;
 
 /***/ }
 /******/ ]);

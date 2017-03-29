@@ -2,7 +2,7 @@ module.exports = [
 //hiragana max 6 characters
   {
     'name': 'DRAGON',
-    'hiragana': ['\u3046','\u308A\u3085','\u3086','\u3046','\u3046'],
+    'hiragana': ['\u308A\u3085','\u3046'],
     'kanji': '竜',
     'romaji': 'ryū',
     'imgsrc': 'res/img/dragon.jpg'

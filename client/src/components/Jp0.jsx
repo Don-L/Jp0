@@ -1,5 +1,5 @@
 const React = require('react');
-const Words = require('../res/words.js');
+const Cards = require('../res/cards.js');
 const Hiragana = require('../res/hiragana.js');
 const KanjiDisplay = require('./KanjiDisplay.jsx');
 const HiraganaDisplay = require('./HiraganaDisplay.jsx');
@@ -14,9 +14,9 @@ const Jp0 = React.createClass({
 
   render: function () {
 
-    let currentWord = this.state.words[this.state.currentIndex];
+    let currentCard = this.state.cards[this.state.currentIndex];
     let hints = [];
-    for (let hira of currentWord['hiragana']) {
+    for (let hira of currentCard['hiragana']) {
       hints.push(this.state.hiragana[hira]['transliteration']);
     }
 
@@ -25,9 +25,9 @@ const Jp0 = React.createClass({
       <div className='Jp0'>
         <div className='top'>
           <ImageDisplay
-            imgsrc={this.state.words[this.state.currentIndex]['imgsrc']}
-            name={this.state.words[this.state.currentIndex]['name']}
-            romaji={this.state.words[this.state.currentIndex]['romaji']}
+            imgsrc={this.state.cards[this.state.currentIndex]['imgsrc']}
+            name={this.state.cards[this.state.currentIndex]['name']}
+            romaji={this.state.cards[this.state.currentIndex]['romaji']}
             revealed={this.state.revealed.length}
             hintsNo={this.state.hintsNo}
             tableDisplayed={this.state.tableDisplayed}
@@ -41,14 +41,16 @@ const Jp0 = React.createClass({
             revealed={this.state.revealed}/>
         </div>
         <HiraganaDisplay
-          hirChars={this.state.words[this.state.currentIndex]['hiragana']} showTableWithSelected={this.showTableWithSelected} />
+          hirChars={this.state.cards[this.state.currentIndex]['hiragana']} showTableWithSelected={this.showTableWithSelected}
+          nextUp={this.findFirstHidden()}
+          highlightingHir={this.state.highlightingHir} />
         <KanjiDisplay
-          kanjiChars={this.state.words[this.state.currentIndex]['kanji']}
+          kanjiChars={this.state.cards[this.state.currentIndex]['kanji']}
           showTableWithAllSelected={this.showTableWithAllSelected} />
         <Controller
-          nextWordButtonClicked={this.getNextWord}
+          nextCardButtonClicked={this.getNextCard}
           nextHintButtonClicked={this.nextHintButtonClicked}
-          mouseOverHintButton={this.changeHirCharColour}
+          mouseOverHintButton={this.toggleHighlightingHir}
           revealButtonClicked={this.revealAll}
           hintsNo={this.state.hintsNo}
           revealed={this.state.revealed}/>
@@ -61,7 +63,7 @@ const Jp0 = React.createClass({
 
   getInitialState: function () {
     return {
-      words: [{
+      cards: [{
         'name': 'init',
         'hiragana': ['I', 'N', 'I', 'T'],
         'kanji': 'KANJI',
@@ -74,7 +76,9 @@ const Jp0 = React.createClass({
       currentIndex: 0,
       hintsNo: 4,
       revealed: [],
+      highlightingHir: false,
       tableDisplayed: false,
+      tableType: null,
       tableSelected: []
     };
   },
@@ -82,24 +86,24 @@ const Jp0 = React.createClass({
 
   componentDidMount: function () {
 
-    let hintsNo = Words[0]['hiragana'].length;
+    let hintsNo = Cards[0]['hiragana'].length;
 
-    this.setState({words: Words,
+    this.setState({cards: Cards,
                    hiragana: Hiragana,
                    currentIndex: 0,
                    revealed: [],
                    hintsNo: hintsNo});
   },
 
-//moves app to next word if all hints revealed or reveals first hidden hint.
+//moves app to next card if all hints revealed or reveals first hidden hint.
   nextHintButtonClicked: function () {
     let firstHidden = this.findFirstHidden();
     let hintsNo = this.state.hintsNo;
     let revealed = this.state.revealed;
     if (firstHidden === -1) {
-      this.getNextWord();
+      this.getNextCard();
     } else {
-      this.changeHirCharColour(firstHidden, 'on');
+      // this.changeHirCharColour(firstHidden + 1, 'on');
       let newRevealed = this.state.revealed;
       newRevealed.push(firstHidden);
       newRevealed = newRevealed.sort(function(a, b){return a-b});
@@ -128,16 +132,16 @@ const Jp0 = React.createClass({
   },
 
 
-  getNextWord: function () {
+  getNextCard: function () {
 
-    for (let i = 0; i < this.state.words[this.state.currentIndex].hiragana.length; i++) {
+    for (let i = 0; i < this.state.cards[this.state.currentIndex].hiragana.length; i++) {
       this.changeHirCharColour(i, 'off');
     }
 
     let newCurrent = this.state.currentIndex + 1;
-    let hintsNo = Words[newCurrent]['hiragana'].length;
+    let hintsNo = Cards[newCurrent]['hiragana'].length;
 
-    this.setState({words: Words,
+    this.setState({cards: Cards,
                    hiragana: Hiragana,
                    currentIndex: newCurrent,
                    revealed: [],
@@ -149,7 +153,7 @@ const Jp0 = React.createClass({
 
   revealAll: function () {
     let rev = [];
-    for (var i = 0; i < this.state.words[this.state.currentIndex]['hiragana'].length; i++) {
+    for (var i = 0; i < this.state.cards[this.state.currentIndex]['hiragana'].length; i++) {
       rev.push(i);
     }
     this.setState(
@@ -161,16 +165,26 @@ const Jp0 = React.createClass({
 
   changeHirCharColour: function (hintIndex, onOrOff) {
     // console.log('mousey mouseuy ', hintIndex);
-    if (hintIndex === 'next') {
-      hintIndex = this.findFirstHidden();
-    }
-    let char = document.getElementById('HirCharId' + hintIndex);
-    if (onOrOff === 'on'){
-      if (char.className.indexOf('hint-selected') === -1) {
-        char.className += ' hint-selected';
-      }
+    // if (hintIndex === 'next') {
+    //   hintIndex = this.findFirstHidden();
+    // }
+    // let char = document.getElementById('HirCharId' + hintIndex);
+    // if (onOrOff === 'on'){
+    //   if (char.className.indexOf('hint-selected') === -1) {
+    //     char.className += ' hint-selected';
+    //   }
+    // } else {
+    //   char.className = char.className.substr(0,8);
+    // }
+    console.log('hello!');
+  },
+
+
+  toggleHighlightingHir: function () {
+    if (this.state.highlightingHir === false) {
+      this.setState({highlightingHir: true});
     } else {
-      char.className = char.className.substr(0,8);
+      this.setState({highlightingHir: false});
     }
   },
 
@@ -212,7 +226,7 @@ const Jp0 = React.createClass({
 
 
   showTableWithAllSelected: function () {
-    let hirChars=this.state.words[this.state.currentIndex]['hiragana'];
+    let hirChars=this.state.cards[this.state.currentIndex]['hiragana'];
     for (let hira of hirChars) {
       this.showTableWithSelected(hira, 'all');
     }
@@ -250,13 +264,13 @@ module.exports = Jp0;
 //   let revealed = this.state.revealed;
 //
 //   if (hintsNo === revealed.length) {
-//     this.getNextWord();
+//     this.getNextCard();
 //   } else if (revealed.length === 0) {
-//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][0]]['sound']);
+//     // let sound = new Audio(this.state.hiragana[this.state.cards[this.state.currentIndex]['hiragana'][0]]['sound']);
 //     // sound.play();
 //     this.setState({revealed: [0]});
 //   } else if (revealed.length === hintsNo - 1) {
-//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
+//     // let sound = new Audio(this.state.hiragana[this.state.cards[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
 //     // sound.play();
 //     let lastRevealed = revealed[revealed.length - 1];
 //     let newRevealed = lastRevealed + 1;
@@ -266,7 +280,7 @@ module.exports = Jp0;
 //     let lastRevealed = revealed[revealed.length - 1];
 //     let newRevealed = lastRevealed + 1;
 //     revealed.push(newRevealed);
-//     // let sound = new Audio(this.state.hiragana[this.state.words[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
+//     // let sound = new Audio(this.state.hiragana[this.state.cards[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
 //     // sound.play();
 //     this.setState({revealed: revealed});
 //   }

@@ -7,9 +7,15 @@ const HirChar = React.createClass({
 
     let classNo = this.props.char.length;
 
+    let highlightClass = '';
+
+    if (this.props.hirIndex === this.props.nextUp && this.props.highlightingHir === true) {
+      highlightClass = ' hint-selected';
+    };
+
     return (
       <div className={'HirChar' + classNo} id={this.props.id} onClick={this.showTableWithSelected}>
-        <p className='Char'>{this.props.char}</p>
+        <p className={'Char' + highlightClass}>{this.props.char}</p>
       </div>
     );
 

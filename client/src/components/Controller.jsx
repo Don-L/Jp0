@@ -23,9 +23,9 @@ const React = require('react');
               >HINT
             </button>
             <button
-              onClick={this.props.nextWordButtonClicked}
-              className='MagicButton next-word'
-              >NEXT WORD
+              onClick={this.props.nextCardButtonClicked}
+              className='MagicButton next-card'
+              >NEXT CARD
             </button>
             <button
               onClick={this.props.revealButtonClicked}
