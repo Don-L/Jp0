@@ -892,7 +892,7 @@ module.exports = {
   '\u3073\u3087': {
     'name': 'yōon with hiragana letter bi and hiragana letter small yo',
     'char': 'びょ',
-    'unicode': '\u3073\u3085',
+    'unicode': '\u3073\u3087',
     'transliteration': 'byo'
   },
 
@@ -906,7 +906,7 @@ module.exports = {
   '\u3074\u3085': {
     'name': 'yōon with hiragana letter pi and hiragana letter small yu',
     'char': 'ぴゅ',
-    'unicode': '\u3074\u3041',
+    'unicode': '\u3074\u3085',
     'transliteration': 'pyu'
   },
 

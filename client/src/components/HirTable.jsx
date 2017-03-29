@@ -13,6 +13,7 @@ const TableCell = require('./TableCell.jsx');
             <TableCell
               tableSelected={this.props.tableSelected}
               tableChar={{char: 'gojūon'}}/>
+            // u3001 = comma
             <TableCell
               tableSelected={this.props.tableSelected}
               tableChar={{char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A'}}/>
@@ -258,7 +259,7 @@ const TableCell = require('./TableCell.jsx');
             <th><i>o</i></th>
           </tr>
           <tr align="center">
-            <th>g</th>
+            <th><i>g</i></th>
             <TableCell
               tableSelected={this.props.tableSelected} tableChar={this.props.hiragana['\u304C']}/>
             <TableCell
@@ -367,7 +368,177 @@ const TableCell = require('./TableCell.jsx');
         </tbody>
       </table>;
 
-      return dakuonTable;
+
+
+
+
+      let yoonTable = <table onClick={this.props.tableClicked}>
+        <tbody>
+          <tr align="center">
+            <th></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={{char: 'gojūon'}}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={{char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A'}}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={{char: 'yōon'}}/>
+          </tr>
+          <tr>
+            <th></th>
+            <th><i>a</i></th>
+            <th><i>u</i></th>
+            <th><i>o</i></th>
+          </tr>
+          <tr align="center">
+            <th><i>ky</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected} tableChar={this.props.hiragana['\u304d\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u304D\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u304D\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>sh</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3057\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3057\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3057\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>ch</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3061\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3061\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3061\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>ny</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u306B\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3061\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u306B\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>hy</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3072\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3072\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3072\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>my</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u307F\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u307F\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u307F\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>ry</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u308A\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u308A\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u308A\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>gy</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u304E\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u304E\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u304E\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>j</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3058\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3058\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3058\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>j</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3062\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3062\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3062\u3087']}/>
+          </tr>
+          <tr align="center">
+            <th><i>by</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3073\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3073\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3073\u3085']}/>
+          </tr>
+          <tr align="center">
+            <th><i>py</i></th>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3074\u3083']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3074\u3085']}/>
+            <TableCell
+              tableSelected={this.props.tableSelected}
+              tableChar={this.props.hiragana['\u3074\u3087']}/>
+          </tr>
+        </tbody>
+      </table>;
+
+      return yoonTable;
 
     }
 
