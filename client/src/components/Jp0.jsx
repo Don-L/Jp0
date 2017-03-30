@@ -28,6 +28,7 @@ const Jp0 = React.createClass({
             imgsrc={this.state.cards[this.state.currentIndex]['imgsrc']}
             name={this.state.cards[this.state.currentIndex]['name']}
             romaji={this.state.cards[this.state.currentIndex]['romaji']}
+            charTypes={this.getCharTypes()}
             revealed={this.state.revealed.length}
             hintsNo={this.state.hintsNo}
             tableDisplayed={this.state.tableDisplayed}
@@ -81,7 +82,7 @@ const Jp0 = React.createClass({
       revealed: [],
       highlightingHir: false,
       tableDisplayed: false,
-      tableType: null,
+      tableType: 'gojūon',
       tableSelected: []
     };
   },
@@ -97,6 +98,16 @@ const Jp0 = React.createClass({
                    revealed: [],
                    hintsNo: hintsNo});
   },
+
+
+  getCharTypes: function () {
+    let cardHiragana = this.state.cards[this.state.currentIndex].hiragana;
+    let types = [];
+    for (var i = 0; i < cardHiragana.length; i++) {
+      return 'hello';
+    }
+  },
+
 
 //moves app to next card if all hints revealed or reveals first hidden hint.
   nextHintButtonClicked: function () {
@@ -150,6 +161,7 @@ const Jp0 = React.createClass({
                    revealed: [],
                    hintsNo: hintsNo,
                    tableDisplayed: false,
+                   tableType: 'gojūon',
                    tableSelected: []});
   },
 

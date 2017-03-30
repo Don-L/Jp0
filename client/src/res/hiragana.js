@@ -25,7 +25,8 @@ module.exports = {
     'char': 'ぁ',
     'unicode': '\u3041',
     'transliteration': 'a',
-    'yōon_parent': '\u3042'
+    'yōon_parent': '\u3042',
+    'hiragana_type': 'small gojūon'
   },
 
   '\u3042': {
@@ -33,7 +34,8 @@ module.exports = {
     'char': 'あ',
     'unicode': '\u3042',
     'transliteration': 'a',
-    'yōon_child': '\u3041'
+    'yōon_child': '\u3041',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3043': {
@@ -41,7 +43,8 @@ module.exports = {
     'char': 'ぃ',
     'unicode': '\u3043',
     'transliteration': 'i',
-    'yōon_parent': '\u3044'
+    'yōon_parent': '\u3044',
+    'hiragana_type': 'small gojūon'
   },
 
   '\u3044': {
@@ -49,7 +52,8 @@ module.exports = {
     'char': 'い',
     'unicode': '\u3044',
     'transliteration': 'i',
-    'yōon_child': '\u3043'
+    'yōon_child': '\u3043',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3045': {
@@ -57,7 +61,8 @@ module.exports = {
     'char': 'ぅ',
     'unicode': '\u3045',
     'transliteration': 'u',
-    'yōon_parent': '\u3046'
+    'yōon_parent': '\u3046',
+    'hiragana_type': 'small gojūon'
   },
 
   '\u3046': {
@@ -66,7 +71,8 @@ module.exports = {
     'unicode': '\u3046',
     'transliteration': 'u',
     'sound': 'res/snd/3046.ogg',
-    'yōon_child': '\u3045'
+    'yōon_child': '\u3045',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3047': {
@@ -74,7 +80,8 @@ module.exports = {
     'char': 'ぇ',
     'unicode': '\u3047',
     'transliteration': 'e',
-    'yōon_parent': '\u3048'
+    'yōon_parent': '\u3048',
+    'hiragana_type': 'small gojūon'
   },
 
   '\u3048': {
@@ -82,7 +89,8 @@ module.exports = {
     'char': 'え',
     'unicode': '\u3048',
     'transliteration': 'e',
-    'yōon_child': '\u3047'
+    'yōon_child': '\u3047',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3049': {
@@ -90,7 +98,8 @@ module.exports = {
     'char': 'ぉ',
     'unicode': '\u3049',
     'transliteration': 'o',
-    'yōon_parent': '\u304A'
+    'yōon_parent': '\u304A',
+    'hiragana_type': 'small gojūon'
   },
 
   '\u304A': {
@@ -99,7 +108,8 @@ module.exports = {
     'unicode': '\u304A',
     'transliteration': 'o',
     'sound': 'res/snd/304A.ogg',
-    'yōon_child': '\u3049'
+    'yōon_child': '\u3049',
+    'hiragana_type': 'gojūon'
   },
 
   '\u304B': {
@@ -108,7 +118,8 @@ module.exports = {
     'unicode': '\u304B',
     'transliteration': 'ka',
     'sound': 'res/snd/304B.ogg',
-    'dakuten_child': '\u304C'
+    'dakuten_child': '\u304C',
+    'hiragana_type': 'gojūon'
   },
 
   '\u304C': {
@@ -116,7 +127,8 @@ module.exports = {
     'char': 'が',
     'unicode': '\u304C',
     'transliteration': 'ga',
-    'dakuten_parent': '\u304B'
+    'dakuten_parent': '\u304B',
+    'hiragana_type': 'dakuten'
   },
 
   '\u304D': {
@@ -124,7 +136,8 @@ module.exports = {
     'char': 'き',
     'unicode': '\u304D',
     'transliteration': 'ki',
-    'dakuten_child': '\u304E'
+    'dakuten_child': '\u304E',
+    'hiragana_type': 'gojūon'
   },
 
   '\u304E': {
@@ -132,7 +145,8 @@ module.exports = {
     'char': 'ぎ',
     'unicode': '\u304E',
     'transliteration': 'gi',
-    'dakuten_parent': '\u304D'
+    'dakuten_parent': '\u304D',
+    'hiragana_type': 'dakuten'
   },
 
   '\u304F': {
@@ -140,7 +154,8 @@ module.exports = {
     'char': 'く',
     'unicode': '\u304F',
     'transliteration': 'ku',
-    'dakuten_child': '\u3050'
+    'dakuten_child': '\u3050',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3050': {
@@ -148,7 +163,8 @@ module.exports = {
     'char': 'ぐ',
     'unicode': '\u3050',
     'transliteration': 'gu',
-    'dakuten_parent': '\u304F'
+    'dakuten_parent': '\u304F',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3051': {
@@ -156,7 +172,8 @@ module.exports = {
     'char': 'け',
     'unicode': '\u3051',
     'transliteration': 'ke',
-    'dakuten_child': '\u3052'
+    'dakuten_child': '\u3052',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3052': {
@@ -164,7 +181,8 @@ module.exports = {
     'char': 'げ',
     'unicode': '\u3052',
     'transliteration': 'ge',
-    'dakuten_parent': '\u3051'
+    'dakuten_parent': '\u3051',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3053': {
@@ -172,7 +190,8 @@ module.exports = {
     'char': 'こ',
     'unicode': '\u3053',
     'transliteration': 'ko',
-    'dakuten_child': '\u3054'
+    'dakuten_child': '\u3054',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3054': {
@@ -180,7 +199,8 @@ module.exports = {
     'char': 'ご',
     'unicode': '\u3054',
     'transliteration': 'go',
-    'dakuten_parent': '\u3053'
+    'dakuten_parent': '\u3053',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3055': {
@@ -188,7 +208,8 @@ module.exports = {
     'char': 'さ',
     'unicode': '\u3055',
     'transliteration': 'sa',
-    'dakuten_child': '\u3056'
+    'dakuten_child': '\u3056',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3056': {
@@ -196,7 +217,8 @@ module.exports = {
     'char': 'ざ',
     'unicode': '\u3056',
     'transliteration': 'za',
-    'dakuten_parent': '\u3055'
+    'dakuten_parent': '\u3055',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3057': {
@@ -204,7 +226,8 @@ module.exports = {
     'char': 'し',
     'unicode': '\u3057',
     'transliteration': 'shi',
-    'dakuten_child': '\u3058'
+    'dakuten_child': '\u3058',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3058': {
@@ -212,7 +235,8 @@ module.exports = {
     'char': 'じ',
     'unicode': '\u3058',
     'transliteration': 'zi',
-    'dakuten_parent': '\u3057'
+    'dakuten_parent': '\u3057',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3059': {
@@ -220,7 +244,8 @@ module.exports = {
     'char': 'す',
     'unicode': '\u3059',
     'transliteration': 'su',
-    'dakuten_child': '\u305A'
+    'dakuten_child': '\u305A',
+    'hiragana_type': 'gojūon'
   },
 
   '\u305A': {
@@ -228,7 +253,8 @@ module.exports = {
     'char': 'ず',
     'unicode': '\u305A',
     'transliteration': 'zu',
-    'dakuten_parent': '\u3059'
+    'dakuten_parent': '\u3059',
+    'hiragana_type': 'dakuten'
   },
 
   '\u305B': {
@@ -236,7 +262,8 @@ module.exports = {
     'char': 'せ',
     'unicode': '\u305B',
     'transliteration': 'se',
-    'dakuten_child': '\u305C'
+    'dakuten_child': '\u305C',
+    'hiragana_type': 'gojūon'
   },
 
   '\u305C': {
@@ -244,7 +271,8 @@ module.exports = {
     'char': 'ぜ',
     'unicode': '\u305C',
     'transliteration': 'ze',
-    'dakuten_parent': '\u305B'
+    'dakuten_parent': '\u305B',
+    'hiragana_type': 'dakuten'
   },
 
   '\u305D': {
@@ -252,7 +280,8 @@ module.exports = {
     'char': 'そ',
     'unicode': '\u305D',
     'transliteration': 'so',
-    'dakuten_child': '\u305E'
+    'dakuten_child': '\u305E',
+    'hiragana_type': 'gojūon'
   },
 
   '\u305E': {
@@ -260,7 +289,8 @@ module.exports = {
     'char': 'ぞ',
     'unicode': '\u305E',
     'transliteration': 'zo',
-    'dakuten_parent': '\u305D'
+    'dakuten_parent': '\u305D',
+    'hiragana_type': 'dakuten'
   },
 
   '\u305F': {
@@ -268,7 +298,8 @@ module.exports = {
     'char': 'た',
     'unicode': '\u305F',
     'transliteration': 'ta',
-    'dakuten_child': '\u3060'
+    'dakuten_child': '\u3060',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3060': {
@@ -276,7 +307,8 @@ module.exports = {
     'char': 'だ',
     'unicode': '\u3060',
     'transliteration': 'da',
-    'dakuten_parent': '\u305F'
+    'dakuten_parent': '\u305F',
+    'hiragana_type': 'dakuten'
   },
 
 // or chi? - check transliteration
@@ -286,7 +318,8 @@ module.exports = {
     'unicode': '\u3061',
     'transliteration': 'ti',
     'sound': 'res/snd/3061.ogg',
-    'dakuten_child': '\u3062'
+    'dakuten_child': '\u3062',
+    'hiragana_type': 'gojūon'
   },
 
 // di or ji?
@@ -295,7 +328,8 @@ module.exports = {
     'char': 'ぢ',
     'unicode': '\u3062',
     'transliteration': 'di',
-    'dakuten_parent': '\u3061'
+    'dakuten_parent': '\u3061',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3063': {
@@ -303,7 +337,8 @@ module.exports = {
     'char': 'っ',
     'unicode': '\u3063',
     'transliteration': '!',
-    'yōon_parent': '\u3064'
+    'yōon_parent': '\u3064',
+    'hiragana_type': 'small gojūon'
   },
 
 //tu or tsu?
@@ -313,7 +348,8 @@ module.exports = {
     'unicode': '\u3064',
     'transliteration': 'tsu',
     'yōon_child': '\u3063',
-    'dakuten_child': '\u3065'
+    'dakuten_child': '\u3065',
+    'hiragana_type': 'gojūon'
   },
 
 //need this? - uncommon
@@ -322,7 +358,8 @@ module.exports = {
     'char': 'づ',
     'unicode': '\u3065',
     'transliteration': 'du',
-    'dakuten_parent': '\u3064'
+    'dakuten_parent': '\u3064',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3066': {
@@ -330,7 +367,8 @@ module.exports = {
     'char': 'て',
     'unicode': '\u3066',
     'transliteration': 'te',
-    'dakuten_child': '\u3067'
+    'dakuten_child': '\u3067',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3067': {
@@ -338,7 +376,8 @@ module.exports = {
     'char': 'で',
     'unicode': '\u3067',
     'transliteration': 'de',
-    'dakuten_parent': '\u3066'
+    'dakuten_parent': '\u3066',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3068': {
@@ -346,7 +385,8 @@ module.exports = {
     'char': 'と',
     'unicode': '\u3068',
     'transliteration': 'to',
-    'dakuten_child': '\u3069'
+    'dakuten_child': '\u3069',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3069': {
@@ -354,42 +394,48 @@ module.exports = {
     'char': 'ど',
     'unicode': '\u3069',
     'transliteration': 'do',
-    'dakuten_parent': '\u3068'
+    'dakuten_parent': '\u3068',
+    'hiragana_type': 'dakuten'
   },
 
   '\u306A': {
     'name': 'hiragana letter na',
     'char': 'な',
     'unicode': '\u306A',
-    'transliteration': 'na'
+    'transliteration': 'na',
+    'hiragana_type': 'gojūon'
   },
 
   '\u306B': {
     'name': 'hiragana letter ni',
     'char': 'に',
     'unicode': '\u306B',
-    'transliteration': 'ni'
+    'transliteration': 'ni',
+    'hiragana_type': 'gojūon'
   },
 
   '\u306C': {
     'name': 'hiragana letter nu',
     'char': 'ぬ',
     'unicode': '\u306C',
-    'transliteration': 'nu'
+    'transliteration': 'nu',
+    'hiragana_type': 'gojūon'
   },
 
   '\u306D': {
     'name': 'hiragana letter ne',
     'char': 'ね',
     'unicode': '\u306D',
-    'transliteration': 'ne'
+    'transliteration': 'ne',
+    'hiragana_type': 'gojūon'
   },
 
   '\u306E': {
     'name': 'hiragana letter no',
     'char': 'の',
     'unicode': '\u306E',
-    'transliteration': 'no'
+    'transliteration': 'no',
+    'hiragana_type': 'gojūon'
   },
 
   '\u306F': {
@@ -398,7 +444,8 @@ module.exports = {
     'unicode': '\u306F',
     'transliteration': 'ha',
     'dakuten_child': '\u3070',
-    'handakuten_child': '\u3071'
+    'handakuten_child': '\u3071',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3070': {
@@ -406,7 +453,8 @@ module.exports = {
     'char': 'ば',
     'unicode': '\u3070',
     'transliteration': 'ba',
-    'dakuten_parent': '\u306F'
+    'dakuten_parent': '\u306F',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3071': {
@@ -414,7 +462,8 @@ module.exports = {
     'char': 'ぱ',
     'unicode': '\u3071',
     'transliteration': 'pa',
-    'handakuten_parent': '\u306F'
+    'handakuten_parent': '\u306F',
+    'hiragana_type': 'handakuten'
   },
 
 //lots of additional forms for hi
@@ -424,7 +473,8 @@ module.exports = {
     'unicode': '\u3072',
     'transliteration': 'hyi',
     'dakuten_child': '\u3073',
-    'handakuten_child': '\u3074'
+    'handakuten_child': '\u3074',
+    'hiragana_type': 'gojūon'
   },
 
 //check transliteration - bi or byi best?
@@ -433,7 +483,8 @@ module.exports = {
     'char': 'び',
     'unicode': '\u3073',
     'transliteration': 'byi',
-    'dakuten_parent': '\u3072'
+    'dakuten_parent': '\u3072',
+    'hiragana_type': 'dakuten'
   },
 //check transliteration
   '\u3074': {
@@ -441,7 +492,8 @@ module.exports = {
     'char': 'ぴ',
     'unicode': '\u3074',
     'transliteration': 'pyi',
-    'handakuten_parent': '\u3072'
+    'handakuten_parent': '\u3072',
+    'hiragana_type': 'handakuten'
   },
 
   '\u3075': {
@@ -450,7 +502,8 @@ module.exports = {
     'unicode': '\u3075',
     'transliteration': 'fu',
     'dakuten_child': '\u3076',
-    'handakuten_child': '\u3077'
+    'handakuten_child': '\u3077',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3076': {
@@ -458,7 +511,8 @@ module.exports = {
     'char': 'ぶ',
     'unicode': '\u3076',
     'transliteration': 'bu',
-    'dakuten_parent': '\u3075'
+    'dakuten_parent': '\u3075',
+    'hiragana_type': 'dakuten'
   },
 
   '\u3077': {
@@ -466,7 +520,8 @@ module.exports = {
     'char': 'ぷ',
     'unicode': '\u3077',
     'transliteration': 'pu',
-    'handakuten_parent': '\u3075'
+    'handakuten_parent': '\u3075',
+    'hiragana_type': 'handakuten'
   },
 
   '\u3078': {
@@ -475,7 +530,8 @@ module.exports = {
     'unicode': '\u3078',
     'transliteration': 'he',
     'dakuten_child': '\u3079',
-    'handakuten_child': '\u307A'
+    'handakuten_child': '\u307A',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3079': {
@@ -483,7 +539,8 @@ module.exports = {
     'char': 'べ',
     'unicode': '\u3079',
     'transliteration': 'be',
-    'dakuten_parent': '\u3078'
+    'dakuten_parent': '\u3078',
+    'hiragana_type': 'dakuten'
   },
 
   '\u307A': {
@@ -491,7 +548,8 @@ module.exports = {
     'char': 'ぺ',
     'unicode': '\u307A',
     'transliteration': 'pe',
-    'handakuten_parent': '\u3078'
+    'handakuten_parent': '\u3078',
+    'hiragana_type': 'handakuten'
   },
 
   '\u307B': {
@@ -500,7 +558,8 @@ module.exports = {
     'unicode': '\u307B',
     'transliteration': 'ho',
     'dakuten_child': '\u307C',
-    'handakuten_child': '\u307D'
+    'handakuten_child': '\u307D',
+    'hiragana_type': 'gojūon'
   },
 
   '\u307C': {
@@ -508,7 +567,8 @@ module.exports = {
     'char': 'ぼ',
     'unicode': '\u307C',
     'transliteration': 'bo',
-    'dakuten_parent': '\u307B'
+    'dakuten_parent': '\u307B',
+    'hiragana_type': 'dakuten'
   },
 
   '\u307D': {
@@ -516,42 +576,48 @@ module.exports = {
     'char': 'ぽ',
     'unicode': '\u307D',
     'transliteration': 'po',
-    'handakuten_parent': '\u307B'
+    'handakuten_parent': '\u307B',
+    'hiragana_type': 'handakuten'
   },
 
   '\u307E': {
     'name': 'hiragana letter ma',
     'char': 'ま',
     'unicode': '\u307E',
-    'transliteration': 'ma'
+    'transliteration': 'ma',
+    'hiragana_type': 'gojūon'
   },
 
   '\u307F': {
     'name': 'hiragana letter mi',
     'char': 'み',
     'unicode': '\u307F',
-    'transliteration': 'mi'
+    'transliteration': 'mi',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3080': {
     'name': 'hiragana letter mu',
     'char': 'む',
     'unicode': '\u3080',
-    'transliteration': 'mu'
+    'transliteration': 'mu',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3081': {
     'name': 'hiragana letter me',
     'char': 'め',
     'unicode': '\u3081',
-    'transliteration': 'me'
+    'transliteration': 'me',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3082': {
     'name': 'hiragana letter mo',
     'char': 'も',
     'unicode': '\u3082',
-    'transliteration': 'mo'
+    'transliteration': 'mo',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3083': {
@@ -559,7 +625,8 @@ module.exports = {
     'char': 'ゃ',
     'unicode': '\u3083',
     'transliteration': 'ya',
-    'yōon_parent': '\u3084'
+    'yōon_parent': '\u3084',
+    'hiragana_type': 'small gojūon'
   },
 
   '\u3084': {
@@ -567,7 +634,8 @@ module.exports = {
     'char': 'や',
     'unicode': '\u3084',
     'transliteration': 'ya',
-    'yōon_child': '\u3083'
+    'yōon_child': '\u3083',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3085': {
@@ -575,7 +643,8 @@ module.exports = {
     'char': 'ゅ',
     'unicode': '\u3085',
     'transliteration': 'yu',
-    'yōon_parent': '\u3086'
+    'yōon_parent': '\u3086',
+    'hiragana_type': 'small gojūon'
   },
 
   '\u3086': {
@@ -583,7 +652,8 @@ module.exports = {
     'char': 'ゆ',
     'unicode': '\u3086',
     'transliteration': 'yu',
-    'yōon_child': '\u3085'
+    'yōon_child': '\u3085',
+    'hiragana_type': 'gojūon'
   },
 
   '\u3087': {
@@ -591,7 +661,8 @@ module.exports = {
     'char': 'ょ',
     'unicode': '\u3087',
     'transliteration': 'yo',
-    'yōon_parent': '\u3088'
+    'yōon_parent': '\u3088',
+    'hiragana_type': 'small gojūon'
   },
 
   '\u3088': {
@@ -599,7 +670,8 @@ module.exports = {
     'char': 'よ',
     'unicode': '\u3088',
     'transliteration': 'yo',
-    'yōon_child': '\u3087'
+    'yōon_child': '\u3087',
+    'hiragana_type': 'gojūon'
   },
 
 //ra or la?
@@ -607,7 +679,8 @@ module.exports = {
     'name': 'hiragana letter ra',
     'char': 'ら',
     'unicode': '\u3089',
-    'transliteration': 'ra'
+    'transliteration': 'ra',
+    'hiragana_type': 'gojūon'
   },
 
   '\u308A': {
@@ -615,35 +688,40 @@ module.exports = {
     'char': 'り',
     'unicode': '\u308A',
     'transliteration': 'ri',
-    'sound': 'res/snd/308A.ogg'
+    'sound': 'res/snd/308A.ogg',
+    'hiragana_type': 'gojūon'
   },
 
   '\u308B': {
     'name': 'hiragana letter ru',
     'char': 'る',
     'unicode': '\u308B',
-    'transliteration': 'ru'
+    'transliteration': 'ru',
+    'hiragana_type': 'gojūon'
   },
 
   '\u308C': {
     'name': 'hiragana letter re',
     'char': 'れ',
     'unicode': '\u308C',
-    'transliteration': 're'
+    'transliteration': 're',
+    'hiragana_type': 'gojūon'
   },
 
   '\u308D': {
     'name': 'hiragana letter ro',
     'char': 'ろ',
     'unicode': '\u308D',
-    'transliteration': 'ro'
+    'transliteration': 'ro',
+    'hiragana_type': 'gojūon'
   },
 
   '\u308F': {
     'name': 'hiragana letter wa',
     'char': 'わ',
     'unicode': '\u308F',
-    'transliteration': 'wa'
+    'transliteration': 'wa',
+    'hiragana_type': 'gojūon'
   },
 
 //check transliteration - o or wo best?
@@ -651,7 +729,8 @@ module.exports = {
     'name': 'hiragana letter wo',
     'char': 'を',
     'unicode': '\u3092',
-    'transliteration': 'o'
+    'transliteration': 'o',
+    'hiragana_type': 'gojūon'
   },
 
 //changes sound depending on surrounding mora
@@ -659,7 +738,8 @@ module.exports = {
     'name': 'hiragana letter n',
     'char': 'ん',
     'unicode': '\u3093',
-    'transliteration': 'n'
+    'transliteration': 'n',
+    'hiragana_type': 'gojūon'
   },
 
   //yōon
@@ -668,168 +748,192 @@ module.exports = {
     'name': 'yōon with hiragana letter ki and hiragana letter small ya',
     'char': 'きゃ',
     'unicode': '\u304d\u3083',
-    'transliteration': 'kya'
+    'transliteration': 'kya',
+    'hiragana_type': 'yōon_with_gojūon'
   },
 
   '\u304D\u3085': {
     'name': 'yōon with hiragana letter ki and hiragana letter small yu',
     'char': 'きゅ',
     'unicode': '\u304D\u3085',
-    'transliteration': 'kyu'
+    'transliteration': 'kyu',
+    'hiragana_type': 'yōon_with_gojūon'
   },
 
   '\u304D\u3087': {
     'name': 'yōon with hiragana letter ki and hiragana letter small yo',
     'char': 'きょ',
     'unicode': '\u304D\u3087',
-    'transliteration': 'kyo'
+    'transliteration': 'kyo',
+    'hiragana_type': 'yōon'
   },
 
   '\u3057\u3083': {
     'name': 'yōon with hiragana letter si and hiragana letter small ya',
     'char': 'しゃ',
     'unicode': '\u3057\u3083',
-    'transliteration': 'sha'
+    'transliteration': 'sha',
+    'hiragana_type': 'yōon'
   },
 
   '\u3057\u3085': {
     'name': 'yōon with hiragana letter si and hiragana letter small yu',
     'char': 'しゅ',
     'unicode': '\u3057\u3085',
-    'transliteration': 'shu'
+    'transliteration': 'shu',
+    'hiragana_type': 'yōon'
   },
 
   '\u3057\u3087': {
     'name': 'yōon with hiragana letter si and hiragana letter small yo',
     'char': 'しょ',
     'unicode': '\u3057\u3087',
-    'transliteration': 'sho'
+    'transliteration': 'sho',
+    'hiragana_type': 'yōon'
   },
 
   '\u3061\u3083': {
     'name': 'yōon with hiragana letter ti and hiragana letter small ya',
     'char': 'ちゃ',
     'unicode': '\u3061\u3083',
-    'transliteration': 'cha'
+    'transliteration': 'cha',
+    'hiragana_type': 'yōon'
   },
 
   '\u3061\u3085': {
     'name': 'yōon with hiragana letter ti and hiragana letter small yu',
     'char': 'ちゅ',
     'unicode': '\u3061\u3085',
-    'transliteration': 'chu'
+    'transliteration': 'chu',
+    'hiragana_type': 'yōon'
   },
 
   '\u3061\u3087': {
     'name': 'yōon with hiragana letter ti and hiragana letter small yo',
     'char': 'ちょ',
     'unicode': '\u3061\u3087',
-    'transliteration': 'cho'
+    'transliteration': 'cho',
+    'hiragana_type': 'yōon'
   },
 
   '\u306B\u3083': {
     'name': 'yōon with hiragana letter ni and hiragana letter small ya',
     'char': 'にゃ',
     'unicode': '\u306B\u3083',
-    'transliteration': 'nya'
+    'transliteration': 'nya',
+    'hiragana_type': 'yōon'
   },
 
   '\u306B\u3085': {
     'name': 'yōon with hiragana letter ni and hiragana letter small yu',
     'char': 'にゅ',
     'unicode': '\u3061\u3085',
-    'transliteration': 'nyu'
+    'transliteration': 'nyu',
+    'hiragana_type': 'yōon'
   },
 
   '\u306B\u3087': {
     'name': 'yōon with hiragana letter ni and hiragana letter small yo',
     'char': 'にょ',
     'unicode': '\u306B\u3087',
-    'transliteration': 'nyo'
+    'transliteration': 'nyo',
+    'hiragana_type': 'yōon'
   },
 
   '\u3072\u3083': {
     'name': 'yōon with hiragana letter hi and hiragana letter small ya',
     'char': 'ひゃ',
     'unicode': '\u3072\u3083',
-    'transliteration': 'hya'
+    'transliteration': 'hya',
+    'hiragana_type': 'yōon'
   },
 
   '\u3072\u3085': {
     'name': 'yōon with hiragana letter hi and hiragana letter small yu',
     'char': 'ひゅ',
     'unicode': '\u3072\u3085',
-    'transliteration': 'hyu'
+    'transliteration': 'hyu',
+    'hiragana_type': 'yōon'
   },
 
   '\u3072\u3087': {
     'name': 'yōon with hiragana letter hi and hiragana letter small yo',
     'char': 'ひょ',
     'unicode': '\u3072\u3087',
-    'transliteration': 'hyo'
+    'transliteration': 'hyo',
+    'hiragana_type': 'yōon'
   },
 
   '\u307F\u3083': {
     'name': 'yōon with hiragana letter mi and hiragana letter small ya',
     'char': 'みゃ',
     'unicode': '\u307F\u3083',
-    'transliteration': 'mya'
+    'transliteration': 'mya',
+    'hiragana_type': 'yōon'
   },
 
   '\u307F\u3085': {
     'name': 'yōon with hiragana letter mi and hiragana letter small yu',
     'char': 'みゅ',
     'unicode': '\u307F\u3085',
-    'transliteration': 'myu'
+    'transliteration': 'myu',
+    'hiragana_type': 'yōon'
   },
 
   '\u307F\u3087': {
     'name': 'yōon with hiragana letter mi and hiragana letter small yo',
     'char': 'みょ',
     'unicode': '\u307F\u3087',
-    'transliteration': 'myo'
+    'transliteration': 'myo',
+    'hiragana_type': 'yōon'
   },
 
   '\u308A\u3083': {
     'name': 'yōon with hiragana letter ri and hiragana letter small ya',
     'char': 'りゃ',
     'unicode': '\u308A\u3083',
-    'transliteration': 'rya'
+    'transliteration': 'rya',
+    'hiragana_type': 'yōon'
   },
 
   '\u308A\u3085': {
     'name': 'yōon with hiragana letter ri and hiragana letter small yu',
     'char': 'りゅ',
     'unicode': '\u308A\u3085',
-    'transliteration': 'ryu'
+    'transliteration': 'ryu',
+    'hiragana_type': 'yōon'
   },
 
   '\u308A\u3087': {
     'name': 'yōon with hiragana letter ri and hiragana letter small yo',
     'char': 'りょ',
     'unicode': '\u308A\u3087',
-    'transliteration': 'ryo'
+    'transliteration': 'ryo',
+    'hiragana_type': 'yōon'
   },
 
   '\u304E\u3083': {
     'name': 'yōon with hiragana letter gi and hiragana letter small ya',
     'char': 'ぎゃ',
     'unicode': '\u304E\u3083',
-    'transliteration': 'gya'
+    'transliteration': 'gya',
+    'hiragana_type': 'yōon'
   },
 
   '\u304E\u3085': {
     'name': 'yōon with hiragana letter gi and hiragana letter small yu',
     'char': 'ぎゅ',
     'unicode': '\u304E\u3085',
-    'transliteration': 'gyu'
+    'transliteration': 'gyu',
+    'hiragana_type': 'yōon'
   },
 
   '\u304E\u3087': {
     'name': 'yōon with hiragana letter gi and hiragana letter small yo',
     'char': 'ぎょ',
     'unicode': '\u304E\u3087',
-    'transliteration': 'gyo'
+    'transliteration': 'gyo',
+    'hiragana_type': 'yōon'
   },
 
 //check transliterations for next 3
@@ -837,84 +941,96 @@ module.exports = {
     'name': 'yōon with hiragana letter zi and hiragana letter small ya',
     'char': 'じゃ',
     'unicode': '\u3058\u3083',
-    'transliteration': 'ja'
+    'transliteration': 'ja',
+    'hiragana_type': 'yōon'
   },
 
   '\u3058\u3085': {
     'name': 'yōon with hiragana letter zi and hiragana letter small yu',
     'char': 'じゅ',
     'unicode': '\u3058\u3085',
-    'transliteration': 'ju'
+    'transliteration': 'ju',
+    'hiragana_type': 'yōon'
   },
 
   '\u3058\u3087': {
     'name': 'yōon with hiragana letter zi and hiragana letter small yo',
     'char': 'じょ',
     'unicode': '\u3058\u3087',
-    'transliteration': 'jo'
+    'transliteration': 'jo',
+    'hiragana_type': 'yōon'
   },
 
   '\u3062\u3083': {
     'name': 'yōon with hiragana letter di and hiragana letter small ya',
     'char': 'ぢゃ',
     'unicode': '\u3062\u3083',
-    'transliteration': 'ja'
+    'transliteration': 'ja',
+    'hiragana_type': 'yōon'
   },
 
   '\u3062\u3085': {
     'name': 'yōon with hiragana letter di and hiragana letter small yu',
     'char': 'ぢゅ',
     'unicode': '\u3062\u3085',
-    'transliteration': 'ju'
+    'transliteration': 'ju',
+    'hiragana_type': 'yōon'
   },
 
   '\u3062\u3087': {
     'name': 'yōon with hiragana letter di and hiragana letter small yo',
     'char': 'ぢょ',
     'unicode': '\u3062\u3087',
-    'transliteration': 'jo'
+    'transliteration': 'jo',
+    'hiragana_type': 'yōon'
   },
 
   '\u3073\u3083': {
     'name': 'yōon with hiragana letter bi and hiragana letter small ya',
     'char': 'びゃ',
     'unicode': '\u3073\u3083',
-    'transliteration': 'bya'
+    'transliteration': 'bya',
+    'hiragana_type': 'yōon'
   },
 
   '\u3073\u3085': {
     'name': 'yōon with hiragana letter bi and hiragana letter small yu',
     'char': 'びゅ',
     'unicode': '\u3073\u3085',
-    'transliteration': 'byu'
+    'transliteration': 'byu',
+    'hiragana_type': 'yōon'
   },
 
   '\u3073\u3087': {
     'name': 'yōon with hiragana letter bi and hiragana letter small yo',
     'char': 'びょ',
     'unicode': '\u3073\u3087',
-    'transliteration': 'byo'
+    'transliteration': 'byo',
+    'hiragana_type': 'yōon'
   },
 
   '\u3074\u3083': {
     'name': 'yōon with hiragana letter pi and hiragana letter small ya',
     'char': 'ぴゃ',
     'unicode': '\u3074\u3083',
-    'transliteration': 'pya'
+    'transliteration': 'pya',
+    'hiragana_type': 'yōon'
   },
 
   '\u3074\u3085': {
     'name': 'yōon with hiragana letter pi and hiragana letter small yu',
     'char': 'ぴゅ',
     'unicode': '\u3074\u3085',
-    'transliteration': 'pyu'
+    'transliteration': 'pyu',
+    'hiragana_type': 'yōon'
   },
 
   '\u3074\u3087': {
     'name': 'yōon with hiragana letter pi and hiragana letter small yo',
     'char': 'ぴょ',
     'unicode': '\u3074\u3087',
-    'transliteration': 'pyo'
+    'transliteration': 'pyo',
+    'hiragana_type': 'yōon'
   }
 
 }

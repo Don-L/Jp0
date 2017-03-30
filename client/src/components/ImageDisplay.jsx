@@ -10,6 +10,7 @@ const ImageDisplay = React.createClass({
       return (
         <div className='ImageDisplay'>
           <HirTable
+            card={this.props.card}
             tableSelected={this.props.tableSelected}
             hideTable={this.props.hideTable}
             hiragana={this.props.hiragana}
