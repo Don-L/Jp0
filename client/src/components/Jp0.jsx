@@ -73,10 +73,10 @@ const Jp0 = React.createClass({
         'kanji': 'KANJI',
         'imgsrc': 'res/Nightingale.JPG'
       }],
-      hiragana: {'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init'},
-                 'N':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init'},
-                 'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init'},
-                 'T':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init'},},
+      hiragana: {'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},
+                 'N':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},
+                 'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},
+                 'T':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},},
       currentIndex: 0,
       hintsNo: 4,
       revealed: [],
@@ -103,9 +103,10 @@ const Jp0 = React.createClass({
   getCharTypes: function () {
     let cardHiragana = this.state.cards[this.state.currentIndex].hiragana;
     let types = [];
-    for (var i = 0; i < cardHiragana.length; i++) {
-      return 'hello';
+    for (let i = 0; i < cardHiragana.length; i++) {
+      types.push(this.state.hiragana.cardHiragana[i].hiragana_type);
     }
+    return types;
   },
 
 

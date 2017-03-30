@@ -19851,9 +19851,9 @@
 	        'kanji': 'KANJI',
 	        'imgsrc': 'res/Nightingale.JPG'
 	      }],
-	      hiragana: (_hiragana = { 'I': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init' },
-	        'N': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init' }
-	      }, _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init' }), _defineProperty(_hiragana, 'T', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init' }), _hiragana),
+	      hiragana: (_hiragana = { 'I': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' },
+	        'N': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }
+	      }, _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _defineProperty(_hiragana, 'T', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _hiragana),
 	      currentIndex: 0,
 	      hintsNo: 4,
 	      revealed: [],
@@ -19879,8 +19879,9 @@
 	    var cardHiragana = this.state.cards[this.state.currentIndex].hiragana;
 	    var types = [];
 	    for (var i = 0; i < cardHiragana.length; i++) {
-	      return 'hello';
+	      types.push(this.state.hiragana.cardHiragana[i].hiragana_type);
 	    }
+	    return types;
 	  },
 	
 	  //moves app to next card if all hints revealed or reveals first hidden hint.
