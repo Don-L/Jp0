@@ -19763,7 +19763,7 @@
 	var HiraganaDisplay = __webpack_require__(163);
 	var HintDisplay = __webpack_require__(165);
 	var ImageDisplay = __webpack_require__(174);
-	var Controller = __webpack_require__(177);
+	var Controller = __webpack_require__(176);
 	
 	var Jp0 = React.createClass({
 	  displayName: 'Jp0',
@@ -19812,13 +19812,16 @@
 	          hintsNo: this.state.hintsNo,
 	          tableDisplayed: this.state.tableDisplayed,
 	          tableSelected: this.state.tableSelected,
-	          tableClicked: this.hideTable,
+	          hideTable: this.hideTable,
+	          tableType: this.state.tableType,
+	          setTableType: this.setTableType,
 	          hiragana: this.state.hiragana }),
 	        React.createElement(HintDisplay, {
 	          changeHirCharColour: this.changeHirCharColour,
 	          hintClicked: this.revealHint,
 	          hintsList: hints,
-	          revealed: this.state.revealed })
+	          revealed: this.state.revealed,
+	          tableDisplayed: this.state.tableDisplayed })
 	      ),
 	      React.createElement(HiraganaDisplay, {
 	        hirChars: this.state.cards[this.state.currentIndex]['hiragana'], showTableWithSelected: this.showTableWithSelected,
@@ -19988,28 +19991,32 @@
 	  },
 	
 	  showTableWithAllSelected: function showTableWithAllSelected() {
-	    var hirChars = this.state.cards[this.state.currentIndex]['hiragana'];
-	    var _iteratorNormalCompletion2 = true;
-	    var _didIteratorError2 = false;
-	    var _iteratorError2 = undefined;
+	    if (this.state.tableDisplayed == true) {
+	      this.hideTable();
+	    } else {
+	      var hirChars = this.state.cards[this.state.currentIndex]['hiragana'];
+	      var _iteratorNormalCompletion2 = true;
+	      var _didIteratorError2 = false;
+	      var _iteratorError2 = undefined;
 	
-	    try {
-	      for (var _iterator2 = hirChars[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-	        var hira = _step2.value;
-	
-	        this.showTableWithSelected(hira, 'all');
-	      }
-	    } catch (err) {
-	      _didIteratorError2 = true;
-	      _iteratorError2 = err;
-	    } finally {
 	      try {
-	        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-	          _iterator2.return();
+	        for (var _iterator2 = hirChars[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	          var hira = _step2.value;
+	
+	          this.showTableWithSelected(hira, 'all');
 	        }
+	      } catch (err) {
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
 	      } finally {
-	        if (_didIteratorError2) {
-	          throw _iteratorError2;
+	        try {
+	          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	            _iterator2.return();
+	          }
+	        } finally {
+	          if (_didIteratorError2) {
+	            throw _iteratorError2;
+	          }
 	        }
 	      }
 	    }
@@ -20017,6 +20024,10 @@
 	
 	  hideTable: function hideTable() {
 	    this.setState({ tableDisplayed: false });
+	  },
+	
+	  setTableType: function setTableType(type) {
+	    this.setState({ tableType: type });
 	  }
 	
 	});
@@ -21146,11 +21157,15 @@
 	      nodes.push(React.createElement(Hint, { key: i, hint: hintsList[i], changeHirCharColour: this.props.changeHirCharColour, hintClicked: this.props.hintClicked, revealed: revealed, hintIndex: i }));
 	    }
 	
-	    return React.createElement(
-	      'div',
-	      { className: 'HintDisplay' },
-	      nodes
-	    );
+	    if (this.props.tableDisplayed == false) {
+	      return React.createElement(
+	        'div',
+	        { className: 'HintDisplay' },
+	        nodes
+	      );
+	    } else {
+	      return React.createElement('div', { className: 'HintDisplay' });
+	    }
 	  }
 	
 	});
@@ -22043,8 +22058,10 @@
 	        { className: 'ImageDisplay' },
 	        React.createElement(HirTable, {
 	          tableSelected: this.props.tableSelected,
-	          tableClicked: this.props.tableClicked,
-	          hiragana: this.props.hiragana })
+	          hideTable: this.props.hideTable,
+	          hiragana: this.props.hiragana,
+	          setTableType: this.props.setTableType,
+	          tableType: this.props.tableType })
 	      );
 	    } else if (this.props.revealed === this.props.hintsNo) {
 	      return React.createElement(
@@ -22103,7 +22120,8 @@
 	'use strict';
 	
 	var React = __webpack_require__(1);
-	var TableCell = __webpack_require__(176);
+	var TableCell = __webpack_require__(177);
+	var TableTab = __webpack_require__(178);
 	
 	var HirTable = React.createClass({
 	  displayName: 'HirTable',
@@ -22112,921 +22130,902 @@
 	  render: function render() {
 	
 	    var gojuonTable = React.createElement(
-	      'table',
-	      { onClick: this.props.tableClicked },
+	      'div',
+	      null,
 	      React.createElement(
-	        'tbody',
+	        'div',
+	        { className: 'tabs' },
+	        React.createElement(TableTab, { tabName: 'X', setTableType: this.props.setTableType, tableType: this.props.tableType, hideTable: this.props.hideTable }),
+	        React.createElement(TableTab, { tabName: 'gojūon', setTableType: this.props.setTableType, tableType: this.props.tableType }),
+	        React.createElement(TableTab, { tabName: '゛、゜', setTableType: this.props.setTableType, tableType: this.props.tableType }),
+	        React.createElement(TableTab, { tabName: 'yōon', setTableType: this.props.setTableType, tableType: this.props.tableType })
+	      ),
+	      React.createElement(
+	        'table',
 	        null,
 	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement('th', null),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: { char: 'gojūon' } }),
-	          '// u3001 = comma',
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: { char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A' } }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: { char: 'yōon' } })
-	        ),
-	        React.createElement(
-	          'tr',
+	          'tbody',
 	          null,
-	          React.createElement('th', null),
 	          React.createElement(
-	            'th',
+	            'tr',
 	            null,
+	            React.createElement('th', null),
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'a'
+	              React.createElement(
+	                'i',
+	                null,
+	                'a'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'i'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'u'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'e'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'o'
+	              )
 	            )
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'i'
-	            )
+	            'tr',
+	            { align: 'center' },
+	            React.createElement('th', null),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected, tableChar: this.props.hiragana['\u3042'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3044'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3046'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3048'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304A'] })
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
+	            'tr',
+	            { align: 'center' },
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'u'
-	            )
+	              React.createElement(
+	                'i',
+	                null,
+	                'k'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304B'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304D'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304F'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3051'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3053'] })
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
+	            'tr',
+	            { align: 'center' },
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'e'
-	            )
+	              React.createElement(
+	                'i',
+	                null,
+	                's'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3055'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3057'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3059'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u305B'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u305D'] })
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
+	            'tr',
+	            { align: 'center' },
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'o'
-	            )
+	              React.createElement(
+	                'i',
+	                null,
+	                't'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u305F'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3061'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3064'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3066'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3068'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'n'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u306A'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u306B'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u306C'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u306D'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u306E'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'h'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u306F'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3072'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3075'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3078'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u307B'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'm'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u307E'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u307F'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3080'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3081'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3082'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'y'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3084'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana[' '] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3086'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana[' '] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3088'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'r'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3089'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u308A'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u308B'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u308C'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u308D'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'w'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u308F'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana[' '] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana[' '] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana[' '] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3092'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement('th', null),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['empty_string'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3093'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['empty_string'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3063'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['empty_string'] })
 	          )
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement('th', null),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected, tableChar: this.props.hiragana['\u3042'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3044'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3046'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3048'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304A'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'k'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304B'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304D'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304F'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3051'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3053'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              's'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3055'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3057'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3059'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u305B'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u305D'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              't'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u305F'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3061'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3064'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3066'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3068'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'n'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u306A'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u306B'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u306C'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u306D'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u306E'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'h'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u306F'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3072'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3075'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3078'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u307B'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'm'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u307E'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u307F'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3080'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3081'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3082'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'y'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3084'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3086'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3088'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'r'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3089'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u308A'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u308B'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u308C'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u308D'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'w'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u308F'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3092'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement('th', null),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['empty_string'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3093'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['empty_string'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3063'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['empty_string'] })
 	        )
 	      )
 	    );
 	
 	    var dakuonTable = React.createElement(
-	      'table',
-	      { onClick: this.props.tableClicked },
+	      'div',
+	      null,
 	      React.createElement(
-	        'tbody',
+	        'div',
+	        { className: 'tabs' },
+	        React.createElement(TableTab, { tabName: 'X', setTableType: this.props.setTableType, tableType: this.props.tableType, hideTable: this.props.hideTable }),
+	        React.createElement(TableTab, { tabName: 'gojūon', setTableType: this.props.setTableType, tableType: this.props.tableType }),
+	        React.createElement(TableTab, { tabName: '゛、゜', setTableType: this.props.setTableType, tableType: this.props.tableType }),
+	        React.createElement(TableTab, { tabName: 'yōon', setTableType: this.props.setTableType, tableType: this.props.tableType })
+	      ),
+	      React.createElement(
+	        'table',
 	        null,
 	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement('th', null),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: { char: 'gojūon' } }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: { char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A' } }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: { char: 'yōon' } })
-	        ),
-	        React.createElement(
-	          'tr',
+	          'tbody',
 	          null,
-	          React.createElement('th', null),
 	          React.createElement(
-	            'th',
+	            'tr',
 	            null,
+	            React.createElement('th', null),
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'a'
+	              React.createElement(
+	                'i',
+	                null,
+	                'a'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'i'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'u'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'e'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'o'
+	              )
 	            )
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
+	            'tr',
+	            { align: 'center' },
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'i'
-	            )
+	              React.createElement(
+	                'i',
+	                null,
+	                'g'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected, tableChar: this.props.hiragana['\u304C'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304E'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3050'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3052'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3054'] })
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
+	            'tr',
+	            { align: 'center' },
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'u'
-	            )
+	              React.createElement(
+	                'i',
+	                null,
+	                'z'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3056'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3058'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u305A'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u305C'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u305E'] })
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
+	            'tr',
+	            { align: 'center' },
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'e'
-	            )
+	              React.createElement(
+	                'i',
+	                null,
+	                'd'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3060'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3062'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3065'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3067'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3069'] })
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
+	            'tr',
+	            { align: 'center' },
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'o'
-	            )
+	              React.createElement(
+	                'i',
+	                null,
+	                'b'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3070'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3073'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3076'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3079'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u307C'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'p'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3071'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3074'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3077'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u307A'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u307D'] })
 	          )
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'g'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected, tableChar: this.props.hiragana['\u304C'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304E'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3050'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3052'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3054'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'z'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3056'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3058'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u305A'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u305C'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u305E'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'd'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3060'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3062'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3065'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3067'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3069'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'b'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3070'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3073'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3076'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3079'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u307C'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement('th', null),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana[' '] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'p'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3071'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3074'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3077'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u307A'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u307D'] })
 	        )
 	      )
 	    );
 	
 	    var yoonTable = React.createElement(
-	      'table',
-	      { onClick: this.props.tableClicked },
+	      'div',
+	      null,
 	      React.createElement(
-	        'tbody',
+	        'div',
+	        { className: 'tabs' },
+	        React.createElement(TableTab, { tabName: 'X', setTableType: this.props.setTableType, tableType: this.props.tableType, hideTable: this.props.hideTable }),
+	        React.createElement(TableTab, { tabName: 'gojūon', setTableType: this.props.setTableType, tableType: this.props.tableType }),
+	        React.createElement(TableTab, { tabName: '゛、゜', setTableType: this.props.setTableType, tableType: this.props.tableType }),
+	        React.createElement(TableTab, { tabName: 'yōon', setTableType: this.props.setTableType, tableType: this.props.tableType })
+	      ),
+	      React.createElement(
+	        'table',
 	        null,
 	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement('th', null),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: { char: 'gojūon' } }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: { char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A' } }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: { char: 'yōon' } })
-	        ),
-	        React.createElement(
-	          'tr',
+	          'tbody',
 	          null,
-	          React.createElement('th', null),
 	          React.createElement(
-	            'th',
+	            'tr',
 	            null,
+	            React.createElement('th', null),
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'a'
+	              React.createElement(
+	                'i',
+	                null,
+	                'a'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'u'
+	              )
+	            ),
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'o'
+	              )
 	            )
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
+	            'tr',
+	            { align: 'center' },
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'u'
-	            )
+	              React.createElement(
+	                'i',
+	                null,
+	                'ky'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected, tableChar: this.props.hiragana['\u304D\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304D\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304D\u3087'] })
 	          ),
 	          React.createElement(
-	            'th',
-	            null,
+	            'tr',
+	            { align: 'center' },
 	            React.createElement(
-	              'i',
+	              'th',
 	              null,
-	              'o'
-	            )
+	              React.createElement(
+	                'i',
+	                null,
+	                'sh'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3057\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3057\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3057\u3087'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'ch'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3061\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3061\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3061\u3087'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'ny'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u306B\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3061\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u306B\u3087'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'hy'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3072\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3072\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3072\u3087'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'my'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u307F\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u307F\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u307F\u3087'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'ry'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u308A\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u308A\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u308A\u3087'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'gy'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304E\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304E\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u304E\u3087'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'j'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3058\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3058\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3058\u3087'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'j'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3062\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3062\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3062\u3087'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'by'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3073\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3073\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3073\u3085'] })
+	          ),
+	          React.createElement(
+	            'tr',
+	            { align: 'center' },
+	            React.createElement(
+	              'th',
+	              null,
+	              React.createElement(
+	                'i',
+	                null,
+	                'py'
+	              )
+	            ),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3074\u3083'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3074\u3085'] }),
+	            React.createElement(TableCell, {
+	              tableSelected: this.props.tableSelected,
+	              tableChar: this.props.hiragana['\u3074\u3087'] })
 	          )
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'ky'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected, tableChar: this.props.hiragana['\u304D\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304D\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304D\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'sh'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3057\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3057\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3057\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'ch'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3061\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3061\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3061\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'ny'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u306B\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3061\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u306B\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'hy'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3072\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3072\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3072\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'my'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u307F\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u307F\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u307F\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'ry'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u308A\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u308A\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u308A\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'gy'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304E\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304E\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u304E\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'j'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3058\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3058\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3058\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'j'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3062\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3062\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3062\u3087'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'by'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3073\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3073\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3073\u3085'] })
-	        ),
-	        React.createElement(
-	          'tr',
-	          { align: 'center' },
-	          React.createElement(
-	            'th',
-	            null,
-	            React.createElement(
-	              'i',
-	              null,
-	              'py'
-	            )
-	          ),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3074\u3083'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3074\u3085'] }),
-	          React.createElement(TableCell, {
-	            tableSelected: this.props.tableSelected,
-	            tableChar: this.props.hiragana['\u3074\u3087'] })
 	        )
 	      )
 	    );
 	
-	    return yoonTable;
+	    if (this.props.tableType == 'gojūon') {
+	      return gojuonTable;
+	    } else if (this.props.tableType == '゛、゜') {
+	      return dakuonTable;
+	    } else if (this.props.tableType == 'yōon') {
+	      return yoonTable;
+	    } else {
+	      return gojuonTable;
+	    }
 	  }
 	
 	});
@@ -23035,71 +23034,6 @@
 
 /***/ },
 /* 176 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(1);
-	
-	var TableCell = React.createClass({
-	  displayName: 'TableCell',
-	
-	
-	  render: function render() {
-	
-	    if (this.props.tableChar.char === 'ん') {
-	      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
-	        return React.createElement(
-	          'td',
-	          { className: 'selected-cell' },
-	          this.props.tableChar.char,
-	          ' (',
-	          React.createElement(
-	            'strong',
-	            null,
-	            'n'
-	          ),
-	          ')'
-	        );
-	      } else {
-	        return React.createElement(
-	          'td',
-	          null,
-	          this.props.tableChar.char,
-	          ' (',
-	          React.createElement(
-	            'strong',
-	            null,
-	            'n'
-	          ),
-	          ')'
-	        );
-	      }
-	    } else if (this.props.tableChar.char === '') {
-	      return React.createElement('td', { className: 'blank-cell' });
-	    } else {
-	      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
-	        return React.createElement(
-	          'td',
-	          { className: 'selected-cell' },
-	          this.props.tableChar.char
-	        );
-	      } else {
-	        return React.createElement(
-	          'td',
-	          null,
-	          this.props.tableChar.char
-	        );
-	      }
-	    }
-	  }
-	
-	});
-	
-	module.exports = TableCell;
-
-/***/ },
-/* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -23179,6 +23113,123 @@
 	});
 	
 	module.exports = Controller;
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var TableCell = React.createClass({
+	  displayName: 'TableCell',
+	
+	
+	  render: function render() {
+	
+	    if (this.props.tableChar.char === 'ん') {
+	      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
+	        return React.createElement(
+	          'td',
+	          { className: 'selected-cell' },
+	          this.props.tableChar.char,
+	          ' (',
+	          React.createElement(
+	            'strong',
+	            null,
+	            'n'
+	          ),
+	          ')'
+	        );
+	      } else {
+	        return React.createElement(
+	          'td',
+	          null,
+	          this.props.tableChar.char,
+	          ' (',
+	          React.createElement(
+	            'strong',
+	            null,
+	            'n'
+	          ),
+	          ')'
+	        );
+	      }
+	    } else if (this.props.tableChar.char === '') {
+	      return React.createElement('td', { className: 'blank-cell' });
+	    } else {
+	      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
+	        return React.createElement(
+	          'td',
+	          { className: 'selected-cell' },
+	          this.props.tableChar.char
+	        );
+	      } else {
+	        return React.createElement(
+	          'td',
+	          null,
+	          this.props.tableChar.char
+	        );
+	      }
+	    }
+	  },
+	
+	  setTableType: function setTableType() {
+	    this.props.setTableType(this.props.tableChar.char);
+	  }
+	
+	});
+	
+	module.exports = TableCell;
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(1);
+	
+	var TableTab = React.createClass({
+	  displayName: 'TableTab',
+	
+	
+	  render: function render() {
+	    if (this.props.tabName == 'X') {
+	      return React.createElement(
+	        'span',
+	        { className: 'close', onClick: this.hideTable },
+	        this.props.tabName
+	      );
+	    } else {
+	      if (this.props.tableType == this.props.tabName) {
+	        return React.createElement(
+	          'span',
+	          { className: 'selectedTab', onClick: this.setTableType },
+	          this.props.tabName
+	        );
+	      } else {
+	        return React.createElement(
+	          'span',
+	          { onClick: this.setTableType },
+	          this.props.tabName
+	        );
+	      }
+	    }
+	  },
+	
+	  setTableType: function setTableType() {
+	    this.props.setTableType(this.props.tabName);
+	  },
+	
+	  hideTable: function hideTable() {
+	    this.props.hideTable();
+	  }
+	
+	});
+	
+	module.exports = TableTab;
 
 /***/ }
 /******/ ]);

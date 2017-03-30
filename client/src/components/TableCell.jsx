@@ -20,6 +20,10 @@ const TableCell = React.createClass({
         return <td>{this.props.tableChar.char}</td>
       }
     }
+  },
+
+  setTableType: function () {
+    this.props.setTableType(this.props.tableChar.char);
   }
 
 

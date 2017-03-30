@@ -15,11 +15,15 @@ const HintDisplay = React.createClass({
       nodes.push(<Hint key={i} hint={hintsList[i]} changeHirCharColour={this.props.changeHirCharColour} hintClicked={this.props.hintClicked} revealed={revealed} hintIndex={i}/>)
     }
 
-    return (
-      <div className='HintDisplay'>
-        {nodes}
-      </div>
-    );
+    if (this.props.tableDisplayed == false) {
+      return (
+        <div className='HintDisplay'>
+          {nodes}
+        </div>
+      );
+    } else {
+      return <div className='HintDisplay'/>
+    }
 
   }
 

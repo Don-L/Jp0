@@ -119,13 +119,53 @@ img.ImageDisplay {
 /*            TABLE             */
 /*------------------------------*/
 
+.ImageDisplay div.tabs {
+  border: solid 2px #ff938e;
+  border-bottom: none;
+  border-radius: 3px;
+  background-color: #ffc38e;
+  /*padding: 5px;*/
+  margin: 0 auto;
+  width: 356px;
+  line-height: 25px;
+}
+
+.ImageDisplay div.tabs span {
+  cursor: pointer;
+  display: inline-block;
+  background-color: #e6c9b0;
+  /*padding: 5px;*/
+  margin: 0 auto;
+  font-size: 18px;
+  width: 83px;
+  height: 27px;
+  border: solid 2px #e38838;
+  border-radius: 3px;
+  color: #753700;
+  margin: 1px;
+}
+
+.ImageDisplay div.tabs span.selectedTab {
+  background-color: #e38838;
+  border-color: #753700;
+}
+
+.ImageDisplay div.tabs span.close {
+  color: white;
+  border-color: #753700;
+  background-color: #e34138;
+}
+
 .ImageDisplay table {
   border: solid 2px #ff938e;
+  border-top: none;
   border-radius: 3px;
   background-color: #ffc38e;
   /*padding: 5px;*/
   margin: 0 auto;
   font-size: 18px;
+  width: 360px;
+  height: 460px;
 }
 
 .ImageDisplay td {

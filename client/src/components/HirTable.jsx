@@ -1,26 +1,22 @@
 const React = require('react');
 const TableCell = require('./TableCell.jsx');
+const TableTab = require('./TableTab.jsx');
 
 
-  const HirTable = React.createClass({
+const HirTable = React.createClass({
 
-    render: function () {
+  render: function () {
 
-      let gojuonTable = <table onClick={this.props.tableClicked}>
+    let gojuonTable =
+    <div>
+      <div className={'tabs'}>
+        <TableTab tabName={'X'} setTableType={this.props.setTableType} tableType={this.props.tableType} hideTable={this.props.hideTable}/>
+        <TableTab tabName={'gojūon'} setTableType={this.props.setTableType} tableType={this.props.tableType}/>
+        <TableTab tabName={'゛、゜'} setTableType={this.props.setTableType} tableType={this.props.tableType}/>
+        <TableTab tabName={'yōon'} setTableType={this.props.setTableType} tableType={this.props.tableType}/>
+      </div>
+      <table>
         <tbody>
-          <tr align="center">
-            <th></th>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={{char: 'gojūon'}}/>
-            // u3001 = comma
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={{char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A'}}/>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={{char: 'yōon'}}/>
-          </tr>
           <tr>
             <th></th>
             <th><i>a</i></th>
@@ -227,7 +223,8 @@ const TableCell = require('./TableCell.jsx');
               tableChar={this.props.hiragana['empty_string']}/>
           </tr>
         </tbody>
-      </table>;
+      </table>
+    </div>;
 
 
 
@@ -236,20 +233,16 @@ const TableCell = require('./TableCell.jsx');
 
 
 
-      let dakuonTable = <table onClick={this.props.tableClicked}>
+    let dakuonTable =
+    <div>
+      <div className={'tabs'}>
+        <TableTab tabName={'X'} setTableType={this.props.setTableType} tableType={this.props.tableType} hideTable={this.props.hideTable}/>
+        <TableTab tabName={'gojūon'} setTableType={this.props.setTableType} tableType={this.props.tableType}/>
+        <TableTab tabName={'゛、゜'} setTableType={this.props.setTableType} tableType={this.props.tableType}/>
+        <TableTab tabName={'yōon'} setTableType={this.props.setTableType} tableType={this.props.tableType}/>
+      </div>
+      <table>
         <tbody>
-          <tr align="center">
-            <th></th>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={{char: 'gojūon'}}/>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={{char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A'}}/>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={{char: 'yōon'}}/>
-          </tr>
           <tr>
             <th></th>
             <th><i>a</i></th>
@@ -330,24 +323,6 @@ const TableCell = require('./TableCell.jsx');
               tableChar={this.props.hiragana['\u307C']}/>
           </tr>
           <tr align="center">
-            <th></th>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={this.props.hiragana[' ']}/>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={this.props.hiragana[' ']}/>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={this.props.hiragana[' ']}/>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={this.props.hiragana[' ']}/>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={this.props.hiragana[' ']}/>
-          </tr>
-          <tr align="center">
             <th><i>p</i></th>
             <TableCell
               tableSelected={this.props.tableSelected}
@@ -366,26 +341,23 @@ const TableCell = require('./TableCell.jsx');
               tableChar={this.props.hiragana['\u307D']}/>
           </tr>
         </tbody>
-      </table>;
+      </table>
+    </div>;
 
 
 
 
 
-      let yoonTable = <table onClick={this.props.tableClicked}>
+    let yoonTable =
+    <div>
+      <div className={'tabs'}>
+        <TableTab tabName={'X'} setTableType={this.props.setTableType} tableType={this.props.tableType} hideTable={this.props.hideTable}/>
+        <TableTab tabName={'gojūon'} setTableType={this.props.setTableType} tableType={this.props.tableType}/>
+        <TableTab tabName={'゛、゜'} setTableType={this.props.setTableType} tableType={this.props.tableType}/>
+        <TableTab tabName={'yōon'} setTableType={this.props.setTableType} tableType={this.props.tableType}/>
+      </div>
+      <table>
         <tbody>
-          <tr align="center">
-            <th></th>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={{char: 'gojūon'}}/>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={{char: '\u3099' + ' ' + '\u3001' + ' ' + '\u309A'}}/>
-            <TableCell
-              tableSelected={this.props.tableSelected}
-              tableChar={{char: 'yōon'}}/>
-          </tr>
           <tr>
             <th></th>
             <th><i>a</i></th>
@@ -536,13 +508,22 @@ const TableCell = require('./TableCell.jsx');
               tableChar={this.props.hiragana['\u3074\u3087']}/>
           </tr>
         </tbody>
-      </table>;
+      </table>
+    </div>;
 
+    if (this.props.tableType == 'gojūon') {
+      return gojuonTable;
+    } else if (this.props.tableType == '゛、゜') {
+      return dakuonTable;
+    } else if (this.props.tableType == 'yōon') {
       return yoonTable;
-
+    } else {
+      return gojuonTable;
     }
 
+  }
 
-  });
 
-  module.exports = HirTable;
+});
+
+module.exports = HirTable;

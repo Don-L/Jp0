@@ -32,13 +32,16 @@ const Jp0 = React.createClass({
             hintsNo={this.state.hintsNo}
             tableDisplayed={this.state.tableDisplayed}
             tableSelected={this.state.tableSelected}
-            tableClicked={this.hideTable}
+            hideTable={this.hideTable}
+            tableType={this.state.tableType}
+            setTableType={this.setTableType}
             hiragana={this.state.hiragana}/>
           <HintDisplay
             changeHirCharColour={this.changeHirCharColour}
             hintClicked={this.revealHint}
             hintsList={hints}
-            revealed={this.state.revealed}/>
+            revealed={this.state.revealed}
+            tableDisplayed={this.state.tableDisplayed}/>
         </div>
         <HiraganaDisplay
           hirChars={this.state.cards[this.state.currentIndex]['hiragana']} showTableWithSelected={this.showTableWithSelected}
@@ -226,15 +229,24 @@ const Jp0 = React.createClass({
 
 
   showTableWithAllSelected: function () {
-    let hirChars=this.state.cards[this.state.currentIndex]['hiragana'];
-    for (let hira of hirChars) {
-      this.showTableWithSelected(hira, 'all');
+    if (this.state.tableDisplayed == true) {
+      this.hideTable();
+    } else {
+      let hirChars=this.state.cards[this.state.currentIndex]['hiragana'];
+      for (let hira of hirChars) {
+        this.showTableWithSelected(hira, 'all');
+      }
     }
   },
 
 
   hideTable: function () {
     this.setState({tableDisplayed: false});
+  },
+
+
+  setTableType: function (type) {
+    this.setState({tableType: type});
   }
 
 
