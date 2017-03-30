@@ -150,6 +150,10 @@ img.ImageDisplay {
   border-color: #753700;
 }
 
+.ImageDisplay div.tabs span.contains_char {
+  border-color: #753700;
+}
+
 .ImageDisplay div.tabs span.close {
   color: white;
   border-color: #753700;
@@ -163,7 +167,7 @@ img.ImageDisplay {
   background-color: #ffc38e;
   /*padding: 5px;*/
   margin: 0 auto;
-  font-size: 18px;
+  font-size: 21px;
   width: 360px;
   height: 460px;
 }
@@ -183,6 +187,8 @@ img.ImageDisplay {
   font-weight: bold;
   padding: 0 5px 0 5px;
   color: #014147;
+  width: 60px;
+  height: 26px;
 }
 
 @media screen and (max-width: 414px) {

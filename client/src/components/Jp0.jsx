@@ -104,7 +104,7 @@ const Jp0 = React.createClass({
     let cardHiragana = this.state.cards[this.state.currentIndex].hiragana;
     let types = [];
     for (let i = 0; i < cardHiragana.length; i++) {
-      types.push(this.state.hiragana.cardHiragana[i].hiragana_type);
+      types.push(this.state.hiragana[cardHiragana[i]].hiragana_type);
     }
     return types;
   },

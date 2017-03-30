@@ -19879,7 +19879,7 @@
 	    var cardHiragana = this.state.cards[this.state.currentIndex].hiragana;
 	    var types = [];
 	    for (var i = 0; i < cardHiragana.length; i++) {
-	      types.push(this.state.hiragana.cardHiragana[i].hiragana_type);
+	      types.push(this.state.hiragana[cardHiragana[i]].hiragana_type);
 	    }
 	    return types;
 	  },
@@ -21232,15 +21232,8 @@
 	
 	
 	  render: function render() {
-	
 	    var classNo = this.props.char.length;
-	
-	    var highlightClass = '';
-	
-	    if (this.props.hirIndex === this.props.nextUp && this.props.highlightingHir === true) {
-	      highlightClass = ' hint-selected';
-	    };
-	
+	    var highlightClass = this.getHighlightClass();
 	    return React.createElement(
 	      'div',
 	      { className: 'HirChar' + classNo, id: this.props.id, onClick: this.showTableWithSelected },
@@ -21254,6 +21247,14 @@
 	
 	  showTableWithSelected: function showTableWithSelected() {
 	    this.props.showTableWithSelected(this.props.char);
+	  },
+	
+	  getHighlightClass: function getHighlightClass() {
+	    var highlightClass = '';
+	    if (this.props.hirIndex === this.props.nextUp && this.props.highlightingHir === true) {
+	      highlightClass = ' hint-selected';
+	    };
+	    return highlightClass;
 	  }
 	
 	});
@@ -22185,6 +22186,7 @@
 	        { className: 'ImageDisplay' },
 	        React.createElement(HirTable, {
 	          card: this.props.card,
+	          charTypes: this.props.charTypes,
 	          tableSelected: this.props.tableSelected,
 	          hideTable: this.props.hideTable,
 	          hiragana: this.props.hiragana,
@@ -22263,10 +22265,10 @@
 	      React.createElement(
 	        'div',
 	        { className: 'tabs' },
-	        React.createElement(TableTab, { tabName: 'X', setTableType: this.props.setTableType, tableType: this.props.tableType, hideTable: this.props.hideTable }),
-	        React.createElement(TableTab, { tabName: 'gojūon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card }),
-	        React.createElement(TableTab, { tabName: '゛、゜', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card }),
-	        React.createElement(TableTab, { tabName: 'yōon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card })
+	        React.createElement(TableTab, { tabName: 'X', setTableType: this.props.setTableType, tableType: this.props.tableType, hideTable: this.props.hideTable, charTypes: this.props.charTypes }),
+	        React.createElement(TableTab, { tabName: 'gojūon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card, charTypes: this.props.charTypes }),
+	        React.createElement(TableTab, { tabName: '゛、゜', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card, charTypes: this.props.charTypes }),
+	        React.createElement(TableTab, { tabName: 'yōon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card, charTypes: this.props.charTypes })
 	      ),
 	      React.createElement(
 	        'table',
@@ -22625,10 +22627,10 @@
 	      React.createElement(
 	        'div',
 	        { className: 'tabs' },
-	        React.createElement(TableTab, { tabName: 'X', setTableType: this.props.setTableType, tableType: this.props.tableType, hideTable: this.props.hideTable }),
-	        React.createElement(TableTab, { tabName: 'gojūon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card }),
-	        React.createElement(TableTab, { tabName: '゛、゜', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card }),
-	        React.createElement(TableTab, { tabName: 'yōon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card })
+	        React.createElement(TableTab, { tabName: 'X', setTableType: this.props.setTableType, tableType: this.props.tableType, hideTable: this.props.hideTable, charTypes: this.props.charTypes }),
+	        React.createElement(TableTab, { tabName: 'gojūon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card, charTypes: this.props.charTypes }),
+	        React.createElement(TableTab, { tabName: '゛、゜', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card, charTypes: this.props.charTypes }),
+	        React.createElement(TableTab, { tabName: 'yōon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card, charTypes: this.props.charTypes })
 	      ),
 	      React.createElement(
 	        'table',
@@ -22835,10 +22837,10 @@
 	      React.createElement(
 	        'div',
 	        { className: 'tabs' },
-	        React.createElement(TableTab, { tabName: 'X', setTableType: this.props.setTableType, tableType: this.props.tableType, hideTable: this.props.hideTable }),
-	        React.createElement(TableTab, { tabName: 'gojūon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card }),
-	        React.createElement(TableTab, { tabName: '゛、゜', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card }),
-	        React.createElement(TableTab, { tabName: 'yōon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card })
+	        React.createElement(TableTab, { tabName: 'X', setTableType: this.props.setTableType, tableType: this.props.tableType, hideTable: this.props.hideTable, charTypes: this.props.charTypes }),
+	        React.createElement(TableTab, { tabName: 'gojūon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card, charTypes: this.props.charTypes }),
+	        React.createElement(TableTab, { tabName: '゛、゜', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card, charTypes: this.props.charTypes }),
+	        React.createElement(TableTab, { tabName: 'yōon', setTableType: this.props.setTableType, tableType: this.props.tableType, card: this.props.card, charTypes: this.props.charTypes })
 	      ),
 	      React.createElement(
 	        'table',
@@ -23324,26 +23326,41 @@
 	
 	
 	  render: function render() {
+	    var className = this.getClassName();
+	    var onClick = this.getClick();
+	    return React.createElement(
+	      'span',
+	      { className: className, onClick: onClick },
+	      this.props.tabName
+	    );
+	  },
+	
+	  getClassName: function getClassName() {
+	    var className = '';
+	    var tabName = this.props.tabName;
+	    if (tabName == 'X') {
+	      return className = 'close';
+	    }
+	    var tableType = this.props.tableType;
+	    if (tabName == tableType) {
+	      className += ' selectedTab ';
+	    }
+	    var charTypes = this.props.charTypes;
+	    if (tabName == '゛、゜' && (charTypes.indexOf('dakuten') > -1 || charTypes.indexOf('handakuten') > -1)) {
+	      className += ' contains_char ';
+	    }
+	    if (charTypes.indexOf(tabName) > -1) {
+	      className += 'contains_char';
+	    }
+	    return className;
+	  },
+	
+	  getClick: function getClick() {
+	    var onClick = null;
 	    if (this.props.tabName == 'X') {
-	      return React.createElement(
-	        'span',
-	        { className: 'close', onClick: this.hideTable },
-	        this.props.tabName
-	      );
+	      return onClick = this.hideTable;
 	    } else {
-	      if (this.props.tableType == this.props.tabName) {
-	        return React.createElement(
-	          'span',
-	          { className: 'selectedTab', onClick: this.setTableType },
-	          this.props.tabName
-	        );
-	      } else {
-	        return React.createElement(
-	          'span',
-	          { onClick: this.setTableType },
-	          this.props.tabName
-	        );
-	      }
+	      return onClick = this.setTableType;
 	    }
 	  },
 	

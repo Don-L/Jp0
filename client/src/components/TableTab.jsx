@@ -3,14 +3,37 @@ const React = require('react');
 const TableTab = React.createClass({
 
   render: function () {
+    let className = this.getClassName();
+    let onClick = this.getClick();
+    return <span className={className} onClick={onClick}>{this.props.tabName}</span>;
+  },
+
+  getClassName: function () {
+    let className = '';
+    let tabName = this.props.tabName;
+    if (tabName == 'X') {
+      return className = 'close';
+    }
+    let tableType = this.props.tableType;
+    if (tabName == tableType) {
+      className += ' selectedTab ';
+    }
+    let charTypes = this.props.charTypes;
+    if ((tabName == '゛、゜') && (charTypes.indexOf('dakuten') > -1 || charTypes.indexOf('handakuten') > -1)) {
+      className += ' contains_char ';
+    }
+    if (charTypes.indexOf(tabName) > -1) {
+      className += 'contains_char';
+    }
+    return className;
+  },
+
+  getClick: function () {
+    let onClick = null;
     if (this.props.tabName == 'X') {
-      return <span className={'close'} onClick={this.hideTable}>{this.props.tabName}</span>;
+      return onClick = this.hideTable;
     } else {
-      if (this.props.tableType == this.props.tabName) {
-        return <span className={'selectedTab'} onClick={this.setTableType}>{this.props.tabName}</span>;
-      } else {
-        return <span onClick={this.setTableType}>{this.props.tabName}</span>;
-      }
+      return onClick = this.setTableType;
     }
   },
 
@@ -21,7 +44,6 @@ const TableTab = React.createClass({
   hideTable: function () {
     this.props.hideTable();
   }
-
 
 });
 
