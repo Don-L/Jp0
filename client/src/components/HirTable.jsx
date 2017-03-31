@@ -12,7 +12,7 @@ const HirTable = React.createClass({
       <div className={'tabs'}>
         <TableTab tabName={'X'} setTableType={this.props.setTableType} tableType={this.props.tableType} hideTable={this.props.hideTable} charTypes={this.props.charTypes}/>
         <TableTab tabName={'gojūon'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
-        <TableTab tabName={'゛、゜'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
+        <TableTab tabName={'dakuten'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
         <TableTab tabName={'yōon'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
       </div>
       <table>
@@ -238,7 +238,7 @@ const HirTable = React.createClass({
       <div className={'tabs'}>
         <TableTab tabName={'X'} setTableType={this.props.setTableType} tableType={this.props.tableType} hideTable={this.props.hideTable} charTypes={this.props.charTypes}/>
         <TableTab tabName={'gojūon'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
-        <TableTab tabName={'゛、゜'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
+        <TableTab tabName={'dakuten'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
         <TableTab tabName={'yōon'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
       </div>
       <table>
@@ -353,7 +353,7 @@ const HirTable = React.createClass({
       <div className={'tabs'}>
         <TableTab tabName={'X'} setTableType={this.props.setTableType} tableType={this.props.tableType} hideTable={this.props.hideTable} charTypes={this.props.charTypes}/>
         <TableTab tabName={'gojūon'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
-        <TableTab tabName={'゛、゜'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
+        <TableTab tabName={'dakuten'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
         <TableTab tabName={'yōon'} setTableType={this.props.setTableType} tableType={this.props.tableType} card={this.props.card} charTypes={this.props.charTypes}/>
       </div>
       <table>
@@ -513,7 +513,7 @@ const HirTable = React.createClass({
 
     if (this.props.tableType == 'gojūon') {
       return gojuonTable;
-    } else if (this.props.tableType == '゛、゜') {
+    } else if (this.props.tableType == 'dakuten') {
       return dakuonTable;
     } else if (this.props.tableType == 'yōon') {
       return yoonTable;

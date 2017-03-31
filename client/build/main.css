@@ -146,7 +146,8 @@ img.ImageDisplay {
 }
 
 .ImageDisplay div.tabs span.selectedTab {
-  background-color: #e38838;
+  /*background-color: #e38838;*/
+  background-color: #ff938e;
   border-color: #753700;
 }
 

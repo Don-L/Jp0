@@ -19,9 +19,9 @@ const TableTab = React.createClass({
       className += ' selectedTab ';
     }
     let charTypes = this.props.charTypes;
-    if ((tabName == '゛、゜') && (charTypes.indexOf('dakuten') > -1 || charTypes.indexOf('handakuten') > -1)) {
-      className += ' contains_char ';
-    }
+    // if ((tabName == '゛、゜') && (charTypes.indexOf('dakuten') > -1 || charTypes.indexOf('handakuten') > -1)) {
+    //   className += ' contains_char ';
+    // }
     if (charTypes.indexOf(tabName) > -1) {
       className += 'contains_char';
     }
