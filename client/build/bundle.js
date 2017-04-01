@@ -22425,12 +22425,9 @@
 	
 	  render: function render() {
 	    var tabs = this.getTabs();
-	    var gojuonArray = this.props.tableArrays[0];
-	    var dakutenArray = this.props.tableArrays[1];
-	    var yoonArray = this.props.tableArrays[2];
-	    var gojuonTable = this.getTable(gojuonArray, ['', 'a', 'i', 'u', 'e', 'o'], ['', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w', '']);
-	    var dakutenTable = this.getTable(dakutenArray, ['', 'a', 'i', 'u', 'e', 'o'], ['g', 'z', 'd', 'b', 'p']);
-	    var yoonTable = this.getTable(yoonArray, ['', 'a', 'u', 'o'], ['ky', 'sh', 'ch', 'ny', 'hy', 'my', 'ry', 'gy', 'j', 'j', 'by', 'py']);
+	    var gojuonTable = this.getTable(this.props.tableArrays[0], ['', 'a', 'i', 'u', 'e', 'o'], ['', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w', '']);
+	    var dakutenTable = this.getTable(this.props.tableArrays[1], ['', 'a', 'i', 'u', 'e', 'o'], ['g', 'z', 'd', 'b', 'p']);
+	    var yoonTable = this.getTable(this.props.tableArrays[2], ['', 'a', 'u', 'o'], ['ky', 'sh', 'ch', 'ny', 'hy', 'my', 'ry', 'gy', 'j', 'j', 'by', 'py']);
 	
 	    if (this.props.tableType == 'dakuten') {
 	      return React.createElement(
@@ -22489,15 +22486,15 @@
 	  getColumnHeadings: function getColumnHeadings(columnHeadingsArr) {
 	    var columnHeadings = [];
 	    for (var i = 0; i < columnHeadingsArr.length; i++) {
-	      columnHeadings.push(this.getColHeading(columnHeadingsArr[i]));
+	      columnHeadings.push(this.getColHeading(columnHeadingsArr[i], i));
 	    }
 	    return columnHeadings;
 	  },
 	
-	  getColHeading: function getColHeading(heading) {
+	  getColHeading: function getColHeading(heading, keyIndex) {
 	    return React.createElement(
 	      'th',
-	      null,
+	      { key: 'colHeading ' + heading + keyIndex },
 	      React.createElement(
 	        'i',
 	        null,
@@ -22510,20 +22507,20 @@
 	    var rowArraysArr = this.getRowArrays(tableDataArr);
 	    var rows = [];
 	    for (var i = 0; i < rowArraysArr.length; i++) {
-	      rows.push(this.getRow(rowArraysArr[i], rowHeadingsArr[i]));
+	      rows.push(this.getRow(rowArraysArr[i], rowHeadingsArr[i], i));
 	    }
 	    return rows;
 	  },
 	
-	  getRow: function getRow(rowArray, rowHeading) {
+	  getRow: function getRow(rowArray, rowHeading, keyIndex) {
 	    var rowCells = [];
 	    for (var i = 0; i < rowArray.length; i++) {
-	      var cell = this.getCell(rowArray[i]);
+	      var cell = this.getCell(rowArray[i], i);
 	      rowCells.push(cell);
 	    }
 	    return React.createElement(
 	      'tr',
-	      { align: 'center' },
+	      { align: 'center', key: 'rowHeading ' + rowHeading + keyIndex },
 	      React.createElement(
 	        'th',
 	        null,
@@ -22537,8 +22534,9 @@
 	    );
 	  },
 	
-	  getCell: function getCell(hiragana) {
+	  getCell: function getCell(hiragana, keyIndex) {
 	    return React.createElement(TableCell, {
+	      key: 'TableCell ' + hiragana['char'] + keyIndex,
 	      tableSelected: this.props.tableSelected,
 	      char: hiragana['char'] });
 	  },
@@ -22613,50 +22611,45 @@
 	
 	  render: function render() {
 	
-	    if (this.props.char === 'ん') {
-	      if (this.props.tableSelected.indexOf(this.props.char) > -1) {
-	        return React.createElement(
-	          'td',
-	          { className: 'selected-cell' },
-	          this.props.char,
-	          ' (',
-	          React.createElement(
-	            'strong',
-	            null,
-	            'n'
-	          ),
-	          ')'
-	        );
-	      } else {
-	        return React.createElement(
-	          'td',
+	    var cssClass = null;
+	    if (this.props.char === '') {
+	      cssClass = 'blank-cell';
+	    } else if (this.props.tableSelected.indexOf(this.props.char) > -1) {
+	      cssClass = 'selected-cell';
+	    }
+	
+	    if (this.props.char != 'ん' && this.props.char != 'っ') {
+	      return React.createElement(
+	        'td',
+	        { className: cssClass },
+	        this.props.char
+	      );
+	    } else if (this.props.char === 'ん') {
+	      return React.createElement(
+	        'td',
+	        { className: cssClass },
+	        this.props.char,
+	        ' (',
+	        React.createElement(
+	          'strong',
 	          null,
-	          this.props.char,
-	          ' (',
-	          React.createElement(
-	            'strong',
-	            null,
-	            'n'
-	          ),
-	          ')'
-	        );
-	      }
-	    } else if (this.props.char === '') {
-	      return React.createElement('td', { className: 'blank-cell' });
+	          'n'
+	        ),
+	        ')'
+	      );
 	    } else {
-	      if (this.props.tableSelected.indexOf(this.props.char) > -1) {
-	        return React.createElement(
-	          'td',
-	          { className: 'selected-cell' },
-	          this.props.char
-	        );
-	      } else {
-	        return React.createElement(
-	          'td',
+	      return React.createElement(
+	        'td',
+	        { className: cssClass },
+	        this.props.char,
+	        ' (',
+	        React.createElement(
+	          'strong',
 	          null,
-	          this.props.char
-	        );
-	      }
+	          '-'
+	        ),
+	        ')'
+	      );
 	    }
 	  }
 	
