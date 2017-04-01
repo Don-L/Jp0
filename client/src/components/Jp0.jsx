@@ -11,6 +11,7 @@ const Controller = require('./Controller.jsx');
 
 const Jp0 = React.createClass({
 
+  // _isMounted: false,
 
   render: function () {
 
@@ -29,6 +30,7 @@ const Jp0 = React.createClass({
             name={this.state.cards[this.state.currentIndex]['name']}
             romaji={this.state.cards[this.state.currentIndex]['romaji']}
             charTypes={this.getCharTypes()}
+            tableArrays={this.getTableArrays()}
             revealed={this.state.revealed.length}
             hintsNo={this.state.hintsNo}
             tableDisplayed={this.state.tableDisplayed}
@@ -76,7 +78,10 @@ const Jp0 = React.createClass({
       hiragana: {'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},
                  'N':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},
                  'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},
-                 'T':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},},
+                 'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},
+                 'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},
+                 'I':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init'},
+                 'T':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init', 'chart': ['gojūon', 0, 0]}},
       currentIndex: 0,
       hintsNo: 4,
       revealed: [],
@@ -92,11 +97,20 @@ const Jp0 = React.createClass({
 
     let hintsNo = Cards[0]['hiragana'].length;
 
+
+
     this.setState({cards: Cards,
                    hiragana: Hiragana,
                    currentIndex: 0,
                    revealed: [],
                    hintsNo: hintsNo});
+
+                  //  this._isMounted = true;
+  },
+
+
+  componentWillUnmount: function () {
+    this._isMounted = false;
   },
 
 
@@ -107,6 +121,30 @@ const Jp0 = React.createClass({
       types.push(this.state.hiragana[cardHiragana[i]].hiragana_type);
     }
     return types;
+  },
+
+  getTableArrays: function () {
+    let arr = [];
+    for (const key of Object.keys(this.state.hiragana)) {
+      arr.push(this.state.hiragana[key]);
+    }
+    let goujArr = [];
+    let dakArr = [];
+    let yoonArr = [];
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i]['table'] != null) {
+        if (arr[i]['table'][0] === 'gojūon') {
+          goujArr.push(arr[i]);
+        }
+        if (arr[i]['table'][0] === 'dakuten') {
+          dakArr.push(arr[i]);
+        }
+        if (arr[i]['table'][0] === 'yōon') {
+          yoonArr.push(arr[i]);
+        }
+      }
+    }
+  return [goujArr, dakArr, yoonArr];
   },
 
 

@@ -1,23 +1,25 @@
 module.exports = {
 
   'empty_string': {
+    'name': 'empty_string',
     'char': ''
   },
 
   ' ': {
+    'name': 'space',
     'char': ' '
   },
 
-  'yōon': {
-    'char': 'yōon'
-  },
-
   '\u3099': {
-    'char': '゛'
+    'name': 'hiragana diacritic mark dakuten',
+    'char': '゛',
+    'unicode': '\u3099'
   },
 
   '\u309A': {
-    'char': '゜'
+    'name': 'hiragana diacritic mark handakuten',
+    'char': '゜',
+    'unicode': '\u309A'
   },
 
   '\u3041': {
@@ -36,7 +38,7 @@ module.exports = {
     'transliteration': 'a',
     'yōon_child': '\u3041',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 0, 0]
+    'table': ['gojūon', 0, 0]
   },
 
   '\u3043': {
@@ -55,7 +57,7 @@ module.exports = {
     'transliteration': 'i',
     'yōon_child': '\u3043',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 0, 1]
+    'table': ['gojūon', 0, 1]
   },
 
   '\u3045': {
@@ -75,7 +77,7 @@ module.exports = {
     'sound': 'res/snd/3046.ogg',
     'yōon_child': '\u3045',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 0, 2]
+    'table': ['gojūon', 0, 2]
   },
 
   '\u3047': {
@@ -94,7 +96,7 @@ module.exports = {
     'transliteration': 'e',
     'yōon_child': '\u3047',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 0, 3]
+    'table': ['gojūon', 0, 3]
   },
 
   '\u3049': {
@@ -114,7 +116,7 @@ module.exports = {
     'sound': 'res/snd/304A.ogg',
     'yōon_child': '\u3049',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 0, 4]
+    'table': ['gojūon', 0, 4]
   },
 
   '\u304B': {
@@ -125,7 +127,7 @@ module.exports = {
     'sound': 'res/snd/304B.ogg',
     'dakuten_child': '\u304C',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 1, 0]
+    'table': ['gojūon', 1, 0]
   },
 
   '\u304C': {
@@ -135,7 +137,7 @@ module.exports = {
     'transliteration': 'ga',
     'dakuten_parent': '\u304B',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 0, 0]
+    'table': ['dakuten', 0, 0]
   },
 
   '\u304D': {
@@ -145,7 +147,7 @@ module.exports = {
     'transliteration': 'ki',
     'dakuten_child': '\u304E',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 1, 1]
+    'table': ['gojūon', 1, 1]
   },
 
   '\u304E': {
@@ -155,7 +157,7 @@ module.exports = {
     'transliteration': 'gi',
     'dakuten_parent': '\u304D',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 0, 1]
+    'table': ['dakuten', 0, 1]
   },
 
   '\u304F': {
@@ -165,7 +167,7 @@ module.exports = {
     'transliteration': 'ku',
     'dakuten_child': '\u3050',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 1, 2]
+    'table': ['gojūon', 1, 2]
   },
 
   '\u3050': {
@@ -175,7 +177,7 @@ module.exports = {
     'transliteration': 'gu',
     'dakuten_parent': '\u304F',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 0, 2]
+    'table': ['dakuten', 0, 2]
   },
 
   '\u3051': {
@@ -185,7 +187,7 @@ module.exports = {
     'transliteration': 'ke',
     'dakuten_child': '\u3052',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 1, 3]
+    'table': ['gojūon', 1, 3]
   },
 
   '\u3052': {
@@ -195,7 +197,7 @@ module.exports = {
     'transliteration': 'ge',
     'dakuten_parent': '\u3051',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 0, 3]
+    'table': ['dakuten', 0, 3]
   },
 
   '\u3053': {
@@ -205,7 +207,7 @@ module.exports = {
     'transliteration': 'ko',
     'dakuten_child': '\u3054',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 1, 4]
+    'table': ['gojūon', 1, 4]
   },
 
   '\u3054': {
@@ -215,7 +217,7 @@ module.exports = {
     'transliteration': 'go',
     'dakuten_parent': '\u3053',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 0, 4]
+    'table': ['dakuten', 0, 4]
   },
 
   '\u3055': {
@@ -225,7 +227,7 @@ module.exports = {
     'transliteration': 'sa',
     'dakuten_child': '\u3056',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 2, 0]
+    'table': ['gojūon', 2, 0]
   },
 
   '\u3056': {
@@ -235,7 +237,7 @@ module.exports = {
     'transliteration': 'za',
     'dakuten_parent': '\u3055',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 1, 0]
+    'table': ['dakuten', 1, 0]
   },
 
   '\u3057': {
@@ -245,7 +247,7 @@ module.exports = {
     'transliteration': 'shi',
     'dakuten_child': '\u3058',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 2, 1]
+    'table': ['gojūon', 2, 1]
   },
 
   '\u3058': {
@@ -255,7 +257,7 @@ module.exports = {
     'transliteration': 'zi',
     'dakuten_parent': '\u3057',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 1, 1]
+    'table': ['dakuten', 1, 1]
   },
 
   '\u3059': {
@@ -265,7 +267,7 @@ module.exports = {
     'transliteration': 'su',
     'dakuten_child': '\u305A',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 2, 2]
+    'table': ['gojūon', 2, 2]
   },
 
   '\u305A': {
@@ -275,7 +277,7 @@ module.exports = {
     'transliteration': 'zu',
     'dakuten_parent': '\u3059',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 1, 2]
+    'table': ['dakuten', 1, 2]
   },
 
   '\u305B': {
@@ -285,7 +287,7 @@ module.exports = {
     'transliteration': 'se',
     'dakuten_child': '\u305C',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 2, 3]
+    'table': ['gojūon', 2, 3]
   },
 
   '\u305C': {
@@ -295,7 +297,7 @@ module.exports = {
     'transliteration': 'ze',
     'dakuten_parent': '\u305B',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 1, 3]
+    'table': ['dakuten', 1, 3]
   },
 
   '\u305D': {
@@ -305,7 +307,7 @@ module.exports = {
     'transliteration': 'so',
     'dakuten_child': '\u305E',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 2, 4]
+    'table': ['gojūon', 2, 4]
   },
 
   '\u305E': {
@@ -315,7 +317,7 @@ module.exports = {
     'transliteration': 'zo',
     'dakuten_parent': '\u305D',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 1, 4]
+    'table': ['dakuten', 1, 4]
   },
 
   '\u305F': {
@@ -325,7 +327,7 @@ module.exports = {
     'transliteration': 'ta',
     'dakuten_child': '\u3060',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 3, 0]
+    'table': ['gojūon', 3, 0]
   },
 
   '\u3060': {
@@ -335,7 +337,7 @@ module.exports = {
     'transliteration': 'da',
     'dakuten_parent': '\u305F',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 2, 0]
+    'table': ['dakuten', 2, 0]
   },
 
 // or chi? - check transliteration
@@ -347,7 +349,7 @@ module.exports = {
     'sound': 'res/snd/3061.ogg',
     'dakuten_child': '\u3062',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 3, 1]
+    'table': ['gojūon', 3, 1]
   },
 
 // di or ji?
@@ -358,7 +360,7 @@ module.exports = {
     'transliteration': 'di',
     'dakuten_parent': '\u3061',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 2, 1]
+    'table': ['dakuten', 2, 1]
   },
 
   '\u3063': {
@@ -367,7 +369,8 @@ module.exports = {
     'unicode': '\u3063',
     'transliteration': '!',
     'yōon_parent': '\u3064',
-    'hiragana_type': 'small gojūon'
+    'hiragana_type': 'small gojūon',
+    'table': ['gojūon', 10, 3]
   },
 
 //tu or tsu?
@@ -379,7 +382,7 @@ module.exports = {
     'yōon_child': '\u3063',
     'dakuten_child': '\u3065',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 3, 2]
+    'table': ['gojūon', 3, 2]
   },
 
 //need this? - uncommon
@@ -390,7 +393,7 @@ module.exports = {
     'transliteration': 'du',
     'dakuten_parent': '\u3064',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 2, 2]
+    'table': ['dakuten', 2, 2]
   },
 
   '\u3066': {
@@ -400,7 +403,7 @@ module.exports = {
     'transliteration': 'te',
     'dakuten_child': '\u3067',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 3, 3]
+    'table': ['gojūon', 3, 3]
   },
 
   '\u3067': {
@@ -410,7 +413,7 @@ module.exports = {
     'transliteration': 'de',
     'dakuten_parent': '\u3066',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 2, 3]
+    'table': ['dakuten', 2, 3]
   },
 
   '\u3068': {
@@ -420,7 +423,7 @@ module.exports = {
     'transliteration': 'to',
     'dakuten_child': '\u3069',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 3, 4]
+    'table': ['gojūon', 3, 4]
   },
 
   '\u3069': {
@@ -430,7 +433,7 @@ module.exports = {
     'transliteration': 'do',
     'dakuten_parent': '\u3068',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 2, 4]
+    'table': ['dakuten', 2, 4]
   },
 
   '\u306A': {
@@ -439,7 +442,7 @@ module.exports = {
     'unicode': '\u306A',
     'transliteration': 'na',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 4, 0]
+    'table': ['gojūon', 4, 0]
   },
 
   '\u306B': {
@@ -448,7 +451,7 @@ module.exports = {
     'unicode': '\u306B',
     'transliteration': 'ni',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 4, 1]
+    'table': ['gojūon', 4, 1]
   },
 
   '\u306C': {
@@ -457,7 +460,7 @@ module.exports = {
     'unicode': '\u306C',
     'transliteration': 'nu',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 4, 2]
+    'table': ['gojūon', 4, 2]
   },
 
   '\u306D': {
@@ -466,7 +469,7 @@ module.exports = {
     'unicode': '\u306D',
     'transliteration': 'ne',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 4, 3]
+    'table': ['gojūon', 4, 3]
   },
 
   '\u306E': {
@@ -475,7 +478,7 @@ module.exports = {
     'unicode': '\u306E',
     'transliteration': 'no',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 4, 4]
+    'table': ['gojūon', 4, 4]
   },
 
   '\u306F': {
@@ -486,7 +489,7 @@ module.exports = {
     'dakuten_child': '\u3070',
     'handakuten_child': '\u3071',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 5, 0]
+    'table': ['gojūon', 5, 0]
   },
 
   '\u3070': {
@@ -496,7 +499,7 @@ module.exports = {
     'transliteration': 'ba',
     'dakuten_parent': '\u306F',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 3, 0]
+    'table': ['dakuten', 3, 0]
   },
 
   '\u3071': {
@@ -506,7 +509,7 @@ module.exports = {
     'transliteration': 'pa',
     'handakuten_parent': '\u306F',
     'hiragana_type': 'handakuten',
-    'chart': ['dakuten', 4, 0]
+    'table': ['dakuten', 4, 0]
   },
 
 //lots of additional forms for hi
@@ -518,7 +521,7 @@ module.exports = {
     'dakuten_child': '\u3073',
     'handakuten_child': '\u3074',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 5, 1]
+    'table': ['gojūon', 5, 1]
   },
 
 //check transliteration - bi or byi best?
@@ -529,7 +532,7 @@ module.exports = {
     'transliteration': 'byi',
     'dakuten_parent': '\u3072',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 3, 1]
+    'table': ['dakuten', 3, 1]
   },
 //check transliteration
   '\u3074': {
@@ -539,7 +542,7 @@ module.exports = {
     'transliteration': 'pyi',
     'handakuten_parent': '\u3072',
     'hiragana_type': 'handakuten',
-    'chart': ['dakuten', 4, 1]
+    'table': ['dakuten', 4, 1]
   },
 
   '\u3075': {
@@ -550,7 +553,7 @@ module.exports = {
     'dakuten_child': '\u3076',
     'handakuten_child': '\u3077',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 5, 2]
+    'table': ['gojūon', 5, 2]
   },
 
   '\u3076': {
@@ -560,7 +563,7 @@ module.exports = {
     'transliteration': 'bu',
     'dakuten_parent': '\u3075',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 3, 2]
+    'table': ['dakuten', 3, 2]
   },
 
   '\u3077': {
@@ -570,7 +573,7 @@ module.exports = {
     'transliteration': 'pu',
     'handakuten_parent': '\u3075',
     'hiragana_type': 'handakuten',
-    'chart': ['dakuten', 4, 2]
+    'table': ['dakuten', 4, 2]
   },
 
   '\u3078': {
@@ -581,7 +584,7 @@ module.exports = {
     'dakuten_child': '\u3079',
     'handakuten_child': '\u307A',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 5, 3]
+    'table': ['gojūon', 5, 3]
   },
 
   '\u3079': {
@@ -591,7 +594,7 @@ module.exports = {
     'transliteration': 'be',
     'dakuten_parent': '\u3078',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 3, 3]
+    'table': ['dakuten', 3, 3]
   },
 
   '\u307A': {
@@ -601,7 +604,7 @@ module.exports = {
     'transliteration': 'pe',
     'handakuten_parent': '\u3078',
     'hiragana_type': 'handakuten',
-    'chart': ['dakuten', 4, 3]
+    'table': ['dakuten', 4, 3]
   },
 
   '\u307B': {
@@ -612,7 +615,7 @@ module.exports = {
     'dakuten_child': '\u307C',
     'handakuten_child': '\u307D',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 5, 4]
+    'table': ['gojūon', 5, 4]
   },
 
   '\u307C': {
@@ -622,7 +625,7 @@ module.exports = {
     'transliteration': 'bo',
     'dakuten_parent': '\u307B',
     'hiragana_type': 'dakuten',
-    'chart': ['dakuten', 3, 4]
+    'table': ['dakuten', 3, 4]
   },
 
   '\u307D': {
@@ -632,7 +635,7 @@ module.exports = {
     'transliteration': 'po',
     'handakuten_parent': '\u307B',
     'hiragana_type': 'handakuten',
-    'chart': ['dakuten', 4, 4]
+    'table': ['dakuten', 4, 4]
   },
 
   '\u307E': {
@@ -641,7 +644,7 @@ module.exports = {
     'unicode': '\u307E',
     'transliteration': 'ma',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 6, 0]
+    'table': ['gojūon', 6, 0]
   },
 
   '\u307F': {
@@ -650,7 +653,7 @@ module.exports = {
     'unicode': '\u307F',
     'transliteration': 'mi',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 6, 1]
+    'table': ['gojūon', 6, 1]
   },
 
   '\u3080': {
@@ -659,7 +662,7 @@ module.exports = {
     'unicode': '\u3080',
     'transliteration': 'mu',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 6, 2]
+    'table': ['gojūon', 6, 2]
   },
 
   '\u3081': {
@@ -668,7 +671,7 @@ module.exports = {
     'unicode': '\u3081',
     'transliteration': 'me',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 6, 3]
+    'table': ['gojūon', 6, 3]
   },
 
   '\u3082': {
@@ -677,7 +680,7 @@ module.exports = {
     'unicode': '\u3082',
     'transliteration': 'mo',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 6, 4]
+    'table': ['gojūon', 6, 4]
   },
 
   '\u3083': {
@@ -696,7 +699,7 @@ module.exports = {
     'transliteration': 'ya',
     'yōon_child': '\u3083',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 7, 0]
+    'table': ['gojūon', 7, 0]
   },
 
   '\u3085': {
@@ -715,7 +718,7 @@ module.exports = {
     'transliteration': 'yu',
     'yōon_child': '\u3085',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 7, 2]
+    'table': ['gojūon', 7, 2]
   },
 
   '\u3087': {
@@ -734,7 +737,7 @@ module.exports = {
     'transliteration': 'yo',
     'yōon_child': '\u3087',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 7, 4]
+    'table': ['gojūon', 7, 4]
   },
 
 //ra or la?
@@ -744,7 +747,7 @@ module.exports = {
     'unicode': '\u3089',
     'transliteration': 'ra',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 8, 0]
+    'table': ['gojūon', 8, 0]
   },
 
   '\u308A': {
@@ -754,7 +757,7 @@ module.exports = {
     'transliteration': 'ri',
     'sound': 'res/snd/308A.ogg',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 8, 1]
+    'table': ['gojūon', 8, 1]
   },
 
   '\u308B': {
@@ -763,7 +766,7 @@ module.exports = {
     'unicode': '\u308B',
     'transliteration': 'ru',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 8, 2]
+    'table': ['gojūon', 8, 2]
   },
 
   '\u308C': {
@@ -772,7 +775,7 @@ module.exports = {
     'unicode': '\u308C',
     'transliteration': 're',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 8, 3]
+    'table': ['gojūon', 8, 3]
   },
 
   '\u308D': {
@@ -781,7 +784,7 @@ module.exports = {
     'unicode': '\u308D',
     'transliteration': 'ro',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 8, 4]
+    'table': ['gojūon', 8, 4]
   },
 
   '\u308F': {
@@ -790,7 +793,7 @@ module.exports = {
     'unicode': '\u308F',
     'transliteration': 'wa',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 9, 0]
+    'table': ['gojūon', 9, 0]
   },
 
 //check transliteration - o or wo best?
@@ -800,7 +803,7 @@ module.exports = {
     'unicode': '\u3092',
     'transliteration': 'o',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 9, 4]
+    'table': ['gojūon', 9, 4]
   },
 
 //changes sound depending on surrounding mora
@@ -810,7 +813,7 @@ module.exports = {
     'unicode': '\u3093',
     'transliteration': 'n',
     'hiragana_type': 'gojūon',
-    'chart': ['gojūon', 10, 0]
+    'table': ['gojūon', 10, 1]
   },
 
   //yōon
@@ -821,7 +824,7 @@ module.exports = {
     'unicode': '\u304d\u3083',
     'transliteration': 'kya',
     'hiragana_type': 'yōon_with_gojūon',
-    'chart': ['yōon', 0, 0]
+    'table': ['yōon', 0, 0]
   },
 
   '\u304D\u3085': {
@@ -830,7 +833,7 @@ module.exports = {
     'unicode': '\u304D\u3085',
     'transliteration': 'kyu',
     'hiragana_type': 'yōon_with_gojūon',
-    'chart': ['yōon', 0, 1]
+    'table': ['yōon', 0, 1]
   },
 
   '\u304D\u3087': {
@@ -839,7 +842,7 @@ module.exports = {
     'unicode': '\u304D\u3087',
     'transliteration': 'kyo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 0, 2]
+    'table': ['yōon', 0, 2]
   },
 
   '\u3057\u3083': {
@@ -848,7 +851,7 @@ module.exports = {
     'unicode': '\u3057\u3083',
     'transliteration': 'sha',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 1, 0]
+    'table': ['yōon', 1, 0]
   },
 
   '\u3057\u3085': {
@@ -857,7 +860,7 @@ module.exports = {
     'unicode': '\u3057\u3085',
     'transliteration': 'shu',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 1, 1]
+    'table': ['yōon', 1, 1]
   },
 
   '\u3057\u3087': {
@@ -866,7 +869,7 @@ module.exports = {
     'unicode': '\u3057\u3087',
     'transliteration': 'sho',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 1, 2]
+    'table': ['yōon', 1, 2]
   },
 
   '\u3061\u3083': {
@@ -875,7 +878,7 @@ module.exports = {
     'unicode': '\u3061\u3083',
     'transliteration': 'cha',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 2, 0]
+    'table': ['yōon', 2, 0]
   },
 
   '\u3061\u3085': {
@@ -884,7 +887,7 @@ module.exports = {
     'unicode': '\u3061\u3085',
     'transliteration': 'chu',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 2, 1]
+    'table': ['yōon', 2, 1]
   },
 
   '\u3061\u3087': {
@@ -893,7 +896,7 @@ module.exports = {
     'unicode': '\u3061\u3087',
     'transliteration': 'cho',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 2, 2]
+    'table': ['yōon', 2, 2]
   },
 
   '\u306B\u3083': {
@@ -902,7 +905,7 @@ module.exports = {
     'unicode': '\u306B\u3083',
     'transliteration': 'nya',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 3, 0]
+    'table': ['yōon', 3, 0]
   },
 
   '\u306B\u3085': {
@@ -911,7 +914,7 @@ module.exports = {
     'unicode': '\u3061\u3085',
     'transliteration': 'nyu',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 3, 1]
+    'table': ['yōon', 3, 1]
   },
 
   '\u306B\u3087': {
@@ -920,7 +923,7 @@ module.exports = {
     'unicode': '\u306B\u3087',
     'transliteration': 'nyo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 3, 2]
+    'table': ['yōon', 3, 2]
   },
 
   '\u3072\u3083': {
@@ -929,7 +932,7 @@ module.exports = {
     'unicode': '\u3072\u3083',
     'transliteration': 'hya',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 4, 0]
+    'table': ['yōon', 4, 0]
   },
 
   '\u3072\u3085': {
@@ -938,7 +941,7 @@ module.exports = {
     'unicode': '\u3072\u3085',
     'transliteration': 'hyu',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 4, 1]
+    'table': ['yōon', 4, 1]
   },
 
   '\u3072\u3087': {
@@ -947,7 +950,7 @@ module.exports = {
     'unicode': '\u3072\u3087',
     'transliteration': 'hyo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 4, 2]
+    'table': ['yōon', 4, 2]
   },
 
   '\u307F\u3083': {
@@ -956,7 +959,7 @@ module.exports = {
     'unicode': '\u307F\u3083',
     'transliteration': 'mya',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 5, 0]
+    'table': ['yōon', 5, 0]
   },
 
   '\u307F\u3085': {
@@ -965,7 +968,7 @@ module.exports = {
     'unicode': '\u307F\u3085',
     'transliteration': 'myu',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 5, 1]
+    'table': ['yōon', 5, 1]
   },
 
   '\u307F\u3087': {
@@ -974,7 +977,7 @@ module.exports = {
     'unicode': '\u307F\u3087',
     'transliteration': 'myo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 5, 2]
+    'table': ['yōon', 5, 2]
   },
 
   '\u308A\u3083': {
@@ -983,7 +986,7 @@ module.exports = {
     'unicode': '\u308A\u3083',
     'transliteration': 'rya',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 6, 0]
+    'table': ['yōon', 6, 0]
   },
 
   '\u308A\u3085': {
@@ -992,7 +995,7 @@ module.exports = {
     'unicode': '\u308A\u3085',
     'transliteration': 'ryu',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 6, 1]
+    'table': ['yōon', 6, 1]
   },
 
   '\u308A\u3087': {
@@ -1001,7 +1004,7 @@ module.exports = {
     'unicode': '\u308A\u3087',
     'transliteration': 'ryo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 6, 2]
+    'table': ['yōon', 6, 2]
   },
 
   '\u304E\u3083': {
@@ -1010,7 +1013,7 @@ module.exports = {
     'unicode': '\u304E\u3083',
     'transliteration': 'gya',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 7, 0]
+    'table': ['yōon', 7, 0]
   },
 
   '\u304E\u3085': {
@@ -1019,7 +1022,7 @@ module.exports = {
     'unicode': '\u304E\u3085',
     'transliteration': 'gyu',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 7, 1]
+    'table': ['yōon', 7, 1]
   },
 
   '\u304E\u3087': {
@@ -1028,7 +1031,7 @@ module.exports = {
     'unicode': '\u304E\u3087',
     'transliteration': 'gyo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 7, 2]
+    'table': ['yōon', 7, 2]
   },
 
 //check transliterations for next 3
@@ -1038,7 +1041,7 @@ module.exports = {
     'unicode': '\u3058\u3083',
     'transliteration': 'ja',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 8, 0]
+    'table': ['yōon', 8, 0]
   },
 
   '\u3058\u3085': {
@@ -1047,7 +1050,7 @@ module.exports = {
     'unicode': '\u3058\u3085',
     'transliteration': 'ju',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 8, 1]
+    'table': ['yōon', 8, 1]
   },
 
   '\u3058\u3087': {
@@ -1056,7 +1059,7 @@ module.exports = {
     'unicode': '\u3058\u3087',
     'transliteration': 'jo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 8, 2]
+    'table': ['yōon', 8, 2]
   },
 
   '\u3062\u3083': {
@@ -1065,7 +1068,7 @@ module.exports = {
     'unicode': '\u3062\u3083',
     'transliteration': 'ja',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 9, 0]
+    'table': ['yōon', 9, 0]
   },
 
   '\u3062\u3085': {
@@ -1074,7 +1077,7 @@ module.exports = {
     'unicode': '\u3062\u3085',
     'transliteration': 'ju',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 9, 1]
+    'table': ['yōon', 9, 1]
   },
 
   '\u3062\u3087': {
@@ -1083,7 +1086,7 @@ module.exports = {
     'unicode': '\u3062\u3087',
     'transliteration': 'jo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 9, 2]
+    'table': ['yōon', 9, 2]
   },
 
   '\u3073\u3083': {
@@ -1092,7 +1095,7 @@ module.exports = {
     'unicode': '\u3073\u3083',
     'transliteration': 'bya',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 10, 0]
+    'table': ['yōon', 10, 0]
   },
 
   '\u3073\u3085': {
@@ -1101,7 +1104,7 @@ module.exports = {
     'unicode': '\u3073\u3085',
     'transliteration': 'byu',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 10, 1]
+    'table': ['yōon', 10, 1]
   },
 
   '\u3073\u3087': {
@@ -1110,7 +1113,7 @@ module.exports = {
     'unicode': '\u3073\u3087',
     'transliteration': 'byo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 10, 2]
+    'table': ['yōon', 10, 2]
   },
 
   '\u3074\u3083': {
@@ -1119,7 +1122,7 @@ module.exports = {
     'unicode': '\u3074\u3083',
     'transliteration': 'pya',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 11, 0]
+    'table': ['yōon', 11, 0]
   },
 
   '\u3074\u3085': {
@@ -1128,7 +1131,7 @@ module.exports = {
     'unicode': '\u3074\u3085',
     'transliteration': 'pyu',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 11, 1]
+    'table': ['yōon', 11, 1]
   },
 
   '\u3074\u3087': {
@@ -1137,7 +1140,7 @@ module.exports = {
     'unicode': '\u3074\u3087',
     'transliteration': 'pyo',
     'hiragana_type': 'yōon',
-    'chart': ['yōon', 11, 0]
+    'table': ['yōon', 11, 0]
   }
 
 }

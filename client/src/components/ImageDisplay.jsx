@@ -16,7 +16,8 @@ const ImageDisplay = React.createClass({
             hideTable={this.props.hideTable}
             hiragana={this.props.hiragana}
             setTableType={this.props.setTableType}
-            tableType={this.props.tableType}/>
+            tableType={this.props.tableType}
+            tableArrays={this.props.tableArrays}/>
         </div>
       );
     } else if (this.props.revealed === this.props.hintsNo) {
