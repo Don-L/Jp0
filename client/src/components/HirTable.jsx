@@ -7,19 +7,16 @@ const HirTable = React.createClass({
 
   render: function () {
     let tabs = this.getTabs();
-    let gojuonTable = this.getTable(this.props.tableArrays[0], ['', 'a', 'i', 'u', 'e', 'o'], ['', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w', '']);
-    let dakutenTable = this.getTable(this.props.tableArrays[1], ['', 'a', 'i', 'u', 'e', 'o'], ['g', 'z', 'd', 'b', 'p']);
-    let yoonTable = this.getTable(this.props.tableArrays[2], ['', 'a', 'u', 'o'], ['ky', 'sh', 'ch', 'ny', 'hy', 'my', 'ry', 'gy', 'j', 'j', 'by', 'py']);
-
+    let table;
     if (this.props.tableType == 'dakuten') {
-      return <div>{tabs}{dakutenTable}</div>;
+      table = this.getTable(this.props.tableArrays[1], ['', 'a', 'i', 'u', 'e', 'o'], ['g', 'z', 'd', 'b', 'p']);
     } else if (this.props.tableType == 'yōon') {
-      return <div>{tabs}{yoonTable}</div>;
+      table = this.getTable(this.props.tableArrays[2], ['', 'a', 'u', 'o'], ['ky', 'sh', 'ch', 'ny', 'hy', 'my', 'ry', 'gy', 'j', 'j', 'by', 'py']);
     } else {
-      return <div>{tabs}{gojuonTable}</div>;
+      table = this.getTable(this.props.tableArrays[0], ['', 'a', 'i', 'u', 'e', 'o'], ['', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w', '']);
     }
+    return <div>{tabs}{table}</div>;
   },
-
 
   getTabs: function () {
     return (
@@ -31,7 +28,6 @@ const HirTable = React.createClass({
       </div>
     );
   },
-
 
   getTable: function (tableDataArr, columnHeadingsArr, rowHeadingsArr) {
     let columnHeadings = this.getColumnHeadings(columnHeadingsArr);
@@ -48,7 +44,6 @@ const HirTable = React.createClass({
     );
   },
 
-
   getColumnHeadings: function (columnHeadingsArr) {
     let columnHeadings = [];
     for (let i = 0; i < columnHeadingsArr.length; i++) {
@@ -57,11 +52,9 @@ const HirTable = React.createClass({
     return columnHeadings;
   },
 
-
   getColHeading: function (heading, keyIndex) {
     return <th key={'colHeading ' + heading + keyIndex}><i>{heading}</i></th>;
   },
-
 
   getTableRows: function (tableDataArr, rowHeadingsArr) {
     let rowArraysArr = this.getRowArrays(tableDataArr);
@@ -71,7 +64,6 @@ const HirTable = React.createClass({
     }
     return rows;
   },
-
 
   getRow: function (rowArray, rowHeading, keyIndex) {
     let rowCells = [];
@@ -87,7 +79,6 @@ const HirTable = React.createClass({
     );
   },
 
-
   getCell: function (hiragana, keyIndex) {
     return <TableCell
       key={'TableCell ' + hiragana['char'] + keyIndex}
@@ -95,34 +86,53 @@ const HirTable = React.createClass({
       char={hiragana['char']}/>;
   },
 
-
   getRowArrays: function (tableDataArr) {
-    let rowArraysArr = [];
-    tableDataArr.sort(function (a, b) {
-      return a['table'][1] - b['table'][1];
-    });
-    let lastRowIndex = tableDataArr[tableDataArr.length - 1]['table'][1];
-    for (let i = 0; i <= lastRowIndex; i++) {
-      rowArraysArr.push([]);
-    }
-    for (let j = 0; j <= lastRowIndex; j++) {
-      for (let i = 0; i < tableDataArr.length; i++) {
-        if (tableDataArr[i]['table'][1] === j) {
-          rowArraysArr[j].push(tableDataArr[i]);
-        }
-      }
-    }
-    for (let i = 0; i <= lastRowIndex; i++) {
-      rowArraysArr[i].sort(function (a, b) {
-        return a['table'][2] - b['table'][2];
-      });
-    }
+    let tableDataSortedByRow = this.sortDataByRow(tableDataArr);
+    let lastRowIndex = tableDataSortedByRow[tableDataArr.length - 1]['table'][1];
+    let rowArraysArr = this.initialiseRowArraysArr(tableDataSortedByRow, lastRowIndex);
+
+    rowArraysArr = this.populateRowArraysArr(rowArraysArr, tableDataSortedByRow, lastRowIndex);
+    rowArraysArr = this.sortRowArraysByColumn(rowArraysArr, lastRowIndex);
     if (tableDataArr[0]['table'][0] === 'gojūon') {
       rowArraysArr = this.addGojuonTableBlanks(rowArraysArr);
     }
     return rowArraysArr;
   },
 
+  sortDataByRow: function (tableDataArr) {
+    tableDataArr.sort(function (a, b) {
+      return a['table'][1] - b['table'][1];
+    });
+    return tableDataArr;
+  },
+
+  initialiseRowArraysArr: function (tableDataSortedByRow, lastRowIndex) {
+    let rowArraysArr = [];
+    for (let i = 0; i <= lastRowIndex; i++) {
+      rowArraysArr.push([]);
+    }
+    return rowArraysArr;
+  },
+
+  populateRowArraysArr: function (rowArraysArr, tableDataSortedByRow, lastRowIndex) {
+    for (let j = 0; j <= lastRowIndex; j++) {
+      for (let i = 0; i < tableDataSortedByRow.length; i++) {
+        if (tableDataSortedByRow[i]['table'][1] === j) {
+          rowArraysArr[j].push(tableDataSortedByRow[i]);
+        }
+      }
+    }
+    return rowArraysArr;
+  },
+
+  sortRowArraysByColumn: function (rowArraysArr, lastRowIndex) {
+    for (let i = 0; i <= lastRowIndex; i++) {
+      rowArraysArr[i].sort(function (a, b) {
+        return a['table'][2] - b['table'][2];
+      });
+    }
+    return rowArraysArr;
+  },
 
   addGojuonTableBlanks: function (rowArraysArr) {
     let newRow7 = [];
