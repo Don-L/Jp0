@@ -14,12 +14,24 @@ const HirTable = React.createClass({
     let dakutenArray = this.props.tableArrays[1];
     let yoonArray = this.props.tableArrays[2];
 
-    let gojuonTable = this.getTable(gojuonArray, ['', 'a', 'i', 'u', 'e', 'o'], ['', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w', '']);
+    let gojuonTab = this.getTable(gojuonArray, ['', 'a', 'i', 'u', 'e', 'o'], ['', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w', '']);
+
+    // console.log(gojuonTab);
+
+    return <div>{tabs}{gojuonTab}</div>;
+
+    // if (this.props.tableType == 'gojūon') {
+    //   return gojuonTable;
+    // } else if (this.props.tableType == 'dakuten') {
+    //   return dakuonTable;
+    // } else if (this.props.tableType == 'yōon') {
+    //   return yoonTable;
+    // } else {
+    //   return gojuonTable;
+    // }
 
 
-
-
-    let gojonTable =
+    let gojuonTable =
     <div>
       {tabs}
       <table>
@@ -508,15 +520,16 @@ const HirTable = React.createClass({
       </table>
     </div>;
 
-    if (this.props.tableType == 'gojūon') {
-      return gojuonTable;
-    } else if (this.props.tableType == 'dakuten') {
-      return dakuonTable;
-    } else if (this.props.tableType == 'yōon') {
-      return yoonTable;
-    } else {
-      return gojuonTable;
-    }
+    // if (this.props.tableType == 'gojūon') {
+    //   return gojuonTable;
+    // } else if (this.props.tableType == 'dakuten') {
+    //   return dakuonTable;
+    // } else if (this.props.tableType == 'yōon') {
+    //   return yoonTable;
+    // } else {
+    //   return gojuonTable;
+    // }
+
 
   },
 
@@ -534,6 +547,7 @@ const HirTable = React.createClass({
   getTable: function (tableDataArr, columnHeadingsArr, rowHeadingsArr) {
     let columnHeadings = this.getColumnHeadings(columnHeadingsArr);
     let rowsAndRowHeadings = this.getTableRows(tableDataArr, rowHeadingsArr);
+    console.log(columnHeadingsArr);
     return (
       <table>
         <tbody>
@@ -547,20 +561,24 @@ const HirTable = React.createClass({
   },
 
   getColumnHeadings: function (columnHeadingsArr) {
+    let columnHeadings = [];
     for (let i = 0; i < columnHeadingsArr.length; i++) {
-      this.getColHeading(columnHeadingsArr[i]);
+      columnHeadings.push(this.getColHeading(columnHeadingsArr[i]));
     }
+    return columnHeadings;
   },
 
   getColHeading: function (heading) {
-    return <th>{heading}</th>;
+    return <th><i>{heading}</i></th>;
   },
 
   getTableRows: function (tableDataArr, rowHeadingsArr) {
     let rowArraysArr = this.getRowArrays(tableDataArr);
+    let rows = [];
     for (let i = 0; i < rowArraysArr.length; i++) {
-      this.getRow(rowArraysArr[i], rowHeadingsArr[i]);
+      rows.push(this.getRow(rowArraysArr[i], rowHeadingsArr[i]));
     }
+    return rows;
   },
 
   getRow: function (rowArray, rowHeading) {
@@ -570,8 +588,8 @@ const HirTable = React.createClass({
       rowCells.push(cell);
     }
     return (
-      <tr>
-        <th>rowHeading</th>
+      <tr align="center">
+        <th><i>{rowHeading}</i></th>
         {rowCells}
       </tr>
     );

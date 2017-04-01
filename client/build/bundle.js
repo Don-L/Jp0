@@ -22431,9 +22431,29 @@
 	    var dakutenArray = this.props.tableArrays[1];
 	    var yoonArray = this.props.tableArrays[2];
 	
-	    var gojuonTable = this.getTable(gojuonArray, ['', 'a', 'i', 'u', 'e', 'o'], ['', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w', '']);
+	    var gojuonTab = this.getTable(gojuonArray, ['', 'a', 'i', 'u', 'e', 'o'], ['', 'k', 's', 't', 'n', 'h', 'm', 'y', 'r', 'w', '']);
 	
-	    var gojonTable = React.createElement(
+	    // console.log(gojuonTab);
+	
+	    return React.createElement(
+	      'div',
+	      null,
+	      tabs,
+	      gojuonTab
+	    );
+	
+	    // if (this.props.tableType == 'gojūon') {
+	    //   return gojuonTable;
+	    // } else if (this.props.tableType == 'dakuten') {
+	    //   return dakuonTable;
+	    // } else if (this.props.tableType == 'yōon') {
+	    //   return yoonTable;
+	    // } else {
+	    //   return gojuonTable;
+	    // }
+	
+	
+	    var gojuonTable = React.createElement(
 	      'div',
 	      null,
 	      tabs,
@@ -23300,15 +23320,16 @@
 	      )
 	    );
 	
-	    if (this.props.tableType == 'gojūon') {
-	      return gojuonTable;
-	    } else if (this.props.tableType == 'dakuten') {
-	      return dakuonTable;
-	    } else if (this.props.tableType == 'yōon') {
-	      return yoonTable;
-	    } else {
-	      return gojuonTable;
-	    }
+	    // if (this.props.tableType == 'gojūon') {
+	    //   return gojuonTable;
+	    // } else if (this.props.tableType == 'dakuten') {
+	    //   return dakuonTable;
+	    // } else if (this.props.tableType == 'yōon') {
+	    //   return yoonTable;
+	    // } else {
+	    //   return gojuonTable;
+	    // }
+	
 	  },
 	
 	  getTabs: function getTabs() {
@@ -23325,6 +23346,7 @@
 	  getTable: function getTable(tableDataArr, columnHeadingsArr, rowHeadingsArr) {
 	    var columnHeadings = this.getColumnHeadings(columnHeadingsArr);
 	    var rowsAndRowHeadings = this.getTableRows(tableDataArr, rowHeadingsArr);
+	    console.log(columnHeadingsArr);
 	    return React.createElement(
 	      'table',
 	      null,
@@ -23342,24 +23364,32 @@
 	  },
 	
 	  getColumnHeadings: function getColumnHeadings(columnHeadingsArr) {
+	    var columnHeadings = [];
 	    for (var i = 0; i < columnHeadingsArr.length; i++) {
-	      this.getColHeading(columnHeadingsArr[i]);
+	      columnHeadings.push(this.getColHeading(columnHeadingsArr[i]));
 	    }
+	    return columnHeadings;
 	  },
 	
 	  getColHeading: function getColHeading(heading) {
 	    return React.createElement(
 	      'th',
 	      null,
-	      heading
+	      React.createElement(
+	        'i',
+	        null,
+	        heading
+	      )
 	    );
 	  },
 	
 	  getTableRows: function getTableRows(tableDataArr, rowHeadingsArr) {
 	    var rowArraysArr = this.getRowArrays(tableDataArr);
+	    var rows = [];
 	    for (var i = 0; i < rowArraysArr.length; i++) {
-	      this.getRow(rowArraysArr[i], rowHeadingsArr[i]);
+	      rows.push(this.getRow(rowArraysArr[i], rowHeadingsArr[i]));
 	    }
+	    return rows;
 	  },
 	
 	  getRow: function getRow(rowArray, rowHeading) {
@@ -23370,11 +23400,15 @@
 	    }
 	    return React.createElement(
 	      'tr',
-	      null,
+	      { align: 'center' },
 	      React.createElement(
 	        'th',
 	        null,
-	        'rowHeading'
+	        React.createElement(
+	          'i',
+	          null,
+	          rowHeading
+	        )
 	      ),
 	      rowCells
 	    );
@@ -23473,51 +23507,27 @@
 	    //   }
 	    // }
 	
-	    if (this.props.tableChar.char === 'ん') {
-	      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
-	        return React.createElement(
-	          'td',
-	          { className: 'selected-cell' },
-	          this.props.tableChar.char,
-	          ' (',
-	          React.createElement(
-	            'strong',
-	            null,
-	            'n'
-	          ),
-	          ')'
-	        );
-	      } else {
-	        return React.createElement(
-	          'td',
-	          null,
-	          this.props.tableChar.char,
-	          ' (',
-	          React.createElement(
-	            'strong',
-	            null,
-	            'n'
-	          ),
-	          ')'
-	        );
-	      }
-	    } else if (this.props.tableChar.char === '') {
-	      return React.createElement('td', { className: 'blank-cell' });
-	    } else {
-	      if (this.props.tableSelected.indexOf(this.props.tableChar.char) > -1) {
-	        return React.createElement(
-	          'td',
-	          { className: 'selected-cell' },
-	          this.props.tableChar.char
-	        );
-	      } else {
-	        return React.createElement(
-	          'td',
-	          null,
-	          this.props.tableChar.char
-	        );
-	      }
-	    }
+	    // if (this.props.char === 'ん') {
+	    //   if (this.props.tableSelected.indexOf(this.props.char) > -1) {
+	    //     return <td className='selected-cell'>{this.props.char} (<strong>n</strong>)</td>
+	    //   } else {
+	    //     return <td>{this.props.char} (<strong>n</strong>)</td>
+	    //   }
+	    // } else if (this.props.char === '') {
+	    //   return <td className='blank-cell'></td>
+	    // } else {
+	    //   if (this.props.tableSelected.indexOf(this.props.char) > -1) {
+	    //     return <td className='selected-cell'>{this.props.char}</td>
+	    //   } else {
+	    //     return <td>{this.props.char}</td>
+	    //   }
+	    // }
+	
+	    return React.createElement(
+	      'td',
+	      null,
+	      this.props.char
+	    );
 	  },
 	
 	  setTableType: function setTableType() {
