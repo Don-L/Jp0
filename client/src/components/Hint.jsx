@@ -43,12 +43,12 @@ const Hint = React.createClass({
 
 
   mouseOverHint: function () {
-    this.props.changeHirCharColour(this.props.hintIndex, 'on');
+    console.log('mouseover');
   },
 
 
   mouseLeaveHint: function () {
-    this.props.changeHirCharColour(this.props.hintIndex, 'off');
+    console.log('mouseleave');
   }
 
 

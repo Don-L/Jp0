@@ -40,7 +40,7 @@ const Jp0 = React.createClass({
             setTableType={this.setTableType}
             hiragana={this.state.hiragana}/>
           <HintDisplay
-            changeHirCharColour={this.changeHirCharColour}
+
             hintClicked={this.revealHint}
             hintsList={hints}
             revealed={this.state.revealed}
@@ -84,6 +84,7 @@ const Jp0 = React.createClass({
                  'T':{'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init', 'chart': ['gojūon', 0, 0]}},
       currentIndex: 0,
       hintsNo: 4,
+      hidden: [],
       revealed: [],
       highlightingHir: false,
       tableDisplayed: false,
@@ -94,23 +95,22 @@ const Jp0 = React.createClass({
 
 
   componentDidMount: function () {
-
-    let hintsNo = Cards[0]['hiragana'].length;
-
-
-
     this.setState({cards: Cards,
                    hiragana: Hiragana,
                    currentIndex: 0,
+                   hidden: this.initialiseHiddenState(Cards[0]['hiragana'].length),
                    revealed: [],
-                   hintsNo: hintsNo});
-
-                  //  this._isMounted = true;
+                   hintsNo: Cards[0]['hiragana'].length});
   },
 
-
-  componentWillUnmount: function () {
-    this._isMounted = false;
+  initialiseHiddenState: function (wordLength) {
+    let hidden = [];
+    let i = 0;
+    while (i < wordLength) {
+      hidden.push(i);
+      i++;
+    }
+    return hidden;
   },
 
 
@@ -153,10 +153,9 @@ const Jp0 = React.createClass({
     let firstHidden = this.findFirstHidden();
     let hintsNo = this.state.hintsNo;
     let revealed = this.state.revealed;
-    if (firstHidden === -1) {
+    if (!firstHidden) {
       this.getNextCard();
     } else {
-      // this.changeHirCharColour(firstHidden + 1, 'on');
       let newRevealed = this.state.revealed;
       newRevealed.push(firstHidden);
       newRevealed = newRevealed.sort(function(a, b){return a-b});
@@ -169,34 +168,33 @@ const Jp0 = React.createClass({
 
 
   findFirstHidden: function () {
-    let revealed = this.state.revealed;
-    let hintsNo = this.state.hintsNo;
-    if (hintsNo === revealed.length) {
-      return -1;
-    } else if (revealed.indexOf(0) === -1) {
-      return 0;
-    } else {
-      for (let i=0; i<revealed.length; i++) {
-        if (revealed[i + 1] - revealed[i] >= 2 || revealed.indexOf(i + 1) === -1) {
-          return(i + 1);
-        }
-      }
-    }
+    // let revealed = this.state.revealed;
+    // let hintsNo = this.state.hintsNo;
+    // if (hintsNo === revealed.length) {
+    //   return -1;
+    // } else if (revealed.indexOf(0) === -1) {
+    //   return 0;
+    // } else {
+    //   for (let i=0; i<revealed.length; i++) {
+    //     if (revealed[i + 1] - revealed[i] >= 2 || revealed.indexOf(i + 1) === -1) {
+    //       return(i + 1);
+    //     }
+    //   }
+    // }
+    return this.state.hidden[0];
   },
 
 
   getNextCard: function () {
 
-    for (let i = 0; i < this.state.cards[this.state.currentIndex].hiragana.length; i++) {
-      this.changeHirCharColour(i, 'off');
-    }
-
     let newCurrent = this.state.currentIndex + 1;
     let hintsNo = Cards[newCurrent]['hiragana'].length;
+    let hidden = this.initialiseHiddenState(hintsNo);
 
     this.setState({cards: Cards,
                    hiragana: Hiragana,
                    currentIndex: newCurrent,
+                   hidden: hidden,
                    revealed: [],
                    hintsNo: hintsNo,
                    tableDisplayed: false,
@@ -217,23 +215,6 @@ const Jp0 = React.createClass({
   },
 
 
-  changeHirCharColour: function (hintIndex, onOrOff) {
-    // console.log('mousey mouseuy ', hintIndex);
-    // if (hintIndex === 'next') {
-    //   hintIndex = this.findFirstHidden();
-    // }
-    // let char = document.getElementById('HirCharId' + hintIndex);
-    // if (onOrOff === 'on'){
-    //   if (char.className.indexOf('hint-selected') === -1) {
-    //     char.className += ' hint-selected';
-    //   }
-    // } else {
-    //   char.className = char.className.substr(0,8);
-    // }
-    console.log('hello!');
-  },
-
-
   toggleHighlightingHir: function () {
     if (this.state.highlightingHir === false) {
       this.setState({highlightingHir: true});
@@ -243,10 +224,26 @@ const Jp0 = React.createClass({
   },
 
 
-  revealHint: function (index) {
+  // revealHint: function (index) {
+  //   let revealed = this.state.revealed;
+  //   revealed.push(index);
+  //   if (revealed.length === this.state.hintsNo) {
+  //     this.setState(
+  //       {revealed: revealed,
+  //        tableDisplayed: false}
+  //     );
+  //   } else {
+  //     this.setState(
+  //       {revealed: revealed}
+  //     );
+  //   }
+  // },
+
+  revealHint: function (hintIndex) {
+    console.log('reveling!');
     let revealed = this.state.revealed;
-    revealed.push(index);
-    this.changeHirCharColour(index, 'on');
+    this.removeFromHiddenState(hintIndex);
+    revealed.push(hintIndex);
     if (revealed.length === this.state.hintsNo) {
       this.setState(
         {revealed: revealed,
@@ -257,6 +254,13 @@ const Jp0 = React.createClass({
         {revealed: revealed}
       );
     }
+  },
+
+  removeFromHiddenState: function (hintIndex) {
+    let hidden = this.state.hidden;
+    let i = hidden.indexOf(hintIndex);
+    hidden = hidden.splice(i, 1);
+    this.setState({hidden: hidden});
   },
 
 
@@ -290,6 +294,13 @@ const Jp0 = React.createClass({
     }
   },
 
+  //showTableWithAllSelected: function () {
+  //   if (this.state.tableDisplayed == true) {
+  //     this.hideTable();
+  //   } else {
+  //
+  //   }
+  // },
 
   hideTable: function () {
     this.setState({tableDisplayed: false});
@@ -317,34 +328,3 @@ const Jp0 = React.createClass({
 });
 
 module.exports = Jp0;
-
-// nextHintButtonClicked: function () {
-//   console.log('click!!');
-//
-//   let firstHidden = this.findFirstHidden();
-//
-//   let hintsNo = this.state.hintsNo;
-//   let revealed = this.state.revealed;
-//
-//   if (hintsNo === revealed.length) {
-//     this.getNextCard();
-//   } else if (revealed.length === 0) {
-//     // let sound = new Audio(this.state.hiragana[this.state.cards[this.state.currentIndex]['hiragana'][0]]['sound']);
-//     // sound.play();
-//     this.setState({revealed: [0]});
-//   } else if (revealed.length === hintsNo - 1) {
-//     // let sound = new Audio(this.state.hiragana[this.state.cards[this.state.currentIndex]['hiragana'][this.state.hintsNo - 1]]['sound']);
-//     // sound.play();
-//     let lastRevealed = revealed[revealed.length - 1];
-//     let newRevealed = lastRevealed + 1;
-//     revealed.push(newRevealed);
-//     this.setState({revealed: revealed});
-//   } else {
-//     let lastRevealed = revealed[revealed.length - 1];
-//     let newRevealed = lastRevealed + 1;
-//     revealed.push(newRevealed);
-//     // let sound = new Audio(this.state.hiragana[this.state.cards[this.state.currentIndex]['hiragana'][revealed.length - 1]]['sound']);
-//     // sound.play();
-//     this.setState({revealed: revealed});
-//   }
-// },
