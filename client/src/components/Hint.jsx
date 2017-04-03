@@ -1,7 +1,6 @@
 const React = require('react');
 const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
-
 const Hint = React.createClass({
 
   render: function () {
@@ -9,16 +8,29 @@ const Hint = React.createClass({
     let revealed = this.props.revealed;
     let hintIndex = this.props.hintIndex;
 
+    let highlightClass = '';
+
+    if (this.props.highlightStatus) {
+      highlightClass = ' highlight';
+    }
+
+
+
     if (revealed.indexOf(hintIndex) > -1) {
       return (
-          <ReactCSSTransitionGroup
-            transitionName="example"
-            transitionAppear={true}
-            transitionAppearTimeout={200}
-            transitionEnter={false}
-            transitionLeave={false}>
+        <ReactCSSTransitionGroup
+          transitionName="example"
+          transitionAppear={true}
+          transitionAppearTimeout={200}
+          transitionEnter={false}
+          transitionLeave={false}>
           <div className='Hint'>
-          <p className='Revealed-Hint' onMouseOver={this.mouseOverHint}>{this.props.hint}</p>
+            <p
+              className={'Revealed-Hint' + highlightClass}
+              onMouseOver={this.mouseOverHint}
+              onMouseLeave={this.mouseLeaveHint}>
+              {this.props.hint}
+            </p>
           </div>
         </ReactCSSTransitionGroup>
       );
@@ -29,7 +41,13 @@ const Hint = React.createClass({
       }
       return (
         <div className='Hint'>
-          <p onMouseOver={this.mouseOverHint} onMouseLeave={this.mouseLeaveHint} onClick={this.hintClicked} className='Hidden-Hint'>{blanks}</p>
+          <p
+            onMouseOver={this.mouseOverHint}
+            onMouseLeave={this.mouseLeaveHint}
+            onClick={this.hintClicked}
+            className={'Hidden-Hint' + highlightClass}>
+            {blanks}
+          </p>
         </div>
       );
     }
@@ -43,11 +61,12 @@ const Hint = React.createClass({
 
 
   mouseOverHint: function () {
-    this.props.highlightSet(this.props.hintIndex);
+    this.props.setHighlightGroup(this.props.hintIndex, 'on');
   },
 
 
   mouseLeaveHint: function () {
+    this.props.setHighlightGroup(this.props.hintIndex, 'off');
   }
 
 

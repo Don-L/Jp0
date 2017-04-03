@@ -9,11 +9,18 @@ const HiraganaDisplay = React.createClass({
     let nodes = [];
 
     for (let i = 0; i < this.props.hirChars.length; i++) {
-      nodes.push(<HirChar key={i}
-                          hirIndex={i}
-                          id={'HirCharId' + i}
-                          nextUp={this.props.nextUp}
-                          showTableWithSelected={this.props.showTableWithSelected} char={this.props.hirChars[i]} />);
+      let highlightStatus = this.getHighlightStatus(i);
+      nodes.push(
+        <HirChar
+          key={i}
+          hirIndex={i}
+          id={'HirCharId' + i}
+          nextUp={this.props.nextUp}
+          showTableWithSelected={this.props.showTableWithSelected}
+          char={this.props.hirChars[i]}
+          highlightStatus={highlightStatus}
+          setHighlightGroup={this.props.setHighlightGroup}/>
+      );
     };
 
     var flattened = this.props.hirChars.reduce(function(a, b) {
@@ -28,6 +35,16 @@ const HiraganaDisplay = React.createClass({
       </div>
     );
 
+  },
+
+  getHighlightStatus: function (i) {
+    let highlightStatus;
+    if (this.props.highlightGroup != i && this.props.highlightGroup != 'all') {
+      highlightStatus = false;
+    } else {
+      highlightStatus = true;
+    }
+    return highlightStatus;
   }
 
 

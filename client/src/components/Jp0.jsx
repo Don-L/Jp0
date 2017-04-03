@@ -33,20 +33,25 @@ const Jp0 = React.createClass({
             hintsList={this.getHints(this.state.cards[this.state.currentIndex])}
             revealed={this.state.revealed}
             tableDisplayed={this.state.tableDisplayed}
-            highlightSet={this.highlightSet}/>
+            highlightGroup={this.state.highlightGroup}
+            setHighlightGroup={this.setHighlightGroup}/>
         </div>
         <HiraganaDisplay
-          hirChars={this.state.cards[this.state.currentIndex]['hiragana']} showTableWithSelected={this.showTableWithSelected}
-          nextUp={this.state.hidden[0]}/>
+          hirChars={this.state.cards[this.state.currentIndex]['hiragana']}
+          showTableWithSelected={this.showTableWithSelected}
+          highlightGroup={this.state.highlightGroup}
+          setHighlightGroup={this.setHighlightGroup}/>
         <KanjiDisplay
           kanjiChars={this.state.cards[this.state.currentIndex]['kanji']}
           showTableWithAllSelected={this.showTableWithAllSelected} />
         <Controller
-          nextCardButtonClicked={this.getNextCard}
+          getNextCard={this.getNextCard}
           showNextHintOrNewCard={this.showNextHintOrNewCard}
           revealAll={this.revealAll}
           hintsNo={this.state.cards[this.state.currentIndex]['hiragana'].length}
-          revealed={this.state.revealed}/>
+          revealed={this.state.revealed}
+          hidden={this.state.hidden}
+          setHighlightGroup={this.setHighlightGroup}/>
       </div>
     );
   },
@@ -69,6 +74,7 @@ const Jp0 = React.createClass({
       currentIndex: 0,
       hidden: [],
       revealed: [],
+      highlightGroup: null,
       tableDisplayed: false,
       tableType: 'gojūon',
       tableSelected: []
@@ -84,8 +90,12 @@ const Jp0 = React.createClass({
                    revealed: []});
   },
 
-  highlightSet: function (x) {
-    console.log('highlightSet', x);
+  setHighlightGroup: function (hintOrHirIndex, onOrOff) {
+    if (onOrOff === 'on') {
+      this.setState({highlightGroup: hintOrHirIndex});
+    } else {
+      this.setState({highlightGroup: null});
+    }
   },
 
   getHints: function (card) {
@@ -147,17 +157,22 @@ const Jp0 = React.createClass({
     }
   },
 
-  getNextCard: function () {
-
+  getNextCard: function (nextCardButtonClicked) {
     let newCurrent = this.state.currentIndex + 1;
     let hintsNo = Cards[newCurrent]['hiragana'].length;
     let hidden = this.initialiseHiddenState(hintsNo);
+    let highlightGroup = null;
+
+    if (!nextCardButtonClicked) {
+      highlightGroup = 0;
+    }
 
     this.setState({cards: Cards,
                    hiragana: Hiragana,
                    currentIndex: newCurrent,
                    hidden: hidden,
                    revealed: [],
+                   highlightGroup: highlightGroup,
                    tableDisplayed: false,
                    tableType: 'gojūon',
                    tableSelected: []});

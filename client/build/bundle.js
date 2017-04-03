@@ -19795,20 +19795,25 @@
 	          hintsList: this.getHints(this.state.cards[this.state.currentIndex]),
 	          revealed: this.state.revealed,
 	          tableDisplayed: this.state.tableDisplayed,
-	          highlightSet: this.highlightSet })
+	          highlightGroup: this.state.highlightGroup,
+	          setHighlightGroup: this.setHighlightGroup })
 	      ),
 	      React.createElement(HiraganaDisplay, {
-	        hirChars: this.state.cards[this.state.currentIndex]['hiragana'], showTableWithSelected: this.showTableWithSelected,
-	        nextUp: this.state.hidden[0] }),
+	        hirChars: this.state.cards[this.state.currentIndex]['hiragana'],
+	        showTableWithSelected: this.showTableWithSelected,
+	        highlightGroup: this.state.highlightGroup,
+	        setHighlightGroup: this.setHighlightGroup }),
 	      React.createElement(KanjiDisplay, {
 	        kanjiChars: this.state.cards[this.state.currentIndex]['kanji'],
 	        showTableWithAllSelected: this.showTableWithAllSelected }),
 	      React.createElement(Controller, {
-	        nextCardButtonClicked: this.getNextCard,
+	        getNextCard: this.getNextCard,
 	        showNextHintOrNewCard: this.showNextHintOrNewCard,
 	        revealAll: this.revealAll,
 	        hintsNo: this.state.cards[this.state.currentIndex]['hiragana'].length,
-	        revealed: this.state.revealed })
+	        revealed: this.state.revealed,
+	        hidden: this.state.hidden,
+	        setHighlightGroup: this.setHighlightGroup })
 	    );
 	  },
 	
@@ -19828,6 +19833,7 @@
 	      currentIndex: 0,
 	      hidden: [],
 	      revealed: [],
+	      highlightGroup: null,
 	      tableDisplayed: false,
 	      tableType: 'gojūon',
 	      tableSelected: []
@@ -19843,8 +19849,12 @@
 	      revealed: [] });
 	  },
 	
-	  highlightSet: function highlightSet(x) {
-	    console.log('highlightSet', x);
+	  setHighlightGroup: function setHighlightGroup(hintOrHirIndex, onOrOff) {
+	    if (onOrOff === 'on') {
+	      this.setState({ highlightGroup: hintOrHirIndex });
+	    } else {
+	      this.setState({ highlightGroup: null });
+	    }
 	  },
 	
 	  getHints: function getHints(card) {
@@ -19950,17 +19960,22 @@
 	    }
 	  },
 	
-	  getNextCard: function getNextCard() {
-	
+	  getNextCard: function getNextCard(nextCardButtonClicked) {
 	    var newCurrent = this.state.currentIndex + 1;
 	    var hintsNo = Cards[newCurrent]['hiragana'].length;
 	    var hidden = this.initialiseHiddenState(hintsNo);
+	    var highlightGroup = null;
+	
+	    if (!nextCardButtonClicked) {
+	      highlightGroup = 0;
+	    }
 	
 	    this.setState({ cards: Cards,
 	      hiragana: Hiragana,
 	      currentIndex: newCurrent,
 	      hidden: hidden,
 	      revealed: [],
+	      highlightGroup: highlightGroup,
 	      tableDisplayed: false,
 	      tableType: 'gojūon',
 	      tableSelected: [] });
@@ -21291,11 +21306,16 @@
 	    var nodes = [];
 	
 	    for (var i = 0; i < this.props.hirChars.length; i++) {
-	      nodes.push(React.createElement(HirChar, { key: i,
+	      var highlightStatus = this.getHighlightStatus(i);
+	      nodes.push(React.createElement(HirChar, {
+	        key: i,
 	        hirIndex: i,
 	        id: 'HirCharId' + i,
 	        nextUp: this.props.nextUp,
-	        showTableWithSelected: this.props.showTableWithSelected, char: this.props.hirChars[i] }));
+	        showTableWithSelected: this.props.showTableWithSelected,
+	        char: this.props.hirChars[i],
+	        highlightStatus: highlightStatus,
+	        setHighlightGroup: this.props.setHighlightGroup }));
 	    };
 	
 	    var flattened = this.props.hirChars.reduce(function (a, b) {
@@ -21309,6 +21329,16 @@
 	      { className: clss },
 	      nodes
 	    );
+	  },
+	
+	  getHighlightStatus: function getHighlightStatus(i) {
+	    var highlightStatus = void 0;
+	    if (this.props.highlightGroup != i && this.props.highlightGroup != 'all') {
+	      highlightStatus = false;
+	    } else {
+	      highlightStatus = true;
+	    }
+	    return highlightStatus;
 	  }
 	
 	});
@@ -21329,13 +21359,23 @@
 	
 	  render: function render() {
 	    var classNo = this.props.char.length;
-	    // let highlightClass = this.getHighlightClass();
+	    var highlightClass = '';
+	
+	    if (this.props.highlightStatus) {
+	      highlightClass = ' highlight';
+	    }
+	
 	    return React.createElement(
 	      'div',
-	      { className: 'HirChar' + classNo, id: this.props.id, onClick: this.showTableWithSelected },
+	      {
+	        className: 'HirChar' + classNo,
+	        id: this.props.id,
+	        onClick: this.showTableWithSelected,
+	        onMouseOver: this.mouseOverChar,
+	        onMouseLeave: this.mouseLeaveChar },
 	      React.createElement(
 	        'p',
-	        { className: 'Char' },
+	        { className: 'Char' + highlightClass },
 	        this.props.char
 	      )
 	    );
@@ -21343,15 +21383,15 @@
 	
 	  showTableWithSelected: function showTableWithSelected() {
 	    this.props.showTableWithSelected(this.props.char);
-	  }
+	  },
 	
-	  // getHighlightClass: function () {
-	  //   let highlightClass = '';
-	  //   if (this.props.hirIndex === this.props.nextUp && this.props.highlightingHir === true) {
-	  //     highlightClass = ' hint-selected';
-	  //   };
-	  //   return highlightClass;
-	  // }
+	  mouseOverChar: function mouseOverChar() {
+	    this.props.setHighlightGroup(this.props.hirIndex, 'on');
+	  },
+	
+	  mouseLeaveChar: function mouseLeaveChar() {
+	    this.props.setHighlightGroup(this.props.hirIndex, 'off');
+	  }
 	
 	});
 	
@@ -21378,7 +21418,16 @@
 	    var nodes = [];
 	
 	    for (var i = 0; i < hintsList.length; i++) {
-	      nodes.push(React.createElement(Hint, { key: i, hint: hintsList[i], changeHirCharColour: this.props.changeHirCharColour, hintClicked: this.props.hintClicked, revealed: revealed, hintIndex: i, highlightSet: this.props.highlightSet }));
+	      var highlightStatus = this.getHighlightStatus(i);
+	      nodes.push(React.createElement(Hint, {
+	        key: i,
+	        hint: hintsList[i],
+	        changeHirCharColour: this.props.changeHirCharColour,
+	        hintClicked: this.props.hintClicked,
+	        revealed: revealed,
+	        hintIndex: i,
+	        highlightStatus: highlightStatus,
+	        setHighlightGroup: this.props.setHighlightGroup }));
 	    }
 	
 	    if (this.props.tableDisplayed == false) {
@@ -21390,6 +21439,16 @@
 	    } else {
 	      return React.createElement('div', { className: 'HintDisplay' });
 	    }
+	  },
+	
+	  getHighlightStatus: function getHighlightStatus(i) {
+	    var highlightStatus = void 0;
+	    if (this.props.highlightGroup != i && this.props.highlightGroup != 'all') {
+	      highlightStatus = false;
+	    } else {
+	      highlightStatus = true;
+	    }
+	    return highlightStatus;
 	  }
 	
 	});
@@ -21414,6 +21473,12 @@
 	    var revealed = this.props.revealed;
 	    var hintIndex = this.props.hintIndex;
 	
+	    var highlightClass = '';
+	
+	    if (this.props.highlightStatus) {
+	      highlightClass = ' highlight';
+	    }
+	
 	    if (revealed.indexOf(hintIndex) > -1) {
 	      return React.createElement(
 	        ReactCSSTransitionGroup,
@@ -21428,7 +21493,10 @@
 	          { className: 'Hint' },
 	          React.createElement(
 	            'p',
-	            { className: 'Revealed-Hint', onMouseOver: this.mouseOverHint },
+	            {
+	              className: 'Revealed-Hint' + highlightClass,
+	              onMouseOver: this.mouseOverHint,
+	              onMouseLeave: this.mouseLeaveHint },
 	            this.props.hint
 	          )
 	        )
@@ -21443,7 +21511,11 @@
 	        { className: 'Hint' },
 	        React.createElement(
 	          'p',
-	          { onMouseOver: this.mouseOverHint, onMouseLeave: this.mouseLeaveHint, onClick: this.hintClicked, className: 'Hidden-Hint' },
+	          {
+	            onMouseOver: this.mouseOverHint,
+	            onMouseLeave: this.mouseLeaveHint,
+	            onClick: this.hintClicked,
+	            className: 'Hidden-Hint' + highlightClass },
 	          blanks
 	        )
 	      );
@@ -21455,10 +21527,12 @@
 	  },
 	
 	  mouseOverHint: function mouseOverHint() {
-	    this.props.highlightSet(this.props.hintIndex);
+	    this.props.setHighlightGroup(this.props.hintIndex, 'on');
 	  },
 	
-	  mouseLeaveHint: function mouseLeaveHint() {}
+	  mouseLeaveHint: function mouseLeaveHint() {
+	    this.props.setHighlightGroup(this.props.hintIndex, 'off');
+	  }
 	
 	});
 	
@@ -22700,7 +22774,7 @@
 	          'button',
 	          {
 	            className: 'MagicButton next-hint',
-	            onClick: this.props.showNextHintOrNewCard,
+	            onClick: this.clickOnHintButton,
 	            onMouseOver: this.mouseOverHintButton,
 	            onMouseLeave: this.mouseLeaveHintButton
 	          },
@@ -22709,7 +22783,7 @@
 	        React.createElement(
 	          'button',
 	          {
-	            onClick: this.props.nextCardButtonClicked,
+	            onClick: this.nextCardButtonClicked,
 	            className: 'MagicButton next-card'
 	          },
 	          'NEXT CARD'
@@ -22717,7 +22791,9 @@
 	        React.createElement(
 	          'button',
 	          {
-	            onClick: this.props.revealAll,
+	            onClick: this.clickOnRevealAllButton,
+	            onMouseOver: this.mouseOverRevealAllButton,
+	            onMouseLeave: this.mouseLeaveRevealAllButton,
 	            className: 'MagicButton reveal-all'
 	          },
 	          'REVEAL ALL'
@@ -22733,22 +22809,43 @@
 	    }
 	  },
 	
-	  // mouseOverHintButton: function () {
-	  //   this.props.mouseOverHintButton('next', 'on');
-	  // },
+	  clickOnHintButton: function clickOnHintButton() {
+	    this.props.showNextHintOrNewCard();
+	    var hidden = this.props.hidden;
+	    if (hidden.length === 0) {
+	      this.props.setHighlightGroup(null, 'off');
+	    } else {
+	      this.mouseOverHintButton();
+	    }
+	  },
 	
 	  mouseOverHintButton: function mouseOverHintButton() {
-	    console.log('yo');
+	    var hidden = this.props.hidden;
+	    if (hidden.length > 0) {
+	      this.props.setHighlightGroup(hidden[0], 'on');
+	    }
 	  },
 	
 	  mouseLeaveHintButton: function mouseLeaveHintButton() {
-	    this.props.mouseOverHintButton('next', 'off');
+	    this.props.setHighlightGroup(null, 'off');
+	  },
+	
+	  nextCardButtonClicked: function nextCardButtonClicked() {
+	    this.props.getNextCard('next card button clicked');
+	  },
+	
+	  mouseOverRevealAllButton: function mouseOverRevealAllButton() {
+	    this.props.setHighlightGroup('all', 'on');
+	  },
+	
+	  mouseLeaveRevealAllButton: function mouseLeaveRevealAllButton() {
+	    this.props.setHighlightGroup('all', 'off');
+	  },
+	
+	  clickOnRevealAllButton: function clickOnRevealAllButton() {
+	    this.props.revealAll();
+	    this.props.setHighlightGroup('all', 'off');
 	  }
-	  //
-	  // revealButtonClicked: function () {
-	  //   console.log('click!');
-	  //   this.props.revealAll();
-	  // }
 	
 	});
 	

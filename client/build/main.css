@@ -252,6 +252,10 @@ td.selected-cell {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
+.Hidden-Hint.highlight {
+  background-color: #ff938e;
+}
+
 @media screen and (max-width: 414px) {
   .HintDisplay {
     height: 47px;
@@ -268,9 +272,11 @@ td.selected-cell {
   }
 }
 
-.Hidden-Hint:hover {
+/*.Hidden-Hint:hover {
   background-color: #ff938e;
-}
+}*/
+
+
 
 .Revealed-Hint {
   display: inline-block;
@@ -284,6 +290,10 @@ td.selected-cell {
   /*margin-top: 11px;*/
   color: white;
   background-color: #e34138;
+}
+
+.Revealed-Hint.highlight {
+  color: #e6c9b0;
 }
 
 @media screen and (max-width: 414px) {
@@ -370,13 +380,7 @@ td.selected-cell {
   cursor: pointer;
 }
 
-.Char:hover {
-  /*background-color: #23818a;
-  border-radius: 5px;*/
-  color: #71ca7c;
-}
-
-.hint-selected {
+.Char.highlight {
   color: #71ca7c;
 }
 
@@ -414,12 +418,6 @@ td.selected-cell {
     width: 300px;
   }
 }
-
-/*.Char:hover {
-  background-color: #23818a;
-  border-radius: 5px;
-  color: #88b28e;
-}*/
 
 
 /*------------------------------*/

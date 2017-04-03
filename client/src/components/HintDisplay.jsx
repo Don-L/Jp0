@@ -12,7 +12,18 @@ const HintDisplay = React.createClass({
     let nodes = [];
 
     for (var i = 0; i < hintsList.length; i++) {
-      nodes.push(<Hint key={i} hint={hintsList[i]} changeHirCharColour={this.props.changeHirCharColour} hintClicked={this.props.hintClicked} revealed={revealed} hintIndex={i} highlightSet={this.props.highlightSet}/>)
+      let highlightStatus = this.getHighlightStatus(i);
+      nodes.push(
+        <Hint
+          key={i}
+          hint={hintsList[i]}
+          changeHirCharColour={this.props.changeHirCharColour}
+          hintClicked={this.props.hintClicked}
+          revealed={revealed}
+          hintIndex={i}
+          highlightStatus={highlightStatus}
+          setHighlightGroup={this.props.setHighlightGroup}/>
+      );
     }
 
     if (this.props.tableDisplayed == false) {
@@ -25,6 +36,16 @@ const HintDisplay = React.createClass({
       return <div className='HintDisplay'/>
     }
 
+  },
+
+  getHighlightStatus: function (i) {
+    let highlightStatus;
+    if (this.props.highlightGroup != i && this.props.highlightGroup != 'all') {
+      highlightStatus = false;
+    } else {
+      highlightStatus = true;
+    }
+    return highlightStatus;
   }
 
 

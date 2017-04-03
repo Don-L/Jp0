@@ -5,26 +5,35 @@ const HirChar = React.createClass({
 
   render: function () {
     let classNo = this.props.char.length;
-    // let highlightClass = this.getHighlightClass();
+    let highlightClass = '';
+
+    if (this.props.highlightStatus) {
+      highlightClass = ' highlight';
+    }
+
     return (
-      <div className={'HirChar' + classNo} id={this.props.id} onClick={this.showTableWithSelected}>
-      
-        <p className={'Char'}>{this.props.char}</p>
+      <div
+        className={'HirChar' + classNo}
+        id={this.props.id}
+        onClick={this.showTableWithSelected}
+        onMouseOver={this.mouseOverChar}
+        onMouseLeave={this.mouseLeaveChar}>
+        <p className={'Char' + highlightClass}>{this.props.char}</p>
       </div>
     );
   },
 
   showTableWithSelected: function () {
     this.props.showTableWithSelected(this.props.char);
-  }
+  },
 
-  // getHighlightClass: function () {
-  //   let highlightClass = '';
-  //   if (this.props.hirIndex === this.props.nextUp && this.props.highlightingHir === true) {
-  //     highlightClass = ' hint-selected';
-  //   };
-  //   return highlightClass;
-  // }
+  mouseOverChar: function () {
+    this.props.setHighlightGroup(this.props.hirIndex, 'on');
+  },
+
+  mouseLeaveChar: function () {
+    this.props.setHighlightGroup(this.props.hirIndex, 'off');
+  }
 
 });
 
