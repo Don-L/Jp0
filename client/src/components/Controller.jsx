@@ -8,7 +8,7 @@ const React = require('react');
       if (this.props.hintsNo === this.props.revealed.length) {
         return (
           <div>
-            <button onClick={this.props.nextHintButtonClicked} className='MagicButton next-hint big'>NEXT</button>
+            <button onClick={this.props.showNextHintOrNewCard} className='MagicButton next-hint big'>NEXT</button>
             <button className='MagicButton exit big'>EXIT</button>
           </div>
         )
@@ -17,7 +17,7 @@ const React = require('react');
           <div>
             <button
               className='MagicButton next-hint'
-              onClick={this.props.nextHintButtonClicked}
+              onClick={this.props.showNextHintOrNewCard}
               onMouseOver={this.mouseOverHintButton}
               onMouseLeave={this.mouseLeaveHintButton}
               >HINT
@@ -28,7 +28,7 @@ const React = require('react');
               >NEXT CARD
             </button>
             <button
-              onClick={this.props.revealButtonClicked}
+              onClick={this.props.revealAll}
               className='MagicButton reveal-all'
               >REVEAL ALL
             </button>
@@ -43,14 +43,23 @@ const React = require('react');
     },
 
 
+    // mouseOverHintButton: function () {
+    //   this.props.mouseOverHintButton('next', 'on');
+    // },
+
     mouseOverHintButton: function () {
-      this.props.mouseOverHintButton('next', 'on');
+      console.log('yo');
     },
 
 
     mouseLeaveHintButton: function () {
       this.props.mouseOverHintButton('next', 'off');
     }
+    //
+    // revealButtonClicked: function () {
+    //   console.log('click!');
+    //   this.props.revealAll();
+    // }
 
   });
 

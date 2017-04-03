@@ -18,7 +18,7 @@ const Hint = React.createClass({
             transitionEnter={false}
             transitionLeave={false}>
           <div className='Hint'>
-          <p className='Revealed-Hint'>{this.props.hint}</p>
+          <p className='Revealed-Hint' onMouseOver={this.mouseOverHint}>{this.props.hint}</p>
           </div>
         </ReactCSSTransitionGroup>
       );
@@ -43,12 +43,11 @@ const Hint = React.createClass({
 
 
   mouseOverHint: function () {
-    console.log('mouseover');
+    this.props.highlightSet(this.props.hintIndex);
   },
 
 
   mouseLeaveHint: function () {
-    console.log('mouseleave');
   }
 
 

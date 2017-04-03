@@ -19769,18 +19769,92 @@
 	  displayName: 'Jp0',
 	
 	
-	  // _isMounted: false,
-	
 	  render: function render() {
+	    return React.createElement(
+	      'div',
+	      { className: 'Jp0' },
+	      React.createElement(
+	        'div',
+	        { className: 'top' },
+	        React.createElement(ImageDisplay, {
+	          imgsrc: this.state.cards[this.state.currentIndex]['imgsrc'],
+	          name: this.state.cards[this.state.currentIndex]['name'],
+	          romaji: this.state.cards[this.state.currentIndex]['romaji'],
+	          charTypes: this.getCharTypes(),
+	          tableArrays: this.getTableArrays(),
+	          revealed: this.state.revealed.length,
+	          hintsNo: this.state.cards[this.state.currentIndex]['hiragana'].length,
+	          tableDisplayed: this.state.tableDisplayed,
+	          tableSelected: this.state.tableSelected,
+	          hideTable: this.hideTable,
+	          tableType: this.state.tableType,
+	          setTableType: this.setTableType,
+	          hiragana: this.state.hiragana }),
+	        React.createElement(HintDisplay, {
+	          hintClicked: this.revealHint,
+	          hintsList: this.getHints(this.state.cards[this.state.currentIndex]),
+	          revealed: this.state.revealed,
+	          tableDisplayed: this.state.tableDisplayed,
+	          highlightSet: this.highlightSet })
+	      ),
+	      React.createElement(HiraganaDisplay, {
+	        hirChars: this.state.cards[this.state.currentIndex]['hiragana'], showTableWithSelected: this.showTableWithSelected,
+	        nextUp: this.state.hidden[0] }),
+	      React.createElement(KanjiDisplay, {
+	        kanjiChars: this.state.cards[this.state.currentIndex]['kanji'],
+	        showTableWithAllSelected: this.showTableWithAllSelected }),
+	      React.createElement(Controller, {
+	        nextCardButtonClicked: this.getNextCard,
+	        showNextHintOrNewCard: this.showNextHintOrNewCard,
+	        revealAll: this.revealAll,
+	        hintsNo: this.state.cards[this.state.currentIndex]['hiragana'].length,
+	        revealed: this.state.revealed })
+	    );
+	  },
 	
-	    var currentCard = this.state.cards[this.state.currentIndex];
+	  getInitialState: function getInitialState() {
+	    var _hiragana;
+	
+	    return {
+	      cards: [{
+	        'name': 'init',
+	        'hiragana': ['I', 'N', 'I', 'T'],
+	        'kanji': 'KANJI',
+	        'imgsrc': 'res/Nightingale.JPG'
+	      }],
+	      hiragana: (_hiragana = { 'I': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' },
+	        'N': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }
+	      }, _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _defineProperty(_hiragana, 'T', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init', 'chart': ['gojūon', 0, 0] }), _hiragana),
+	      currentIndex: 0,
+	      hidden: [],
+	      revealed: [],
+	      tableDisplayed: false,
+	      tableType: 'gojūon',
+	      tableSelected: []
+	    };
+	  },
+	
+	  componentDidMount: function componentDidMount() {
+	    var currentIndex = 0;
+	    this.setState({ cards: Cards,
+	      hiragana: Hiragana,
+	      currentIndex: currentIndex,
+	      hidden: this.initialiseHiddenState(Cards[currentIndex]['hiragana'].length),
+	      revealed: [] });
+	  },
+	
+	  highlightSet: function highlightSet(x) {
+	    console.log('highlightSet', x);
+	  },
+	
+	  getHints: function getHints(card) {
 	    var hints = [];
 	    var _iteratorNormalCompletion = true;
 	    var _didIteratorError = false;
 	    var _iteratorError = undefined;
 	
 	    try {
-	      for (var _iterator = currentCard['hiragana'][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	      for (var _iterator = card['hiragana'][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 	        var hira = _step.value;
 	
 	        hints.push(this.state.hiragana[hira]['transliteration']);
@@ -19800,81 +19874,7 @@
 	      }
 	    }
 	
-	    return React.createElement(
-	      'div',
-	      { className: 'Jp0' },
-	      React.createElement(
-	        'div',
-	        { className: 'top' },
-	        React.createElement(ImageDisplay, {
-	          imgsrc: this.state.cards[this.state.currentIndex]['imgsrc'],
-	          name: this.state.cards[this.state.currentIndex]['name'],
-	          romaji: this.state.cards[this.state.currentIndex]['romaji'],
-	          charTypes: this.getCharTypes(),
-	          tableArrays: this.getTableArrays(),
-	          revealed: this.state.revealed.length,
-	          hintsNo: this.state.hintsNo,
-	          tableDisplayed: this.state.tableDisplayed,
-	          tableSelected: this.state.tableSelected,
-	          hideTable: this.hideTable,
-	          tableType: this.state.tableType,
-	          setTableType: this.setTableType,
-	          hiragana: this.state.hiragana }),
-	        React.createElement(HintDisplay, {
-	
-	          hintClicked: this.revealHint,
-	          hintsList: hints,
-	          revealed: this.state.revealed,
-	          tableDisplayed: this.state.tableDisplayed })
-	      ),
-	      React.createElement(HiraganaDisplay, {
-	        hirChars: this.state.cards[this.state.currentIndex]['hiragana'], showTableWithSelected: this.showTableWithSelected,
-	        nextUp: this.findFirstHidden(),
-	        highlightingHir: this.state.highlightingHir }),
-	      React.createElement(KanjiDisplay, {
-	        kanjiChars: this.state.cards[this.state.currentIndex]['kanji'],
-	        showTableWithAllSelected: this.showTableWithAllSelected }),
-	      React.createElement(Controller, {
-	        nextCardButtonClicked: this.getNextCard,
-	        nextHintButtonClicked: this.nextHintButtonClicked,
-	        mouseOverHintButton: this.toggleHighlightingHir,
-	        revealButtonClicked: this.revealAll,
-	        hintsNo: this.state.hintsNo,
-	        revealed: this.state.revealed })
-	    );
-	  },
-	
-	  getInitialState: function getInitialState() {
-	    var _hiragana;
-	
-	    return {
-	      cards: [{
-	        'name': 'init',
-	        'hiragana': ['I', 'N', 'I', 'T'],
-	        'kanji': 'KANJI',
-	        'imgsrc': 'res/Nightingale.JPG'
-	      }],
-	      hiragana: (_hiragana = { 'I': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' },
-	        'N': { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }
-	      }, _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _defineProperty(_hiragana, 'I', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init' }), _defineProperty(_hiragana, 'T', { 'name': 'init', 'char': 'init', 'transliteration': 'init', 'sound': 'init', 'type': 'init', 'chart': ['gojūon', 0, 0] }), _hiragana),
-	      currentIndex: 0,
-	      hintsNo: 4,
-	      hidden: [],
-	      revealed: [],
-	      highlightingHir: false,
-	      tableDisplayed: false,
-	      tableType: 'gojūon',
-	      tableSelected: []
-	    };
-	  },
-	
-	  componentDidMount: function componentDidMount() {
-	    this.setState({ cards: Cards,
-	      hiragana: Hiragana,
-	      currentIndex: 0,
-	      hidden: this.initialiseHiddenState(Cards[0]['hiragana'].length),
-	      revealed: [],
-	      hintsNo: Cards[0]['hiragana'].length });
+	    return hints;
 	  },
 	
 	  initialiseHiddenState: function initialiseHiddenState(wordLength) {
@@ -19942,41 +19942,12 @@
 	    return [goujArr, dakArr, yoonArr];
 	  },
 	
-	  //moves app to next card if all hints revealed or reveals first hidden hint.
-	  nextHintButtonClicked: function nextHintButtonClicked() {
-	    var firstHidden = this.findFirstHidden();
-	    var hintsNo = this.state.hintsNo;
-	    var revealed = this.state.revealed;
-	    if (!firstHidden) {
+	  showNextHintOrNewCard: function showNextHintOrNewCard() {
+	    if (this.state.hidden.length === 0) {
 	      this.getNextCard();
 	    } else {
-	      var newRevealed = this.state.revealed;
-	      newRevealed.push(firstHidden);
-	      newRevealed = newRevealed.sort(function (a, b) {
-	        return a - b;
-	      });
-	      this.setState({ revealed: newRevealed });
-	      if (newRevealed.length === hintsNo) {
-	        this.setState({ tableDisplayed: false });
-	      }
+	      this.revealHint(this.state.hidden[0]);
 	    }
-	  },
-	
-	  findFirstHidden: function findFirstHidden() {
-	    // let revealed = this.state.revealed;
-	    // let hintsNo = this.state.hintsNo;
-	    // if (hintsNo === revealed.length) {
-	    //   return -1;
-	    // } else if (revealed.indexOf(0) === -1) {
-	    //   return 0;
-	    // } else {
-	    //   for (let i=0; i<revealed.length; i++) {
-	    //     if (revealed[i + 1] - revealed[i] >= 2 || revealed.indexOf(i + 1) === -1) {
-	    //       return(i + 1);
-	    //     }
-	    //   }
-	    // }
-	    return this.state.hidden[0];
 	  },
 	
 	  getNextCard: function getNextCard() {
@@ -19990,61 +19961,45 @@
 	      currentIndex: newCurrent,
 	      hidden: hidden,
 	      revealed: [],
-	      hintsNo: hintsNo,
 	      tableDisplayed: false,
 	      tableType: 'gojūon',
 	      tableSelected: [] });
 	  },
 	
 	  revealAll: function revealAll() {
-	    var rev = [];
-	    for (var i = 0; i < this.state.cards[this.state.currentIndex]['hiragana'].length; i++) {
-	      rev.push(i);
-	    }
-	    this.setState({ revealed: rev,
-	      tableDisplayed: false });
+	    for (var i = 0; i < this.state.hidden.length; i++) {
+	      this.addToRevealedState(this.state.hidden[i]);
+	    };
+	    this.hideTable();
+	    this.setState({ hidden: [] });
 	  },
 	
-	  toggleHighlightingHir: function toggleHighlightingHir() {
-	    if (this.state.highlightingHir === false) {
-	      this.setState({ highlightingHir: true });
-	    } else {
-	      this.setState({ highlightingHir: false });
-	    }
-	  },
-	
-	  // revealHint: function (index) {
-	  //   let revealed = this.state.revealed;
-	  //   revealed.push(index);
-	  //   if (revealed.length === this.state.hintsNo) {
-	  //     this.setState(
-	  //       {revealed: revealed,
-	  //        tableDisplayed: false}
-	  //     );
+	  // toggleHighlightingHir: function () {
+	  //   if (this.state.highlightingHir === false) {
+	  //     this.setState({highlightingHir: true});
 	  //   } else {
-	  //     this.setState(
-	  //       {revealed: revealed}
-	  //     );
+	  //     this.setState({highlightingHir: false});
 	  //   }
 	  // },
 	
 	  revealHint: function revealHint(hintIndex) {
-	    console.log('reveling!');
-	    var revealed = this.state.revealed;
+	    this.addToRevealedState(hintIndex);
 	    this.removeFromHiddenState(hintIndex);
-	    revealed.push(hintIndex);
-	    if (revealed.length === this.state.hintsNo) {
-	      this.setState({ revealed: revealed,
-	        tableDisplayed: false });
-	    } else {
-	      this.setState({ revealed: revealed });
+	    if (this.state.hidden.length === 0) {
+	      this.hideTable();
 	    }
+	  },
+	
+	  addToRevealedState: function addToRevealedState(hintIndex) {
+	    var revealed = this.state.revealed;
+	    revealed.push(hintIndex);
+	    this.setState({ revealed: revealed });
 	  },
 	
 	  removeFromHiddenState: function removeFromHiddenState(hintIndex) {
 	    var hidden = this.state.hidden;
 	    var i = hidden.indexOf(hintIndex);
-	    hidden = hidden.splice(i, 1);
+	    hidden.splice(i, 1);
 	    this.setState({ hidden: hidden });
 	  },
 	
@@ -20095,14 +20050,6 @@
 	      }
 	    }
 	  },
-	
-	  //showTableWithAllSelected: function () {
-	  //   if (this.state.tableDisplayed == true) {
-	  //     this.hideTable();
-	  //   } else {
-	  //
-	  //   }
-	  // },
 	
 	  hideTable: function hideTable() {
 	    this.setState({ tableDisplayed: false });
@@ -21348,7 +21295,6 @@
 	        hirIndex: i,
 	        id: 'HirCharId' + i,
 	        nextUp: this.props.nextUp,
-	        highlightingHir: this.props.highlightingHir,
 	        showTableWithSelected: this.props.showTableWithSelected, char: this.props.hirChars[i] }));
 	    };
 	
@@ -21383,13 +21329,13 @@
 	
 	  render: function render() {
 	    var classNo = this.props.char.length;
-	    var highlightClass = this.getHighlightClass();
+	    // let highlightClass = this.getHighlightClass();
 	    return React.createElement(
 	      'div',
 	      { className: 'HirChar' + classNo, id: this.props.id, onClick: this.showTableWithSelected },
 	      React.createElement(
 	        'p',
-	        { className: 'Char' + highlightClass },
+	        { className: 'Char' },
 	        this.props.char
 	      )
 	    );
@@ -21397,15 +21343,15 @@
 	
 	  showTableWithSelected: function showTableWithSelected() {
 	    this.props.showTableWithSelected(this.props.char);
-	  },
-	
-	  getHighlightClass: function getHighlightClass() {
-	    var highlightClass = '';
-	    if (this.props.hirIndex === this.props.nextUp && this.props.highlightingHir === true) {
-	      highlightClass = ' hint-selected';
-	    };
-	    return highlightClass;
 	  }
+	
+	  // getHighlightClass: function () {
+	  //   let highlightClass = '';
+	  //   if (this.props.hirIndex === this.props.nextUp && this.props.highlightingHir === true) {
+	  //     highlightClass = ' hint-selected';
+	  //   };
+	  //   return highlightClass;
+	  // }
 	
 	});
 	
@@ -21432,7 +21378,7 @@
 	    var nodes = [];
 	
 	    for (var i = 0; i < hintsList.length; i++) {
-	      nodes.push(React.createElement(Hint, { key: i, hint: hintsList[i], changeHirCharColour: this.props.changeHirCharColour, hintClicked: this.props.hintClicked, revealed: revealed, hintIndex: i }));
+	      nodes.push(React.createElement(Hint, { key: i, hint: hintsList[i], changeHirCharColour: this.props.changeHirCharColour, hintClicked: this.props.hintClicked, revealed: revealed, hintIndex: i, highlightSet: this.props.highlightSet }));
 	    }
 	
 	    if (this.props.tableDisplayed == false) {
@@ -21482,7 +21428,7 @@
 	          { className: 'Hint' },
 	          React.createElement(
 	            'p',
-	            { className: 'Revealed-Hint' },
+	            { className: 'Revealed-Hint', onMouseOver: this.mouseOverHint },
 	            this.props.hint
 	          )
 	        )
@@ -21509,12 +21455,10 @@
 	  },
 	
 	  mouseOverHint: function mouseOverHint() {
-	    console.log('mouseover');
+	    this.props.highlightSet(this.props.hintIndex);
 	  },
 	
-	  mouseLeaveHint: function mouseLeaveHint() {
-	    console.log('mouseleave');
-	  }
+	  mouseLeaveHint: function mouseLeaveHint() {}
 	
 	});
 	
@@ -22739,7 +22683,7 @@
 	        null,
 	        React.createElement(
 	          'button',
-	          { onClick: this.props.nextHintButtonClicked, className: 'MagicButton next-hint big' },
+	          { onClick: this.props.showNextHintOrNewCard, className: 'MagicButton next-hint big' },
 	          'NEXT'
 	        ),
 	        React.createElement(
@@ -22756,7 +22700,7 @@
 	          'button',
 	          {
 	            className: 'MagicButton next-hint',
-	            onClick: this.props.nextHintButtonClicked,
+	            onClick: this.props.showNextHintOrNewCard,
 	            onMouseOver: this.mouseOverHintButton,
 	            onMouseLeave: this.mouseLeaveHintButton
 	          },
@@ -22773,7 +22717,7 @@
 	        React.createElement(
 	          'button',
 	          {
-	            onClick: this.props.revealButtonClicked,
+	            onClick: this.props.revealAll,
 	            className: 'MagicButton reveal-all'
 	          },
 	          'REVEAL ALL'
@@ -22789,13 +22733,22 @@
 	    }
 	  },
 	
+	  // mouseOverHintButton: function () {
+	  //   this.props.mouseOverHintButton('next', 'on');
+	  // },
+	
 	  mouseOverHintButton: function mouseOverHintButton() {
-	    this.props.mouseOverHintButton('next', 'on');
+	    console.log('yo');
 	  },
 	
 	  mouseLeaveHintButton: function mouseLeaveHintButton() {
 	    this.props.mouseOverHintButton('next', 'off');
 	  }
+	  //
+	  // revealButtonClicked: function () {
+	  //   console.log('click!');
+	  //   this.props.revealAll();
+	  // }
 	
 	});
 	

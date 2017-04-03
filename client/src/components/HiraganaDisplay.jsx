@@ -13,7 +13,6 @@ const HiraganaDisplay = React.createClass({
                           hirIndex={i}
                           id={'HirCharId' + i}
                           nextUp={this.props.nextUp}
-                          highlightingHir={this.props.highlightingHir}
                           showTableWithSelected={this.props.showTableWithSelected} char={this.props.hirChars[i]} />);
     };
 
