@@ -24,7 +24,8 @@ body {
   height: 800px;
   margin: 0 auto;
   margin-top: calc((100vh - 800px) / 2);
-  background-color: #086972;
+  /* background-color: #086972; */
+  background-color: #014147;
   text-align: center;
   /*padding-top: 23px;*/
   border: solid 5px #014147;
@@ -311,8 +312,9 @@ td.selected-cell {
 /*------------------------------*/
 
 .HiraganaDisplay {
-  color: #09911a;
-  border: 1px solid #71ca7c;
+  /* color: #09911a; */
+  color: #71ca7c;
+  /* border: 1px solid #71ca7c; */
   margin: 0 auto;
   border-radius: 5px;
   margin-top: 20px;
@@ -381,7 +383,8 @@ td.selected-cell {
 }
 
 .Char.highlight {
-  color: #71ca7c;
+  /* color: #71ca7c; */
+  color: #09911a;
 }
 
 @media screen and (max-width: 414px) {

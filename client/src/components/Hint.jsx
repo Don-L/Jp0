@@ -1,5 +1,5 @@
 const React = require('react');
-const ReactCSSTransitionGroup = require('react-addons-css-transition-group');
+const ReactCSSTransitionGroup = require('react-transition-group/CSSTransitionGroup');
 
 const Hint = React.createClass({
 
