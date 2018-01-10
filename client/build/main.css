@@ -253,7 +253,7 @@ td.selected-cell {
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-.Hidden-Hint.highlight {
+.Hidden-Hint:hover {
   background-color: #ff938e;
 }
 

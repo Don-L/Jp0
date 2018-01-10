@@ -10,7 +10,7 @@ const Hint = React.createClass({
 
     let highlightClass = '';
 
-    if (this.props.highlightStatus) {
+    if (this.props.highlightStatus && revealed.indexOf(hintIndex) > -1) {
       highlightClass = ' highlight';
     }
 

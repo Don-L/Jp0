@@ -216,20 +216,28 @@ const Jp0 = React.createClass({
   },
 
   showTableWithSelected: function (char, all) {
+      console.log(Hiragana[char].hiragana_type);
     let tableSelected = [];
+    let tableType = this.state.tableType;
     if (all) {
       tableSelected = this.state.tableSelected;
     }
-    if (this.state.hiragana[char].yoon_parent) {
-      let ch = this.state.hiragana[char].yoon_parent;
-      tableSelected.push(ch);
-      tableSelected.push('yōon')
-    } else {
+    // if (this.state.hiragana[char].yoon_parent) {
+    //   let ch = this.state.hiragana[char].yoon_parent;
+    //   tableSelected.push(ch);
+    //   tableSelected.push('yōon')
+    // }
+    else {
       tableSelected.push(char);
+      tableType = Hiragana[char].hiragana_type;
+      if (tableType === 'handakuten') { tableType = 'dakuten'; };
     }
     this.setState(
-      {tableDisplayed: true,
-       tableSelected: tableSelected}
+      {
+          tableDisplayed: true,
+          tableSelected: tableSelected,
+          tableType: tableType
+      }
     );
   },
 
